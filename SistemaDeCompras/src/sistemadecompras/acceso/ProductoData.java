@@ -23,10 +23,10 @@ public class ProductoData {
         try {
             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 
-            ps.setString(1,producto.getNombre());
+            ps.setString(1,producto.getNombreProducto());
             ps.setString(2,producto.getDescripcion());
             ps.setDouble(3,producto.getPrecio());
-            ps.setBoolean(4,producto.isActivo());
+            ps.setBoolean(4,producto.isEstado());
 
             ps.executeUpdate();
 
@@ -50,10 +50,10 @@ public void modificarProducto(Producto producto) {
 
         try {
             PreparedStatement ps = con.prepareStatement(sql);
-            ps.setString(1, producto.getNombre());
+            ps.setString(1, producto.getNombreProducto());
             ps.setString(2, producto.getDescripcion());
             ps.setDouble(3, producto.getPrecio());
-            ps.setBoolean(4, producto.isActivo());
+            ps.setBoolean(4, producto.isEstado());
             
             int exito = ps.executeUpdate();
 
@@ -78,5 +78,7 @@ public void eliminarProductoPorId(int id) {
             }
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error al acceder al Producto");
+      
         }
-    }
+}
+}
