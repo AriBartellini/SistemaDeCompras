@@ -29,6 +29,9 @@ public class Menu extends javax.swing.JFrame {
         jmCompras = new javax.swing.JMenuItem();
         jmDetalleCompra = new javax.swing.JMenuItem();
         jmActualizar = new javax.swing.JMenu();
+        jMenu3 = new javax.swing.JMenu();
+        jmListaProductos = new javax.swing.JMenuItem();
+        jmListaProveedores = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -91,6 +94,26 @@ public class Menu extends javax.swing.JFrame {
         });
         jMenuBar1.add(jmActualizar);
 
+        jMenu3.setText("Consultas");
+
+        jmListaProductos.setText("Lista de Productos");
+        jmListaProductos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmListaProductosActionPerformed(evt);
+            }
+        });
+        jMenu3.add(jmListaProductos);
+
+        jmListaProveedores.setText("Lista de Proveedores");
+        jmListaProveedores.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmListaProveedoresActionPerformed(evt);
+            }
+        });
+        jMenu3.add(jmListaProveedores);
+
+        jMenuBar1.add(jMenu3);
+
         setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -139,11 +162,11 @@ public class Menu extends javax.swing.JFrame {
         c.setVisible(true);
         escritorio.add(c);
         escritorio.moveToFront(c);
-        
+
     }//GEN-LAST:event_jmComprasActionPerformed
 
     private void jmDetalleCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmDetalleCompraActionPerformed
-         escritorio.removeAll();
+        escritorio.removeAll();
         escritorio.repaint();
         determinarFondo();
         DetalleCompra c = new DetalleCompra();
@@ -153,7 +176,7 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_jmDetalleCompraActionPerformed
 
     private void jmActualizarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jmActualizarMouseClicked
-      escritorio.removeAll();
+        escritorio.removeAll();
         escritorio.repaint();
         determinarFondo();
         ActualizarStock a = new ActualizarStock();
@@ -161,6 +184,26 @@ public class Menu extends javax.swing.JFrame {
         escritorio.add(a);
         escritorio.moveToFront(a);
     }//GEN-LAST:event_jmActualizarMouseClicked
+
+    private void jmListaProductosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmListaProductosActionPerformed
+        escritorio.removeAll();
+        escritorio.repaint();
+        determinarFondo();
+        ListarProductos a = new ListarProductos();
+        a.setVisible(true);
+        escritorio.add(a);
+        escritorio.moveToFront(a);
+    }//GEN-LAST:event_jmListaProductosActionPerformed
+
+    private void jmListaProveedoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmListaProveedoresActionPerformed
+        escritorio.removeAll();
+        escritorio.repaint();
+        determinarFondo();
+        ListarProveedores a = new ListarProveedores();
+        a.setVisible(true);
+        escritorio.add(a);
+        escritorio.moveToFront(a);
+    }//GEN-LAST:event_jmListaProveedoresActionPerformed
 
     public static void main(String args[]) throws UnsupportedLookAndFeelException {
         UIManager.setLookAndFeel(new FlatDarkLaf());
@@ -203,10 +246,13 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JLayeredPane escritorio;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenu jMenu3;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenu jmActualizar;
     private javax.swing.JMenuItem jmCompras;
     private javax.swing.JMenuItem jmDetalleCompra;
+    private javax.swing.JMenuItem jmListaProductos;
+    private javax.swing.JMenuItem jmListaProveedores;
     private javax.swing.JMenuItem jmRegistroProducto;
     private javax.swing.JMenuItem jmRegistroProveedor;
     // End of variables declaration//GEN-END:variables
