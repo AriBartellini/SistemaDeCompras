@@ -19,14 +19,15 @@ public class ProductoData {
 
     public void agregrarProducto(Producto producto) {
 
-        String sql = "INSERT INTO Producto (nombre, descripcion, precio, estado) VALUES (?,?,?,?)";
+        String sql = "INSERT INTO Producto (nombre, descripcion, precio, stock, estado) VALUES (?,?,?,?,?)";
         try {
             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 
             ps.setString(1,producto.getNombreProducto());
             ps.setString(2,producto.getDescripcion());
             ps.setDouble(3,producto.getPrecio());
-            ps.setBoolean(4,producto.isEstado());
+            ps.setDouble(4,producto.getStock());
+            ps.setBoolean(5,producto.isEstado());
 
             ps.executeUpdate();
 
@@ -46,15 +47,15 @@ public class ProductoData {
 
 public void modificarProducto(Producto producto) {
 
-        String sql = "UPDATE Producto SET nombre = ?, descripcion = ? , precio = ?, estado = ? WHERE idMateria = ?";
+        String sql = "UPDATE Producto SET nombre = ?, descripcion = ? , precio = ?, Stock = ?, estado = ? WHERE idMateria = ?";
 
         try {
             PreparedStatement ps = con.prepareStatement(sql);
-            ps.setString(1, producto.getNombreProducto());
-            ps.setString(2, producto.getDescripcion());
-            ps.setDouble(3, producto.getPrecio());
-            ps.setBoolean(4, producto.isEstado());
-            
+            ps.setString(1,producto.getNombreProducto());
+            ps.setString(2,producto.getDescripcion());
+            ps.setDouble(3,producto.getPrecio());
+            ps.setDouble(4,producto.getStock());
+            ps.setBoolean(5,producto.isEstado());
             int exito = ps.executeUpdate();
 
             if (exito == 1) {
