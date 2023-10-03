@@ -70,33 +70,33 @@ public class ProveedorData {
         
     }
     
-//    public Proveedor buscarProveedor(){ //busqueda si o si por ID
-//        
-//        String sql = "SELECT dni, apellido, nombre, fechaNac FROM proveedor WHERE idProveedor = ? AND estado=1";
-//        Proveedor proveedor = null;
-//        try {
-//            PreparedStatement ps = con.prepareStatement(sql);
-//            ps.setInt(1, id);
-//            ResultSet rs = ps.executeQuery();
-//            if (rs.next()) {
-//                proveedor = new Proveedor();
-//                proveedor.setIdProveedor(id);
-//                proveedor.setDni(rs.getInt("dni"));
-//                proveedor.setApellido(rs.getString("apellido"));
-//                proveedor.setNombre(rs.getString("nombre"));
-//                
-//                
-//            } else {
-//                JOptionPane.showMessageDialog(null, "No existe un proveedor con ese id");
-//            }
-//
-//            ps.close();
-//        } catch (SQLException ex) {
-//            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla proveedor");
-//        }
-//        return proveedor;
-//        
-//    }
+    public Proveedor buscarProveedor(int id){ //busqueda si o si por ID // en proceso...
+        
+        String sql = "SELECT id, apellido, nombre, fechaNac FROM proveedor WHERE idProveedor = ? AND estado=1";
+        Proveedor proveedor = null;
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, id);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                proveedor = new Proveedor();
+                proveedor.setIdProveedor(id);
+               // proveedor.set(rs.getInt("dni"));
+               // proveedor.setApellido(rs.getString("apellido"));
+               // proveedor.setNombre(rs.getString("nombre"));
+                
+                
+            } else {
+                JOptionPane.showMessageDialog(null, "No existe un proveedor con ese id");
+            }
+
+            ps.close();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla proveedor");
+        }
+        return proveedor;
+        
+    }
     
     }
     
