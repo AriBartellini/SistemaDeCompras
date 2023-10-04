@@ -16,14 +16,14 @@ public class CompraData {
         con = Conexion.buscarConexion();
     }
 
-    public void guardarCompra(int idCompra, int idProveedor, Date fecha) {
+    public void guardarCompra( int idProveedor, Date fecha) {
         String sql = "INSERT INTO compra (idCompra, idProveedor, fecha) VALUES (?,?,?)";
 
         try {
             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-            ps.setInt(1, idCompra);
-            ps.setInt(2, idProveedor);
-            ps.setDate(3, fecha);
+            
+            ps.setInt(1, idProveedor);
+            ps.setDate(2, fecha);
             ps.executeUpdate();
             ResultSet rs = ps.getGeneratedKeys();
             if (rs.next()) {
@@ -36,22 +36,6 @@ public class CompraData {
         }
     }
 
-    public void actualizarCompra(int idCompra, int idProveedor, Date fecha) {
-        String sql = "UPDATE compra SET idCompra = ? WHERE idProveedor = ? and fecha = ?";
-        try {
-            PreparedStatement ps = con.prepareStatement(sql);
-            ps.setInt(1, idCompra);
-            ps.setInt(2, idProveedor);
-            ps.setDate(3, fecha);
-            int filas = ps.executeUpdate();
-            if (filas > 0) {
-                JOptionPane.showMessageDialog(null, "Compra actualizada");
-            }
-            ps.close();
-
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla compra");
-        }
-    }
+    
 
 }
