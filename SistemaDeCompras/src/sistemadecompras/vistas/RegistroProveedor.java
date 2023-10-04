@@ -193,13 +193,12 @@ public class RegistroProveedor extends javax.swing.JInternalFrame {
     
     private void guardarProveedor(){
         ProveedorData proveedorData = new ProveedorData();
-        int asignarId = proveedorData.traerUltimoId() + 1; //nos trae el ultimo id encontrado y le suma 1
         
         String nombre = jtfNombre.getText();
         String direccion = jtfTelefono.getText();
         String telefono = jtfDireccion.getText();
         
-        Proveedor proveedor = new Proveedor(asignarId,nombre,direccion,telefono);
+        Proveedor proveedor = new Proveedor(nombre,direccion,telefono);
         proveedorData.guardarProveedor(proveedor);
         
         limpiarCampos();

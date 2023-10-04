@@ -1,5 +1,8 @@
 package sistemadecompras.vistas;
 
+import sistemadecompras.acceso.ProductoData;
+import sistemadecompras.entidades.Producto;
+
 public class RegistroProducto extends javax.swing.JInternalFrame {
 
     public RegistroProducto() {
@@ -21,8 +24,10 @@ public class RegistroProducto extends javax.swing.JInternalFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jtfPrecioCosto = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
 
         jbGuardar.setText("Guardar");
+        jbGuardar.setEnabled(false);
         jbGuardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jbGuardarActionPerformed(evt);
@@ -43,9 +48,9 @@ public class RegistroProducto extends javax.swing.JInternalFrame {
             }
         });
 
-        jtfNombre.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jtfNombreActionPerformed(evt);
+        jtfNombre.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jtfNombreKeyReleased(evt);
             }
         });
 
@@ -56,45 +61,49 @@ public class RegistroProducto extends javax.swing.JInternalFrame {
 
         jLabel4.setText("Precio de costo");
 
-        jtfPrecioCosto.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jtfPrecioCostoActionPerformed(evt);
+        jtfPrecioCosto.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jtfPrecioCostoKeyReleased(evt);
             }
         });
+
+        jLabel3.setText("$");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addGap(20, 20, 20)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(jLabel1)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jtfNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(jLabel4)
+                            .addGap(18, 18, 18)
+                            .addComponent(jLabel3)
+                            .addGap(3, 3, 3)
+                            .addComponent(jtfPrecioCosto, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(38, 38, 38)
+                        .addComponent(jbLimpiar)
+                        .addGap(48, 48, 48)
+                        .addComponent(jbGuardar)
+                        .addGap(58, 58, 58)
+                        .addComponent(jbSalir)))
+                .addContainerGap(56, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jtfNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel4)
-                        .addGap(62, 62, 62)
-                        .addComponent(jtfPrecioCosto, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(50, 50, 50))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(44, 44, 44)
-                .addComponent(jbLimpiar)
-                .addGap(48, 48, 48)
-                .addComponent(jbGuardar)
-                .addGap(58, 58, 58)
-                .addComponent(jbSalir)
-                .addGap(0, 0, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(60, 60, 60)
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 286, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(62, 62, 62))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(33, 33, 33)
+                .addContainerGap()
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -103,42 +112,44 @@ public class RegistroProducto extends javax.swing.JInternalFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jtfPrecioCosto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel4))
+                    .addComponent(jLabel4)
+                    .addComponent(jLabel3))
                 .addGap(31, 31, 31)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jbLimpiar)
                     .addComponent(jbGuardar)
                     .addComponent(jbSalir))
-                .addContainerGap(23, Short.MAX_VALUE))
+                .addContainerGap(21, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jbGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbGuardarActionPerformed
-        // TODO add your handling code here:
+        guardarProducto();
     }//GEN-LAST:event_jbGuardarActionPerformed
 
     private void jbLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbLimpiarActionPerformed
-        // TODO add your handling code here:
+        limpiarCampos();
     }//GEN-LAST:event_jbLimpiarActionPerformed
 
     private void jbSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSalirActionPerformed
          this.dispose();
     }//GEN-LAST:event_jbSalirActionPerformed
 
-    private void jtfNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfNombreActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jtfNombreActionPerformed
+    private void jtfNombreKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtfNombreKeyReleased
+         checkCampos();
+    }//GEN-LAST:event_jtfNombreKeyReleased
 
-    private void jtfPrecioCostoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfPrecioCostoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jtfPrecioCostoActionPerformed
+    private void jtfPrecioCostoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtfPrecioCostoKeyReleased
+        checkCampos();
+    }//GEN-LAST:event_jtfPrecioCostoKeyReleased
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JButton jbGuardar;
     private javax.swing.JButton jbLimpiar;
@@ -146,4 +157,25 @@ public class RegistroProducto extends javax.swing.JInternalFrame {
     private javax.swing.JTextField jtfNombre;
     private javax.swing.JTextField jtfPrecioCosto;
     // End of variables declaration//GEN-END:variables
+
+    private void checkCampos(){
+        if(jtfPrecioCosto.getText().equals("")||jtfNombre.getText().equals("")){
+            jbGuardar.setEnabled(false);
+        } else jbGuardar.setEnabled(true);
+    }
+    private void limpiarCampos(){
+        jtfNombre.setText("");
+        jtfPrecioCosto.setText("");
+        checkCampos();
+    }
+    
+    private void guardarProducto(){
+        ProductoData productoData = new ProductoData();
+        String nombre = jtfNombre.getText();
+        double precio = Double.parseDouble(jtfPrecioCosto.getText());
+        
+        Producto producto = new Producto(nombre,precio);
+        productoData.agregarProducto(producto);
+    }
+    
 }
