@@ -7,15 +7,25 @@ public class Compra {
     private int idCompra;
     private Proveedor prov;
     private LocalDate fecha;
+    private int cantidad;
 
     public Compra() {
     }
 
     
-    public Compra(int idCompra, Proveedor prov, LocalDate fecha) {
+    public Compra(int idCompra, Proveedor prov, LocalDate fecha, int cantidad) {
         this.idCompra = idCompra;
         this.prov = prov;
         this.fecha = fecha;
+        this.cantidad= cantidad;
+    }
+
+    public int getCantidad() {
+        return cantidad;
+    }
+
+    public void setCantidad(int cantidad) {
+        this.cantidad = cantidad;
     }
 
     public int getIdCompra() {

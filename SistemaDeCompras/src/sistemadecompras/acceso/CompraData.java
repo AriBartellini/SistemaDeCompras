@@ -17,7 +17,7 @@ public class CompraData {
     }
 
     public void guardarCompra(int idCompra, int idProveedor, Date fecha) {
-        String sql = "INSERT INTO inscripcion (idCompra, idProveedor, fecha) VALUES (?,?,?)";
+        String sql = "INSERT INTO compra (idCompra, idProveedor, fecha) VALUES (?,?,?)";
 
         try {
             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
