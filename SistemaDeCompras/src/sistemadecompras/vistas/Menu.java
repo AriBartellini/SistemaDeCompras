@@ -31,7 +31,6 @@ public class Menu extends javax.swing.JFrame {
         jMenuItem2 = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         jmCompras = new javax.swing.JMenuItem();
-        jmDetalleCompra = new javax.swing.JMenuItem();
         jmActualizar = new javax.swing.JMenu();
         jMenu3 = new javax.swing.JMenu();
         jmListaProductos = new javax.swing.JMenuItem();
@@ -93,14 +92,6 @@ public class Menu extends javax.swing.JFrame {
             }
         });
         jMenu2.add(jmCompras);
-
-        jmDetalleCompra.setText("Detalle de compra");
-        jmDetalleCompra.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jmDetalleCompraActionPerformed(evt);
-            }
-        });
-        jMenu2.add(jmDetalleCompra);
 
         jMenuBar1.add(jMenu2);
 
@@ -183,16 +174,6 @@ public class Menu extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jmComprasActionPerformed
 
-    private void jmDetalleCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmDetalleCompraActionPerformed
-        escritorio.removeAll();
-        escritorio.repaint();
-        determinarFondo();
-        DetalleCompra c = new DetalleCompra();
-        c.setVisible(true);
-        escritorio.add(c);
-        escritorio.moveToFront(c);
-    }//GEN-LAST:event_jmDetalleCompraActionPerformed
-
     private void jmActualizarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jmActualizarMouseClicked
         escritorio.removeAll();
         escritorio.repaint();
@@ -272,7 +253,6 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenu jmActualizar;
     private javax.swing.JMenuItem jmCompras;
-    private javax.swing.JMenuItem jmDetalleCompra;
     private javax.swing.JMenuItem jmListaProductos;
     private javax.swing.JMenuItem jmListaProveedores;
     private javax.swing.JMenuItem jmRegistroProducto;
