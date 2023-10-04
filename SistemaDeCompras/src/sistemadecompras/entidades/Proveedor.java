@@ -10,6 +10,13 @@ public class Proveedor {
     public Proveedor() {
     }
 
+    public Proveedor(String nombreProveedor, String domicilio, String telefono) {
+        this.nombreProveedor = nombreProveedor;
+        this.domicilio = domicilio;
+        this.telefono = telefono;
+    }
+
+    
     public Proveedor(int idProveedor, String nombre, String domicilio, String telefono) {
         this.idProveedor = idProveedor;
         this.nombreProveedor = nombre;

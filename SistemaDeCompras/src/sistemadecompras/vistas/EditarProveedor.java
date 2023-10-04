@@ -163,23 +163,23 @@ public class EditarProveedor extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jtfNombreKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtfNombreKeyReleased
-        checkCampos();
+        //checkCampos();
     }//GEN-LAST:event_jtfNombreKeyReleased
 
     private void jtfTelefonoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtfTelefonoKeyReleased
-        checkCampos();
+        //checkCampos();
     }//GEN-LAST:event_jtfTelefonoKeyReleased
 
     private void jtfDireccionKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtfDireccionKeyReleased
-        checkCampos();
+        //checkCampos();
     }//GEN-LAST:event_jtfDireccionKeyReleased
 
     private void jbLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbLimpiarActionPerformed
-        limpiarCampos();
+        //limpiarCampos();
     }//GEN-LAST:event_jbLimpiarActionPerformed
 
     private void jbGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbGuardarActionPerformed
-        guardarProveedor();
+        //guardarProveedor();
     }//GEN-LAST:event_jbGuardarActionPerformed
 
     private void jbSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSalirActionPerformed

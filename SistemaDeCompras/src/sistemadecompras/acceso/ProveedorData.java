@@ -117,20 +117,4 @@ public class ProveedorData {
         return proveedores;
     }
 
-    public int traerUltimoId() {
-        int id = 0;
-        String sql = "SELECT MAX(idProveedor) AS idMax FROM proveedor"; //busca el mayor de la tabla y guarda el alias como idMax
-        try {
-            PreparedStatement ps = con.prepareStatement(sql);
-            ResultSet rs = ps.executeQuery();
-            if (rs.next()) {
-
-                id = rs.getInt("idMax");
-            }
-            ps.close();
-        } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla en el metodo traerUltimoId");
-        }
-        return id;
-    }
 }

@@ -14,20 +14,17 @@ public class ProductoData {
 
     public ProductoData() {
         con = Conexion.buscarConexion();
-        
+
     }
 
     public void agregarProducto(Producto producto) {
 
-        String sql = "INSERT INTO Producto (nombre, descripcion, precio, stock) VALUES (?,?,?,?,?)";
+        String sql = "INSERT INTO Producto (nombre, precio) VALUES (?,?)";
         try {
             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 
-            ps.setString(1,producto.getNombreProducto());
-            ps.setString(2,producto.getDescripcion());
-            ps.setDouble(3,producto.getPrecio());
-            ps.setDouble(4,producto.getStock());
-           
+            ps.setString(1, producto.getNombreProducto());
+            ps.setDouble(2, producto.getPrecio());
 
             ps.executeUpdate();
 
@@ -44,18 +41,15 @@ public class ProductoData {
 
     }
 
+    public void modificarProducto(Producto producto) {
 
-public void modificarProducto(Producto producto) {
-
-        String sql = "UPDATE Producto SET nombre = ?, descripcion = ? , precio = ?, Stock = ? WHERE idMateria = ?";
+        String sql = "UPDATE Producto SET nombre = ?, precio = ? WHERE idProducto = ?";
 
         try {
             PreparedStatement ps = con.prepareStatement(sql);
-            ps.setString(1,producto.getNombreProducto());
-            ps.setString(2,producto.getDescripcion());
-            ps.setDouble(3,producto.getPrecio());
-            ps.setDouble(4,producto.getStock());
-            ps.setBoolean(5,producto.isEstado());
+            ps.setString(1, producto.getNombreProducto());
+            ps.setDouble(2, producto.getPrecio());
+
             int exito = ps.executeUpdate();
 
             if (exito == 1) {
@@ -63,14 +57,14 @@ public void modificarProducto(Producto producto) {
             }
 
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error al acceder al Producto ");
+            JOptionPane.showMessageDialog(null, "Error al acceder al Producto en metodo modificarProducto");
         }
 
     }
 
-public void eliminarProductoPorId(int id) {
+    public void eliminarProductoPorId(int id) {
         try {
-            String sql = "DELETE Producto  WHERE idProducto = ? ";
+            String sql = "DELETE Producto WHERE idProducto = ? ";
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setInt(1, id);
             int fila = ps.executeUpdate();
@@ -79,7 +73,10 @@ public void eliminarProductoPorId(int id) {
             }
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error al acceder al Producto");
-      
+
         }
-}
+    }
+
+
+
 }
