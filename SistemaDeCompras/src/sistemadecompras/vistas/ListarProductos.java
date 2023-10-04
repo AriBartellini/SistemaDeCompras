@@ -25,13 +25,13 @@ public class ListarProductos extends javax.swing.JInternalFrame {
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null}
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
             },
             new String [] {
-                "idProducto", "Nombre", "Descripcion", "PrecioCosto", "Stock", "Tipo", "Estado"
+                "idProducto", "Nombre", "Descripcion", "PrecioCosto", "Stock", "Tipo"
             }
         ));
         jTable1.getTableHeader().setReorderingAllowed(false);
@@ -43,7 +43,6 @@ public class ListarProductos extends javax.swing.JInternalFrame {
             jTable1.getColumnModel().getColumn(3).setResizable(false);
             jTable1.getColumnModel().getColumn(4).setResizable(false);
             jTable1.getColumnModel().getColumn(5).setResizable(false);
-            jTable1.getColumnModel().getColumn(6).setResizable(false);
         }
 
         jbLimpiar.setText("Modificar");

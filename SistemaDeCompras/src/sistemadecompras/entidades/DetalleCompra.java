@@ -10,6 +10,14 @@ public class DetalleCompra {
     public DetalleCompra() {
     }
 
+    public DetalleCompra(int cantidad, double precioCosto, Compra compra, Producto producto) {
+        this.cantidad = cantidad;
+        this.precioCosto = precioCosto;
+        this.compra = compra;
+        this.producto = producto;
+    }
+
+    
     public DetalleCompra(int idDetalle, int cantidad, double precioCosto, Compra compra, Producto producto) {
         this.idDetalle = idDetalle;
         this.cantidad = cantidad;
@@ -60,7 +68,7 @@ public class DetalleCompra {
 
     @Override
     public String toString() {
-        return "DetalleCompra{" + "idDetalle=" + idDetalle + ", cantidad=" + cantidad + ", precioCosto=" + precioCosto + ", compra=" + compra + ", producto=" + producto + '}';
+        return (compra.getFecha().toString() + producto.getIdProducto() + producto.getNombreProducto() + producto.getPrecio() + compra.getIdCompra());
     }
     
     

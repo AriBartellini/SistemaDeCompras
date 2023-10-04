@@ -125,7 +125,7 @@ public class EditarProveedor extends javax.swing.JInternalFrame {
                                     .addComponent(jLabel1)
                                     .addGap(18, 18, 18)
                                     .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE))))))
-                .addContainerGap(60, Short.MAX_VALUE))
+                .addContainerGap(56, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
