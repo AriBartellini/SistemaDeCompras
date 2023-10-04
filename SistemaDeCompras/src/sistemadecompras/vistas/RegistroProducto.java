@@ -1,6 +1,7 @@
 package sistemadecompras.vistas;
 
 import sistemadecompras.acceso.ProductoData;
+import sistemadecompras.entidades.Producto;
 
 public class RegistroProducto extends javax.swing.JInternalFrame {
 
@@ -125,7 +126,7 @@ public class RegistroProducto extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jbGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbGuardarActionPerformed
-        // TODO add your handling code here:
+        guardarProducto();
     }//GEN-LAST:event_jbGuardarActionPerformed
 
     private void jbLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbLimpiarActionPerformed
@@ -173,8 +174,8 @@ public class RegistroProducto extends javax.swing.JInternalFrame {
         String nombre = jtfNombre.getText();
         double precio = Double.parseDouble(jtfPrecioCosto.getText());
         
-        Producto producto = new Pro
-        
+        Producto producto = new Producto(nombre,precio);
+        productoData.agregarProducto(producto);
     }
     
 }
