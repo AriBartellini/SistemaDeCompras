@@ -90,7 +90,7 @@ public class ProveedorData {
 
             ps.close();
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla proveedor");
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla en el metodo buscarProveedor");
         }
         return proveedor;
 

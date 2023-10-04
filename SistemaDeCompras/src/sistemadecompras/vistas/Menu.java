@@ -23,8 +23,12 @@ public class Menu extends javax.swing.JFrame {
         escritorio = new javax.swing.JLayeredPane();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
+        jMenu4 = new javax.swing.JMenu();
         jmRegistroProveedor = new javax.swing.JMenuItem();
         jmRegistroProducto = new javax.swing.JMenuItem();
+        jMenu5 = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
+        jMenuItem2 = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         jmCompras = new javax.swing.JMenuItem();
         jmDetalleCompra = new javax.swing.JMenuItem();
@@ -46,23 +50,37 @@ public class Menu extends javax.swing.JFrame {
             .addGap(0, 624, Short.MAX_VALUE)
         );
 
-        jMenu1.setText("Registro ");
+        jMenu1.setText("Gestion");
 
-        jmRegistroProveedor.setText("Registro Proveedor");
+        jMenu4.setText("Registrar");
+
+        jmRegistroProveedor.setText("Registrar proveedor");
         jmRegistroProveedor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jmRegistroProveedorActionPerformed(evt);
             }
         });
-        jMenu1.add(jmRegistroProveedor);
+        jMenu4.add(jmRegistroProveedor);
 
-        jmRegistroProducto.setText("Registro Producto");
+        jmRegistroProducto.setText("Registrar producto");
         jmRegistroProducto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jmRegistroProductoActionPerformed(evt);
             }
         });
-        jMenu1.add(jmRegistroProducto);
+        jMenu4.add(jmRegistroProducto);
+
+        jMenu1.add(jMenu4);
+
+        jMenu5.setText("Editar");
+
+        jMenuItem1.setText("Editar proveedor");
+        jMenu5.add(jMenuItem1);
+
+        jMenuItem2.setText("Editar producto");
+        jMenu5.add(jMenuItem2);
+
+        jMenu1.add(jMenu5);
 
         jMenuBar1.add(jMenu1);
 
@@ -247,7 +265,11 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
+    private javax.swing.JMenu jMenu4;
+    private javax.swing.JMenu jMenu5;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenu jmActualizar;
     private javax.swing.JMenuItem jmCompras;
     private javax.swing.JMenuItem jmDetalleCompra;
