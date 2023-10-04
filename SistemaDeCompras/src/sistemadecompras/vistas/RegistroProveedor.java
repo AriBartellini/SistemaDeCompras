@@ -28,6 +28,8 @@ public class RegistroProveedor extends javax.swing.JInternalFrame {
         jbLimpiar = new javax.swing.JButton();
         jbGuardar = new javax.swing.JButton();
 
+        setPreferredSize(new java.awt.Dimension(500, 350));
+
         jbSalir.setText("Salir");
         jbSalir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -36,7 +38,7 @@ public class RegistroProveedor extends javax.swing.JInternalFrame {
         });
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-        jLabel2.setText("Registro de Proveedores");
+        jLabel2.setText("Registro de proveedores");
 
         jLabel1.setText("Nombre");
 
