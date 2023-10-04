@@ -1,6 +1,10 @@
 
 package sistemadecompras.vistas;
 
+import javax.swing.JOptionPane;
+import sistemadecompras.acceso.ProveedorData;
+import sistemadecompras.entidades.Proveedor;
+
 public class RegistroProveedor extends javax.swing.JInternalFrame {
 
     public RegistroProveedor() {
@@ -19,7 +23,7 @@ public class RegistroProveedor extends javax.swing.JInternalFrame {
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jtfTelefono = new javax.swing.JTextField();
-        jtfdireccion = new javax.swing.JTextField();
+        jtfDireccion = new javax.swing.JTextField();
         jtfNombre = new javax.swing.JTextField();
         jbLimpiar = new javax.swing.JButton();
         jbGuardar = new javax.swing.JButton();
@@ -40,21 +44,21 @@ public class RegistroProveedor extends javax.swing.JInternalFrame {
 
         jLabel4.setText("Telefono");
 
-        jtfTelefono.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jtfTelefonoActionPerformed(evt);
+        jtfTelefono.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jtfTelefonoKeyReleased(evt);
             }
         });
 
-        jtfdireccion.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jtfdireccionActionPerformed(evt);
+        jtfDireccion.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jtfDireccionKeyReleased(evt);
             }
         });
 
-        jtfNombre.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jtfNombreActionPerformed(evt);
+        jtfNombre.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jtfNombreKeyReleased(evt);
             }
         });
 
@@ -66,6 +70,7 @@ public class RegistroProveedor extends javax.swing.JInternalFrame {
         });
 
         jbGuardar.setText("Guardar");
+        jbGuardar.setEnabled(false);
         jbGuardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jbGuardarActionPerformed(evt);
@@ -94,7 +99,7 @@ public class RegistroProveedor extends javax.swing.JInternalFrame {
                                 .addComponent(jLabel3))
                             .addGap(29, 29, 29)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jtfdireccion, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jtfDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(jtfTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(jtfNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addGap(98, 98, 98))
@@ -111,7 +116,7 @@ public class RegistroProveedor extends javax.swing.JInternalFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel3)
-                    .addComponent(jtfdireccion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jtfDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(20, 20, 20)
@@ -134,25 +139,25 @@ public class RegistroProveedor extends javax.swing.JInternalFrame {
        this.dispose();
     }//GEN-LAST:event_jbSalirActionPerformed
 
-    private void jtfTelefonoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfTelefonoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jtfTelefonoActionPerformed
-
-    private void jtfdireccionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfdireccionActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jtfdireccionActionPerformed
-
-    private void jtfNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfNombreActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jtfNombreActionPerformed
-
     private void jbLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbLimpiarActionPerformed
-        // TODO add your handling code here:
+        limpiarCampos();
     }//GEN-LAST:event_jbLimpiarActionPerformed
 
     private void jbGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbGuardarActionPerformed
-        // TODO add your handling code here:
+        guardarProveedor();
     }//GEN-LAST:event_jbGuardarActionPerformed
+
+    private void jtfNombreKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtfNombreKeyReleased
+        checkCampos();
+    }//GEN-LAST:event_jtfNombreKeyReleased
+
+    private void jtfDireccionKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtfDireccionKeyReleased
+        checkCampos();
+    }//GEN-LAST:event_jtfDireccionKeyReleased
+
+    private void jtfTelefonoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtfTelefonoKeyReleased
+        checkCampos();
+    }//GEN-LAST:event_jtfTelefonoKeyReleased
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -163,8 +168,39 @@ public class RegistroProveedor extends javax.swing.JInternalFrame {
     private javax.swing.JButton jbGuardar;
     private javax.swing.JButton jbLimpiar;
     private javax.swing.JButton jbSalir;
+    private javax.swing.JTextField jtfDireccion;
     private javax.swing.JTextField jtfNombre;
     private javax.swing.JTextField jtfTelefono;
-    private javax.swing.JTextField jtfdireccion;
     // End of variables declaration//GEN-END:variables
+
+    private void limpiarCampos(){
+        jtfNombre.setText("");
+        jtfDireccion.setText("");
+        jtfTelefono.setText("");
+        checkCampos();
+    }
+    
+    private void checkCampos(){
+        if(jtfNombre.getText().equals("")||jtfDireccion.getText().equals("")||jtfTelefono.getText().equals("")){
+            jbGuardar.setEnabled(false);
+        } else{
+            jbGuardar.setEnabled(true);
+        }
+            
+    }
+    
+    private void guardarProveedor(){
+        ProveedorData proveedorData = new ProveedorData();
+        int asignarId = proveedorData.traerUltimoId() + 1; //nos trae el ultimo id encontrado y le suma 1
+        
+        String nombre = jtfNombre.getText();
+        String direccion = jtfTelefono.getText();
+        String telefono = jtfDireccion.getText();
+        
+        Proveedor proveedor = new Proveedor(asignarId,nombre,direccion,telefono);
+        proveedorData.guardarProveedor(proveedor);
+        
+        limpiarCampos();
+    }
+    
 }

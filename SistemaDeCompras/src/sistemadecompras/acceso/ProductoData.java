@@ -17,7 +17,7 @@ public class ProductoData {
         
     }
 
-    public void agregrarProducto(Producto producto) {
+    public void agregarProducto(Producto producto) {
 
         String sql = "INSERT INTO Producto (nombre, descripcion, precio, stock, estado) VALUES (?,?,?,?,?)";
         try {

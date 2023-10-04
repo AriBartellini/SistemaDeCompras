@@ -5,19 +5,21 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JOptionPane;
 import sistemadecompras.entidades.Proveedor;
 
 public class ProveedorData {
 
     private Connection con;
-    
-    public ProveedorData(){
+
+    public ProveedorData() {
         con = Conexion.buscarConexion();
     }
-    
-    public void guardarProveedor(Proveedor proveedor){
-        
+
+    public void guardarProveedor(Proveedor proveedor) {
+
         String sql = "INSERT INTO proveedor (idProveedor, nombre, domicilio, telefono) VALUES (?,?,?,?)";
         try {
             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
@@ -26,7 +28,7 @@ public class ProveedorData {
             ps.setString(2, proveedor.getNombreProveedor());
             ps.setString(3, proveedor.getDomicilio());
             ps.setString(4, proveedor.getTelefono());
-           
+
             ps.executeUpdate();
 
             ResultSet rs = ps.getGeneratedKeys();
@@ -41,21 +43,19 @@ public class ProveedorData {
         }
 
     }
-    
-    public void modificarProveedor(Proveedor proveedor){
-        
+
+    public void modificarProveedor(Proveedor proveedor) {
+
         String sql = "UPDATE proveedor SET nombre = ?, domicilio = ?, telefono = ? WHERE idProveedor = ? ";
-                
 
         try {
-            
+
             PreparedStatement ps = con.prepareStatement(sql);
-            
+
             ps.setString(1, proveedor.getNombreProveedor());
             ps.setString(2, proveedor.getDomicilio());
             ps.setString(3, proveedor.getTelefono());
             ps.setInt(4, proveedor.getIdProveedor());
-            
 
             int exito = ps.executeUpdate();
 
@@ -67,12 +67,11 @@ public class ProveedorData {
             JOptionPane.showMessageDialog(null, "Error al acceder a la tabla en el metodo modificarProveedor");
         }
 
-        
     }
-    
-    public Proveedor buscarProveedor(int id){ //busqueda si o si por ID // en proceso...
-        
-        String sql = "SELECT id, apellido, nombre, fechaNac FROM proveedor WHERE idProveedor = ? AND estado=1";
+
+    public Proveedor buscarProveedor(int id) { //busqueda si o si por ID // en proceso...
+
+        String sql = "SELECT idProveedor, nombre, domicilio, telefono FROM proveedor WHERE idProveedor = ?";
         Proveedor proveedor = null;
         try {
             PreparedStatement ps = con.prepareStatement(sql);
@@ -81,11 +80,10 @@ public class ProveedorData {
             if (rs.next()) {
                 proveedor = new Proveedor();
                 proveedor.setIdProveedor(id);
-               // proveedor.set(rs.getInt("dni"));
-               // proveedor.setApellido(rs.getString("apellido"));
-               // proveedor.setNombre(rs.getString("nombre"));
-                
-                
+                proveedor.setNombreProveedor(rs.getString("nombre"));
+                proveedor.setDomicilio(rs.getString("domicilio"));
+                proveedor.setTelefono(rs.getString("telefono"));
+
             } else {
                 JOptionPane.showMessageDialog(null, "No existe un proveedor con ese id");
             }
@@ -95,9 +93,44 @@ public class ProveedorData {
             JOptionPane.showMessageDialog(null, "Error al acceder a la tabla proveedor");
         }
         return proveedor;
-        
-    }
-    
-    }
-    
 
+    }
+
+    public List<Proveedor> listarProveedores() {
+        List<Proveedor> proveedores = new ArrayList<>();
+        try {
+            String sql = "SELECT * FROM proveedor";
+            PreparedStatement ps = con.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                Proveedor proveedor = new Proveedor();
+                proveedor.setIdProveedor(rs.getInt("idProveedor"));
+                proveedor.setNombreProveedor(rs.getString("nombre"));
+                proveedor.setDomicilio(rs.getString("domicilio"));
+                proveedor.setTelefono(rs.getString("telefono"));
+                proveedores.add(proveedor);
+            }
+            ps.close();
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla en el metodo listarProveedores");
+        }
+        return proveedores;
+    }
+
+    public int traerUltimoId() {
+        int id = 0;
+        String sql = "SELECT MAX(idProveedor) AS idMax FROM proveedor"; //busca el mayor de la tabla y guarda el alias como idMax
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+
+                id = rs.getInt("idMax");
+            }
+            ps.close();
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla en el metodo traerUltimoId");
+        }
+        return id;
+    }
+}
