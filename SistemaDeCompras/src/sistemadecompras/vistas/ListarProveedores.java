@@ -52,7 +52,7 @@ public class ListarProveedores extends javax.swing.JInternalFrame {
                 {null, null, null, null}
             },
             new String [] {
-                "idProveedor", "Nombre", "Telefono", "Direccion"
+                "Id", "Nombre", "Telefono", "Direccion"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -75,7 +75,7 @@ public class ListarProveedores extends javax.swing.JInternalFrame {
         jScrollPane1.setViewportView(jtProveedores);
         jtProveedores.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_INTERVAL_SELECTION);
         if (jtProveedores.getColumnModel().getColumnCount() > 0) {
-            jtProveedores.getColumnModel().getColumn(0).setMaxWidth(100);
+            jtProveedores.getColumnModel().getColumn(0).setMaxWidth(50);
         }
 
         jbModificar.setText("Modificar");

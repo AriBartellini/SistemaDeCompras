@@ -51,7 +51,7 @@ public class ProductoData {
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setString(1, producto.getNombreProducto());
             ps.setDouble(2, producto.getPrecio());
-
+            ps.setInt(3, producto.getIdProducto());
             int exito = ps.executeUpdate();
 
             if (exito == 1) {
