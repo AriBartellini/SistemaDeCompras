@@ -85,8 +85,8 @@ public class CompraData {
             while (rs.next()) {
                 Compra compra = new Compra();
                 compra.setIdCompra(rs.getInt("idCompra"));
-                compra.setProv(rs.getInt("idProveedor"));
-                compra.setFecha(rs.getDate("fecha"));
+                compra.setIdProv(rs.getInt("idProveedor"));
+                compra.setFecha (rs.getDate("fecha").toLocalDate());
                 compras.add(compra);
             }
             ps.close();
