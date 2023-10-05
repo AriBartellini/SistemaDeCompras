@@ -153,6 +153,7 @@ public class ListarProveedores extends javax.swing.JInternalFrame {
             p.modificarProveedor(proveedor);
 
             llenarTabla();
+            cambios = false; //////////// cambio
             checkCampos();
         } else {
 
