@@ -75,7 +75,8 @@ public class ListarProveedores extends javax.swing.JInternalFrame {
         jScrollPane1.setViewportView(jtProveedores);
         jtProveedores.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_INTERVAL_SELECTION);
         if (jtProveedores.getColumnModel().getColumnCount() > 0) {
-            jtProveedores.getColumnModel().getColumn(0).setMaxWidth(50);
+            jtProveedores.getColumnModel().getColumn(0).setMaxWidth(40);
+            jtProveedores.getColumnModel().getColumn(2).setMaxWidth(60);
         }
 
         jbModificar.setText("Modificar");
