@@ -29,8 +29,7 @@ public class Menu extends javax.swing.JFrame {
         jMenu5 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
-        jMenu2 = new javax.swing.JMenu();
-        jmCompras = new javax.swing.JMenuItem();
+        jmCompras = new javax.swing.JMenu();
         jmActualizar = new javax.swing.JMenu();
         jMenu3 = new javax.swing.JMenu();
         jmListaProductos = new javax.swing.JMenuItem();
@@ -83,17 +82,18 @@ public class Menu extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu1);
 
-        jMenu2.setText("Compras");
-
         jmCompras.setText("Compras");
+        jmCompras.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jmComprasMouseClicked(evt);
+            }
+        });
         jmCompras.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jmComprasActionPerformed(evt);
             }
         });
-        jMenu2.add(jmCompras);
-
-        jMenuBar1.add(jMenu2);
+        jMenuBar1.add(jmCompras);
 
         jmActualizar.setText("Actualizacion Stock");
         jmActualizar.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -163,17 +163,6 @@ public class Menu extends javax.swing.JFrame {
         escritorio.moveToFront(rp);
     }//GEN-LAST:event_jmRegistroProductoActionPerformed
 
-    private void jmComprasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmComprasActionPerformed
-        escritorio.removeAll();
-        escritorio.repaint();
-        determinarFondo();
-        Compras c = new Compras();
-        c.setVisible(true);
-        escritorio.add(c);
-        escritorio.moveToFront(c);
-
-    }//GEN-LAST:event_jmComprasActionPerformed
-
     private void jmActualizarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jmActualizarMouseClicked
         escritorio.removeAll();
         escritorio.repaint();
@@ -203,6 +192,20 @@ public class Menu extends javax.swing.JFrame {
         escritorio.add(a);
         escritorio.moveToFront(a);
     }//GEN-LAST:event_jmListaProveedoresActionPerformed
+
+    private void jmComprasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmComprasActionPerformed
+       
+    }//GEN-LAST:event_jmComprasActionPerformed
+
+    private void jmComprasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jmComprasMouseClicked
+      escritorio.removeAll();
+        escritorio.repaint();
+        determinarFondo();
+        Compras a = new Compras();
+        a.setVisible(true);
+        escritorio.add(a);
+        escritorio.moveToFront(a);
+    }//GEN-LAST:event_jmComprasMouseClicked
 
     public static void main(String args[]) throws UnsupportedLookAndFeelException {
         UIManager.setLookAndFeel(new FlatDarkLaf());
@@ -244,7 +247,6 @@ public class Menu extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLayeredPane escritorio;
     private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenu jMenu5;
@@ -252,7 +254,7 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenu jmActualizar;
-    private javax.swing.JMenuItem jmCompras;
+    private javax.swing.JMenu jmCompras;
     private javax.swing.JMenuItem jmListaProductos;
     private javax.swing.JMenuItem jmListaProveedores;
     private javax.swing.JMenuItem jmRegistroProducto;
