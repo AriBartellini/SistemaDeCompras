@@ -79,6 +79,24 @@ public class ProductoData {
         }
     }
 
-
-
+     public List<Producto> listarProducto(){
+        List<Producto> productos = new ArrayList<>();
+        try {
+            String sql = "SELECT * FROM Producto";
+            PreparedStatement ps = con.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                Producto producto = new Producto();
+                producto.setIdProducto(rs.getInt("idProducto"));
+                producto.setNombreProducto(rs.getString("nombre"));
+                producto.setPrecio(rs.getDouble("precio"));
+                productos.add(producto);
+            }
+            ps.close();
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla en el metodo listarProducto");
+        }
+        return productos;
+    }   
+    
 }
