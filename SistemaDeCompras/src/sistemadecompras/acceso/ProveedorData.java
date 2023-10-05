@@ -69,6 +69,25 @@ public class ProveedorData {
 
     }
 
+    public void eliminarProveedor(int id){
+      
+        
+        try{
+              String sql= "DELETE  FROM proveedor WHERE idProveedor = ?";
+            PreparedStatement ps= con.prepareStatement(sql);
+            ps.setInt(1, id);
+            
+            int exito = ps.executeUpdate();
+
+            if (exito == 1) {
+                JOptionPane.showMessageDialog(null, "Proveedor eliminado correctamente");
+            }
+            
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla en el metodo eliminarProveedor");
+        }
+    }
+    
     public Proveedor buscarProveedor(int id) { //busqueda si o si por ID // en proceso...
 
         String sql = "SELECT idProveedor, nombre, domicilio, telefono FROM proveedor WHERE idProveedor = ?";

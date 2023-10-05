@@ -9,7 +9,9 @@ import sistemadecompras.acceso.ProveedorData;
 import sistemadecompras.entidades.Proveedor;
 
 public class ListarProveedores extends javax.swing.JInternalFrame {
+
     private boolean cambios;
+
     @SuppressWarnings("Convert2Lambda")
 
     public ListarProveedores() {
@@ -17,15 +19,15 @@ public class ListarProveedores extends javax.swing.JInternalFrame {
         Menu m = new Menu();
         m.centrarInternalFrame(this);
         llenarTabla();
-                ///////////////////////////////////////////////// ESTO ES PARA ACTIVAR EL BOTON DE MODIFICAR
-                         DefaultTableModel modelo = (DefaultTableModel) jtProveedores.getModel();
-                         modelo.addTableModelListener(new TableModelListener() {
-                         @Override
-                         public void tableChanged(TableModelEvent e) {
-                                 cambios = true;
-                                 checkCampos();                             
-                         }
-                     });
+        ///////////////////////////////////////////////// ESTO ES PARA ACTIVAR EL BOTON DE MODIFICAR
+        DefaultTableModel modelo = (DefaultTableModel) jtProveedores.getModel();
+        modelo.addTableModelListener(new TableModelListener() {
+            @Override
+            public void tableChanged(TableModelEvent e) {
+                cambios = true;
+                checkCampos();
+            }
+        });
     }
 
     @SuppressWarnings("unchecked")
@@ -52,11 +54,26 @@ public class ListarProveedores extends javax.swing.JInternalFrame {
             new String [] {
                 "idProveedor", "Nombre", "Telefono", "Direccion"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, true, true, true
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jtProveedores.setColumnSelectionAllowed(true);
+        jtProveedores.setNextFocusableComponent(jbEliminar);
+        jtProveedores.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_INTERVAL_SELECTION);
         jtProveedores.getTableHeader().setReorderingAllowed(false);
+        jtProveedores.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                jtProveedoresMouseReleased(evt);
+            }
+        });
         jScrollPane1.setViewportView(jtProveedores);
-        jtProveedores.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        jtProveedores.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_INTERVAL_SELECTION);
         if (jtProveedores.getColumnModel().getColumnCount() > 0) {
             jtProveedores.getColumnModel().getColumn(0).setMaxWidth(100);
         }
@@ -144,12 +161,26 @@ public class ListarProveedores extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jbModificarActionPerformed
 
     private void jbEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbEliminarActionPerformed
-        // TODO add your handling code here:
+        int filaSeleccionada = jtProveedores.getSelectedRow();
+
+        if (filaSeleccionada != -1) {
+            int idProv = (int) jtProveedores.getValueAt(filaSeleccionada, 0);
+            ProveedorData p = new ProveedorData();
+            p.eliminarProveedor(idProv);
+            llenarTabla();
+            checkCampos();
+        } else {
+            JOptionPane.showMessageDialog(this, "Por favor, seleccione un proveedor para eliminar.", "Sin selección", JOptionPane.WARNING_MESSAGE);
+        }
     }//GEN-LAST:event_jbEliminarActionPerformed
 
     private void jbSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSalirActionPerformed
         this.dispose();
     }//GEN-LAST:event_jbSalirActionPerformed
+
+    private void jtProveedoresMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtProveedoresMouseReleased
+      jbEliminar.setEnabled(true);
+    }//GEN-LAST:event_jtProveedoresMouseReleased
 
     private void llenarTabla() {
         DefaultTableModel modelo = (DefaultTableModel) jtProveedores.getModel();
@@ -163,11 +194,21 @@ public class ListarProveedores extends javax.swing.JInternalFrame {
     }
 
     private void checkCampos() {
-         if (cambios) {
+        if (cambios) {
             jbModificar.setEnabled(true);
         } else {
             jbModificar.setEnabled(false);
+
         }
+  
+        int filaSeleccionada = jtProveedores.getSelectedRow();
+
+        if (filaSeleccionada != -1) {
+            jbEliminar.setEnabled(true);
+        } else {
+            jbEliminar.setEnabled(false);
+        }
+
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel2;
