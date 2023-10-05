@@ -6,6 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -45,8 +46,8 @@ public class CompraData {
 
         try {
             PreparedStatement ps = con.prepareStatement(sql);
-            ps.setInt(1, compra.getProv());
-            ps.setDate(2, compra.getFecha());
+            ps.setInt(1, compra.getIdProv());
+            ps.setDate(2, Date.valueOf(compra.getFecha()));
 
             int exito = ps.executeUpdate();
 

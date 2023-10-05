@@ -8,18 +8,34 @@ public class Compra {
     private Proveedor prov;
     private LocalDate fecha;
     private int cantidad;
+    private int idProv;
 
     public Compra() {
     }
 
+    public Compra(int idProv, LocalDate fecha, int cantidad) {
+        idProv = prov.getIdProveedor();
+        this.fecha = fecha;
+        this.cantidad = cantidad;
+    }
+
     
-    public Compra(int idCompra, Proveedor prov, LocalDate fecha, int cantidad) {
+    public Compra(int idCompra, int idProv, LocalDate fecha, int cantidad) {
         this.idCompra = idCompra;
-        this.prov = prov;
+       idProv = prov.getIdProveedor();
         this.fecha = fecha;
         this.cantidad= cantidad;
     }
 
+    public int getIdProv() {
+        return idProv;
+    }
+
+    public void setIdProv(int idProv) {
+        this.idProv = idProv;
+    }
+
+    
     public int getCantidad() {
         return cantidad;
     }
