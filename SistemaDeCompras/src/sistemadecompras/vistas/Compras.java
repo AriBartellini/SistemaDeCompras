@@ -1,11 +1,17 @@
 package sistemadecompras.vistas;
 
+import java.util.List;
+import sistemadecompras.acceso.ProductoData;
+import sistemadecompras.acceso.ProveedorData;
+
 public class Compras extends javax.swing.JInternalFrame {
 
     public Compras() {
         initComponents();
         Menu m= new Menu();
         m.centrarInternalFrame(this);
+        
+        cargarCombos();
     }
 
     
@@ -14,18 +20,18 @@ public class Compras extends javax.swing.JInternalFrame {
     private void initComponents() {
 
         jbLimpiar = new javax.swing.JButton();
-        jbGuardar = new javax.swing.JButton();
+        jbComprar = new javax.swing.JButton();
         jbSalir = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
-        jComboBox1 = new javax.swing.JComboBox<>();
-        jTextField1 = new javax.swing.JTextField();
+        jtLista = new javax.swing.JTable();
+        jcbProductos = new javax.swing.JComboBox<>();
+        jtfCantidad = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
-        jComboBox2 = new javax.swing.JComboBox<>();
+        jcbProveedores = new javax.swing.JComboBox<>();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        jbAgregarALista = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
         jlTotal = new javax.swing.JLabel();
 
@@ -37,11 +43,11 @@ public class Compras extends javax.swing.JInternalFrame {
             }
         });
 
-        jbGuardar.setFont(new java.awt.Font("Segoe UI Symbol", 0, 11)); // NOI18N
-        jbGuardar.setText("Comprar");
-        jbGuardar.addActionListener(new java.awt.event.ActionListener() {
+        jbComprar.setFont(new java.awt.Font("Segoe UI Symbol", 0, 11)); // NOI18N
+        jbComprar.setText("Comprar");
+        jbComprar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbGuardarActionPerformed(evt);
+                jbComprarActionPerformed(evt);
             }
         });
 
@@ -56,7 +62,7 @@ public class Compras extends javax.swing.JInternalFrame {
         jLabel2.setFont(new java.awt.Font("Segoe UI Symbol", 1, 36)); // NOI18N
         jLabel2.setText("Realizar Compras");
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        jtLista.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -67,14 +73,14 @@ public class Compras extends javax.swing.JInternalFrame {
                 "Producto", "Cantidad", "Precio Unitario", "SubTotal"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(jtLista);
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Productos" }));
+        jcbProductos.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Productos" }));
 
         jLabel1.setFont(new java.awt.Font("Segoe UI Symbol", 0, 11)); // NOI18N
         jLabel1.setText("Cantidad:");
 
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Proveedores" }));
+        jcbProveedores.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Proveedores" }));
 
         jLabel3.setFont(new java.awt.Font("Segoe UI Symbol", 0, 11)); // NOI18N
         jLabel3.setText("Seleccionar ");
@@ -82,8 +88,8 @@ public class Compras extends javax.swing.JInternalFrame {
         jLabel4.setFont(new java.awt.Font("Segoe UI Symbol", 0, 11)); // NOI18N
         jLabel4.setText("Seleccionar ");
 
-        jButton1.setFont(new java.awt.Font("Segoe UI Symbol", 0, 11)); // NOI18N
-        jButton1.setText("Agregar a la lista");
+        jbAgregarALista.setFont(new java.awt.Font("Segoe UI Symbol", 0, 11)); // NOI18N
+        jbAgregarALista.setText("Agregar a la lista");
 
         jLabel5.setFont(new java.awt.Font("Segoe UI Symbol", 0, 14)); // NOI18N
         jLabel5.setText("TOTAL:");
@@ -110,7 +116,7 @@ public class Compras extends javax.swing.JInternalFrame {
                                 .addGap(64, 64, 64))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(139, 139, 139)
-                                .addComponent(jbGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jbComprar, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(140, 140, 140)
                                 .addComponent(jbSalir))))
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
@@ -120,18 +126,18 @@ public class Compras extends javax.swing.JInternalFrame {
                                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                                         .addComponent(jLabel3)
                                         .addGap(44, 44, 44)
-                                        .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                        .addComponent(jcbProductos, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(jLabel4)
                                         .addGap(44, 44, 44)
-                                        .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                        .addComponent(jcbProveedores, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                 .addGap(33, 33, 33)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(jLabel1)
                                         .addGap(18, 18, 18)
-                                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(jButton1)))
+                                        .addComponent(jtfCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(jbAgregarALista)))
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                                 .addGap(101, 101, 101)
                                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 317, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -145,15 +151,15 @@ public class Compras extends javax.swing.JInternalFrame {
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(29, 29, 29)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jcbProductos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3)
                     .addComponent(jLabel1)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jtfCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jcbProveedores, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4)
-                    .addComponent(jButton1))
+                    .addComponent(jbAgregarALista))
                 .addGap(37, 37, 37)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(29, 29, 29)
@@ -163,7 +169,7 @@ public class Compras extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 21, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jbLimpiar)
-                    .addComponent(jbGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jbComprar, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jbSalir))
                 .addGap(28, 28, 28))
         );
@@ -175,9 +181,9 @@ public class Compras extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jbLimpiarActionPerformed
 
-    private void jbGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbGuardarActionPerformed
+    private void jbComprarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbComprarActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jbGuardarActionPerformed
+    }//GEN-LAST:event_jbComprarActionPerformed
 
     private void jbSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSalirActionPerformed
         this.dispose();
@@ -185,20 +191,38 @@ public class Compras extends javax.swing.JInternalFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JButton jbGuardar;
+    private javax.swing.JButton jbAgregarALista;
+    private javax.swing.JButton jbComprar;
     private javax.swing.JButton jbLimpiar;
     private javax.swing.JButton jbSalir;
+    private javax.swing.JComboBox<String> jcbProductos;
+    private javax.swing.JComboBox<String> jcbProveedores;
     private javax.swing.JLabel jlTotal;
+    private javax.swing.JTable jtLista;
+    private javax.swing.JTextField jtfCantidad;
     // End of variables declaration//GEN-END:variables
+
+    private void cargarCombos(){
+        
+        ProveedorData proveedor = new ProveedorData();
+        ProductoData producto = new ProductoData();
+        
+        List listaProveedor = proveedor.listarProveedores();
+        List listaProducto = producto.listarProducto();
+        
+        for (int indice = 0; indice < listaProveedor.size(); indice++) {
+            jcbProveedores.addItem(String.valueOf(listaProveedor.get(indice)));
+        }
+        for (int indice = 0; indice < listaProducto.size(); indice++) {
+            jcbProductos.addItem(String.valueOf(listaProducto.get(indice)));
+        }
+        
+    }
+    
 }

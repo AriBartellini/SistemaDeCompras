@@ -35,7 +35,7 @@
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace min="-2" pref="139" max="-2" attributes="0"/>
-                              <Component id="jbGuardar" min="-2" pref="118" max="-2" attributes="0"/>
+                              <Component id="jbComprar" min="-2" pref="118" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="140" max="-2" attributes="0"/>
                               <Component id="jbSalir" min="-2" max="-2" attributes="0"/>
                           </Group>
@@ -48,12 +48,12 @@
                                   <Group type="102" alignment="0" attributes="0">
                                       <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace min="-2" pref="44" max="-2" attributes="0"/>
-                                      <Component id="jComboBox1" max="32767" attributes="0"/>
+                                      <Component id="jcbProductos" max="32767" attributes="0"/>
                                   </Group>
                                   <Group type="102" attributes="0">
                                       <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace min="-2" pref="44" max="-2" attributes="0"/>
-                                      <Component id="jComboBox2" min="-2" pref="180" max="-2" attributes="0"/>
+                                      <Component id="jcbProveedores" min="-2" pref="180" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
                               <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
@@ -61,9 +61,9 @@
                                   <Group type="102" attributes="0">
                                       <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                                      <Component id="jTextField1" min="-2" pref="99" max="-2" attributes="0"/>
+                                      <Component id="jtfCantidad" min="-2" pref="99" max="-2" attributes="0"/>
                                   </Group>
-                                  <Component id="jButton1" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jbAgregarALista" min="-2" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
@@ -85,16 +85,16 @@
               <Component id="jLabel2" min="-2" pref="58" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="jComboBox1" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jcbProductos" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jTextField1" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jtfCantidad" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="jComboBox2" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jcbProveedores" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jLabel4" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jButton1" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jbAgregarALista" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
               <Component id="jScrollPane1" min="-2" pref="186" max="-2" attributes="0"/>
@@ -106,7 +106,7 @@
               <EmptySpace pref="21" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jbLimpiar" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jbGuardar" alignment="3" min="-2" pref="33" max="-2" attributes="0"/>
+                  <Component id="jbComprar" alignment="3" min="-2" pref="33" max="-2" attributes="0"/>
                   <Component id="jbSalir" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
@@ -126,7 +126,7 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbLimpiarActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="jbGuardar">
+    <Component class="javax.swing.JButton" name="jbComprar">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Segoe UI Symbol" size="11" style="0"/>
@@ -134,7 +134,7 @@
         <Property name="text" type="java.lang.String" value="Comprar"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbGuardarActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbComprarActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JButton" name="jbSalir">
@@ -163,7 +163,7 @@
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
       <SubComponents>
-        <Component class="javax.swing.JTable" name="jTable1">
+        <Component class="javax.swing.JTable" name="jtLista">
           <Properties>
             <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
               <Table columnCount="4" rowCount="4">
@@ -204,7 +204,7 @@
         </Component>
       </SubComponents>
     </Container>
-    <Component class="javax.swing.JComboBox" name="jComboBox1">
+    <Component class="javax.swing.JComboBox" name="jcbProductos">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
           <StringArray count="1">
@@ -216,7 +216,7 @@
         <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
       </AuxValues>
     </Component>
-    <Component class="javax.swing.JTextField" name="jTextField1">
+    <Component class="javax.swing.JTextField" name="jtfCantidad">
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel1">
       <Properties>
@@ -226,7 +226,7 @@
         <Property name="text" type="java.lang.String" value="Cantidad:"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JComboBox" name="jComboBox2">
+    <Component class="javax.swing.JComboBox" name="jcbProveedores">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
           <StringArray count="1">
@@ -254,7 +254,7 @@
         <Property name="text" type="java.lang.String" value="Seleccionar "/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JButton" name="jButton1">
+    <Component class="javax.swing.JButton" name="jbAgregarALista">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Segoe UI Symbol" size="11" style="0"/>
