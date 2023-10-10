@@ -282,7 +282,7 @@ public class Compras extends javax.swing.JInternalFrame {
     }
 
     private void actualizarFilas() {
-        borrarFilas();
+        //borrarFilas();
         
         
         String cantidad = jtfCantidad.getText();
@@ -296,6 +296,10 @@ public class Compras extends javax.swing.JInternalFrame {
         
         double subtotal = precio * (Integer.parseInt(cantidad));
         
+        Object[] datos = {producto, cantidad, precio, subtotal};
+        modelo.addRow(datos);
+          
+            
         
         
     }
