@@ -28,9 +28,10 @@ public class Menu extends javax.swing.JFrame {
         jmRegistroProducto = new javax.swing.JMenuItem();
         jmCompras = new javax.swing.JMenu();
         jmActualizar = new javax.swing.JMenu();
-        jMenu3 = new javax.swing.JMenu();
+        jmConsultas = new javax.swing.JMenu();
         jmListaProductos = new javax.swing.JMenuItem();
         jmListaProveedores = new javax.swing.JMenuItem();
+        jmListaCompras = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setPreferredSize(new java.awt.Dimension(800, 600));
@@ -95,7 +96,7 @@ public class Menu extends javax.swing.JFrame {
         });
         jMenuBar1.add(jmActualizar);
 
-        jMenu3.setText("Consultas");
+        jmConsultas.setText("Consultas");
 
         jmListaProductos.setText("Lista de Productos");
         jmListaProductos.addActionListener(new java.awt.event.ActionListener() {
@@ -103,7 +104,7 @@ public class Menu extends javax.swing.JFrame {
                 jmListaProductosActionPerformed(evt);
             }
         });
-        jMenu3.add(jmListaProductos);
+        jmConsultas.add(jmListaProductos);
 
         jmListaProveedores.setText("Lista de Proveedores");
         jmListaProveedores.addActionListener(new java.awt.event.ActionListener() {
@@ -111,9 +112,17 @@ public class Menu extends javax.swing.JFrame {
                 jmListaProveedoresActionPerformed(evt);
             }
         });
-        jMenu3.add(jmListaProveedores);
+        jmConsultas.add(jmListaProveedores);
 
-        jMenuBar1.add(jMenu3);
+        jmListaCompras.setText("Lista de Compras");
+        jmListaCompras.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmListaComprasActionPerformed(evt);
+            }
+        });
+        jmConsultas.add(jmListaCompras);
+
+        jMenuBar1.add(jmConsultas);
 
         setJMenuBar(jMenuBar1);
 
@@ -195,6 +204,16 @@ public class Menu extends javax.swing.JFrame {
         escritorio.moveToFront(a);
     }//GEN-LAST:event_jmComprasMouseClicked
 
+    private void jmListaComprasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmListaComprasActionPerformed
+        escritorio.removeAll();
+        escritorio.repaint();
+        determinarFondo();
+        ListarCompras a = new ListarCompras();
+        a.setVisible(true);
+        escritorio.add(a);
+        escritorio.moveToFront(a);
+    }//GEN-LAST:event_jmListaComprasActionPerformed
+
     public static void main(String args[]) throws UnsupportedLookAndFeelException {
         UIManager.setLookAndFeel(new FlatDarkLaf());
         new Menu().setVisible(true);
@@ -235,11 +254,12 @@ public class Menu extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLayeredPane escritorio;
     private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenu jmActualizar;
     private javax.swing.JMenu jmCompras;
+    private javax.swing.JMenu jmConsultas;
+    private javax.swing.JMenuItem jmListaCompras;
     private javax.swing.JMenuItem jmListaProductos;
     private javax.swing.JMenuItem jmListaProveedores;
     private javax.swing.JMenuItem jmRegistroProducto;

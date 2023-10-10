@@ -66,7 +66,7 @@ public class ProductoData {
 
     public void eliminarProductoPorId(int id) {
         try {
-            String sql = "DELETE Producto WHERE idProducto = ? ";
+            String sql = "DELETE  FROM producto  WHERE  idProducto  =  ?  ";
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setInt(1, id);
             int fila = ps.executeUpdate();

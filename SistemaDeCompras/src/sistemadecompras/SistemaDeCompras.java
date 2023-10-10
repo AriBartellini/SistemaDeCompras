@@ -1,10 +1,7 @@
 package sistemadecompras;
 
-import java.sql.Date;
 import javax.swing.UnsupportedLookAndFeelException;
 import sistemadecompras.vistas.Menu;
-import sistemadecompras.entidades.Compra;
-import sistemadecompras.acceso.CompraData;
 
 public class SistemaDeCompras {
 

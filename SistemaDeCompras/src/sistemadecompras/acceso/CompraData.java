@@ -11,24 +11,31 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
 import sistemadecompras.entidades.Compra;
+import sistemadecompras.entidades.Producto;
 
 public class CompraData {
 
-    private Connection con;
+    private final Connection con;
 
     public CompraData() {
         con = Conexion.buscarConexion();
     }
 
-    public void guardarCompra( int idProveedor, Date fecha) {
-        String sql = "INSERT INTO compra (idCompra, idProveedor, fecha) VALUES (?,?,?)";
-
+    public void guardarCompra(int idProveedor, List<Producto> detalle, int cant, int total ) {
+       Date fecha= Date.valueOf(LocalDate.now());
+       String sql = "INSERT INTO compra ( idProveedor , detalle , cant , total , fecha ) VALUES ( ? , ? , ? , ? , ? )";
+        
         try {
             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-            
+
             ps.setInt(1, idProveedor);
-            ps.setDate(2, fecha);
+            ps.setString(2, detalle.toString());
+            ps.setInt(3, cant);
+            ps.setDouble(4, total);
+            ps.setDate(5, fecha);
+        
             ps.executeUpdate();
+            
             ResultSet rs = ps.getGeneratedKeys();
             if (rs.next()) {
                 JOptionPane.showMessageDialog(null, "Compra cargada correctamente");
@@ -39,18 +46,20 @@ public class CompraData {
             JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Compra");
         }
     }
-    
-    public void modificarCompra(Compra compra) {
 
-        String sql = "UPDATE Producto SET idProveedor = ?, fecha = ? WHERE idCompra = ?";
+    public void modificarCompra(Compra compra, int idCompra) {
 
+        String sql = "UPDATE Producto SET idProveedor = ?, detalle = ?, cant = ?, total = ? WHERE idCompra = ?";
+                
         try {
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setInt(1, compra.getIdProv());
-            ps.setDate(2, Date.valueOf(compra.getFecha()));
+            ps.setString(2, compra.getDetalle());
+            ps.setInt(3, compra.getCantidad());
+            ps.setDouble(4, compra.getTotal());
+            ps.setInt(5, idCompra);
 
             int exito = ps.executeUpdate();
-
             if (exito == 1) {
                 JOptionPane.showMessageDialog(null, "Compra modificado correctamente");
             }
@@ -60,10 +69,10 @@ public class CompraData {
         }
 
     }
-    
+
     public void eliminarCompraPorId(int id) {
         try {
-            String sql = "DELETE Compra WHERE idCompra= ? ";
+            String sql = "DELETE FROM Compra WHERE idCompra= ? ";
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setInt(1, id);
             int fila = ps.executeUpdate();
@@ -75,8 +84,9 @@ public class CompraData {
 
         }
     }
+
     
-    public List<Compra> listarCompra(){
+    public List<Compra> listarCompra() {
         List<Compra> compras = new ArrayList<>();
         try {
             String sql = "SELECT * FROM Compra";
@@ -86,14 +96,18 @@ public class CompraData {
                 Compra compra = new Compra();
                 compra.setIdCompra(rs.getInt("idCompra"));
                 compra.setIdProv(rs.getInt("idProveedor"));
-                compra.setFecha (rs.getDate("fecha").toLocalDate());
+                compra.setDetalle(rs.getString("detalle"));
+                compra.setCantidad(rs.getInt("cantidad"));
+                compra.setTotal(rs.getDouble("total"));
+                compra.setFecha(rs.getDate("fecha").toLocalDate());
                 compras.add(compra);
             }
             ps.close();
         } catch (SQLException e) {
+            
             JOptionPane.showMessageDialog(null, "Error al acceder a la tabla en el metodo listarCompra");
         }
         return compras;
-    } 
+    }
 
 }

@@ -5,20 +5,21 @@ import javax.swing.JOptionPane;
 import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
 import javax.swing.table.DefaultTableModel;
-import sistemadecompras.acceso.ProductoData;
-import sistemadecompras.entidades.Producto;
+import sistemadecompras.acceso.CompraData;
+import sistemadecompras.entidades.Compra;
 
-public class ListarProductos extends javax.swing.JInternalFrame {
-
+public class ListarCompras extends javax.swing.JInternalFrame {
+    
     private boolean cambios;
 
-    public ListarProductos() {
+    public ListarCompras() {
         initComponents();
         Menu m = new Menu();
         m.centrarInternalFrame(this);
         llenarTabla();
-        ///////////////////////////////////////////////// ESTO ES PARA ACTIVAR EL BOTON DE MODIFICAR
-        DefaultTableModel modelo = (DefaultTableModel) jtProductos.getModel();
+        
+///////////////////////////////////////////////// ESTO ES PARA ACTIVAR EL BOTON DE MODIFICAR
+        DefaultTableModel modelo = (DefaultTableModel) jtLista.getModel();
         modelo.addTableModelListener(new TableModelListener() {
             @Override
             public void tableChanged(TableModelEvent e) {
@@ -28,69 +29,50 @@ public class ListarProductos extends javax.swing.JInternalFrame {
         });
     }
 
-    private void llenarTabla() {
-        DefaultTableModel modelo = (DefaultTableModel) jtProductos.getModel();
-        modelo.setRowCount(0);
-        ProductoData p = new ProductoData();
-        List<Producto> lista = p.listarProducto();
-        lista.forEach((elemento) -> {
-            modelo.addRow(new Object[]{elemento.getIdProducto(), elemento.getNombreProducto(), elemento.getPrecio()});
-        });
-        checkCampos();
-    }
-
-    private void checkCampos() {
-        if (cambios) {
-            jbModificar.setEnabled(true);
-        } else {
-            jbModificar.setEnabled(false);
-        }
-
-        int filaSeleccionada = jtProductos.getSelectedRow();
-        if (filaSeleccionada != -1) {
-            jbEliminar.setEnabled(true);
-        } else {
-            jbEliminar.setEnabled(false);
-        }
-    }
-
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
         jLabel2 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jtProductos = new javax.swing.JTable();
+        jtLista = new javax.swing.JTable();
         jbModificar = new javax.swing.JButton();
         jbEliminar = new javax.swing.JButton();
         jbSalir = new javax.swing.JButton();
 
         jLabel2.setFont(new java.awt.Font("Segoe UI Symbol", 1, 36)); // NOI18N
-        jLabel2.setText("Productos");
+        jLabel2.setText(" Compras");
 
-        jtProductos.setFont(new java.awt.Font("Segoe UI Symbol", 0, 11)); // NOI18N
-        jtProductos.setModel(new javax.swing.table.DefaultTableModel(
+        jtLista.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "Id", "Nombre", "PrecioCosto"
+                "Id", "Fecha", "Provedores", "Productos", "Total"
             }
-        ));
-        jtProductos.getTableHeader().setReorderingAllowed(false);
-        jtProductos.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseReleased(java.awt.event.MouseEvent evt) {
-                jtProductosMouseReleased(evt);
+        ) {
+            boolean[] canEdit = new boolean [] {
+                true, false, true, true, true
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(jtProductos);
-        if (jtProductos.getColumnModel().getColumnCount() > 0) {
-            jtProductos.getColumnModel().getColumn(0).setMaxWidth(40);
-            jtProductos.getColumnModel().getColumn(1).setResizable(false);
-            jtProductos.getColumnModel().getColumn(2).setMaxWidth(80);
+        jtLista.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                jtListaMouseReleased(evt);
+            }
+        });
+        jScrollPane1.setViewportView(jtLista);
+        if (jtLista.getColumnModel().getColumnCount() > 0) {
+            jtLista.getColumnModel().getColumn(0).setMaxWidth(40);
+            jtLista.getColumnModel().getColumn(1).setMaxWidth(80);
+            jtLista.getColumnModel().getColumn(3).setMaxWidth(80);
+            jtLista.getColumnModel().getColumn(4).setMaxWidth(80);
         }
 
         jbModificar.setFont(new java.awt.Font("Segoe UI Symbol", 0, 11)); // NOI18N
@@ -124,69 +106,70 @@ public class ListarProductos extends javax.swing.JInternalFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(36, 36, 36)
+                        .addGap(29, 29, 29)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jbModificar)
-                                .addGap(113, 113, 113)
+                                .addGap(160, 160, 160)
                                 .addComponent(jbEliminar)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jbSalir))
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 572, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(150, 150, 150)
-                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(213, 213, 213)
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(37, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(22, 22, 22)
-                .addComponent(jLabel2)
-                .addGap(28, 28, 28)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(30, 30, 30)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(38, 38, 38)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jbModificar)
                     .addComponent(jbEliminar)
                     .addComponent(jbSalir))
-                .addContainerGap(35, Short.MAX_VALUE))
+                .addContainerGap(28, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jbModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbModificarActionPerformed
-        int filaSeleccionada = jtProductos.getSelectedRow();
+      int filaSeleccionada = jtLista.getSelectedRow();
 
         if (filaSeleccionada != -1) {
-            int idProducto = (int) jtProductos.getValueAt(filaSeleccionada, 0);
-            String nombreProducto = (String) jtProductos.getValueAt(filaSeleccionada, 1);
-            Double precioCosto = (Double) jtProductos.getValueAt(filaSeleccionada, 2);
-            Producto producto = new Producto(idProducto, nombreProducto, precioCosto);
-            ProductoData p = new ProductoData();
-            p.modificarProducto(producto);
+            int idCompra = (int) jtLista.getValueAt(filaSeleccionada, 0);
+            String nombreProveedor = (String) jtLista.getValueAt(filaSeleccionada, 1);
+            Double total = (Double) jtLista.getValueAt(filaSeleccionada, 2);
+            int cantidad= (int) jtLista.getValueAt(filaSeleccionada, 3);
+           Compra compra = new Compra(idCompra, nombreProveedor, cantidad, total );
+            CompraData c = new CompraData();
+            c.modificarCompra(compra, idCompra);
 
             llenarTabla();
             cambios = false; //////////// cambio
             checkCampos();
         }else {
-            JOptionPane.showMessageDialog(this, "Por favor, seleccione un producto para eliminar.", "Sin selección", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Por favor, seleccione una compra para eliminar.", "Sin selección", JOptionPane.WARNING_MESSAGE);
         }
     }//GEN-LAST:event_jbModificarActionPerformed
 
     private void jbEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbEliminarActionPerformed
-         int filaSeleccionada = jtProductos.getSelectedRow();
+       int filaSeleccionada = jtLista.getSelectedRow();
 
         if (filaSeleccionada != -1) {
-            int idProducto = (int) jtProductos.getValueAt(filaSeleccionada, 0);
-            ProductoData p = new ProductoData();
-            p.eliminarProductoPorId(idProducto);
+            int idCompra = (int) jtLista.getValueAt(filaSeleccionada, 0);
+            CompraData p = new CompraData();
+            p.eliminarCompraPorId(idCompra);
             llenarTabla();
             checkCampos();
         } else {
             JOptionPane.showMessageDialog(this, "Por favor, seleccione un producto para eliminar.", "Sin selección", JOptionPane.WARNING_MESSAGE);
-       
+
         }
     }//GEN-LAST:event_jbEliminarActionPerformed
 
@@ -194,18 +177,42 @@ public class ListarProductos extends javax.swing.JInternalFrame {
         this.dispose();
     }//GEN-LAST:event_jbSalirActionPerformed
 
-    private void jtProductosMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtProductosMouseReleased
-       jbEliminar.setEnabled(true);
-    }//GEN-LAST:event_jtProductosMouseReleased
+    private void jtListaMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtListaMouseReleased
+           jbEliminar.setEnabled(true);
+    }//GEN-LAST:event_jtListaMouseReleased
 
+private void llenarTabla() {
+        DefaultTableModel modelo = (DefaultTableModel) jtLista.getModel();
+        modelo.setRowCount(0);
+        CompraData p = new CompraData();
+        List<Compra> lista = p.listarCompra();
+        lista.forEach((elemento) -> {
+            modelo.addRow(new Object[]{elemento.getIdCompra(), elemento.getFecha(), elemento.getProv(), elemento.getCantidad(), elemento.getTotal()});
+        });
+        checkCampos();
+    }
 
+private void checkCampos() {
+        if (cambios) {
+            jbModificar.setEnabled(true);
+        } else {
+            jbModificar.setEnabled(false);
+        }
+
+        int filaSeleccionada = jtLista.getSelectedRow();
+        if (filaSeleccionada != -1) {
+            jbEliminar.setEnabled(true);
+        } else {
+            jbEliminar.setEnabled(false);
+        }
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton jbEliminar;
     private javax.swing.JButton jbModificar;
     private javax.swing.JButton jbSalir;
-    private javax.swing.JTable jtProductos;
+    private javax.swing.JTable jtLista;
     // End of variables declaration//GEN-END:variables
-
 }
