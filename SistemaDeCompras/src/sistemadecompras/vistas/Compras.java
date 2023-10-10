@@ -194,9 +194,10 @@ public class Compras extends javax.swing.JInternalFrame {
     private void jbComprarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbComprarActionPerformed
 
         //PARA SACAR ID PROVEEDOR
-        Proveedor prov = (Proveedor) jcbProveedores.getSelectedItem();
-        int idProveedor = prov.getIdProveedor();
-
+       String proveedor =  (String) jcbProveedores.getSelectedItem();
+       String id = proveedor.substring(0, 1);
+        int idProveedor = Integer.parseInt(id);
+       
         //PARA SACAR LISTA DE PRODUCTOS QUE VA A DETALLE
         List<String> detalle = new ArrayList<>();
         for (int i = 0; i < modelo.getRowCount(); i++) {

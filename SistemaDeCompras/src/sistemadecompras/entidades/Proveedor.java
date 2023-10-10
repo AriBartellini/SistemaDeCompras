@@ -58,7 +58,7 @@ public class Proveedor {
 
     @Override
     public String toString() {
-        return nombreProveedor;
+        return idProveedor + " - "+ nombreProveedor;
     }
     
     
