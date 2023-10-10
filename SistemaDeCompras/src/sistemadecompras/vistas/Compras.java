@@ -208,8 +208,12 @@ public class Compras extends javax.swing.JInternalFrame {
         //PARA SACAR CANTIDAD TOTAL DE PRODUCTOS
         int cant = 0;
         for (int i = 0; i < modelo.getRowCount(); i++) {
-            int cantidad = (int) modelo.getValueAt(i, 1);
+            try{
+           int cantidad = Integer.parseInt(modelo.getValueAt(i, 1).toString());
             cant = cant + cantidad;
+            } catch (NumberFormatException e){
+                 System.out.println("Error al convertir a entero en la fila " + i);
+            }
         }
         //PARA SACAR TOTAL MONEY DEL LABEL
         String totalS = jlTotal.getText();
