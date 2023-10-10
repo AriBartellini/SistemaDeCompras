@@ -203,8 +203,8 @@ public class RegistroProveedor extends javax.swing.JInternalFrame {
         ProveedorData proveedorData = new ProveedorData();
         
         String nombre = jtfNombre.getText();
-        String direccion = jtfTelefono.getText();
-        String telefono = jtfDireccion.getText();
+        String direccion =jtfDireccion.getText();
+        String telefono =jtfTelefono.getText();
         
         Proveedor proveedor = new Proveedor(nombre,direccion,telefono);
         proveedorData.guardarProveedor(proveedor);
