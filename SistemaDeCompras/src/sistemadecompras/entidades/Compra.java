@@ -47,10 +47,7 @@ public class Compra {
         this.total = total;
         this.fecha = fecha;
     }
-
-
-
-    public Compra(int idCompra, int idProv, LocalDate fecha, int cantidad) {
+  public Compra(int idCompra, int idProv, LocalDate fecha, int cantidad) {
         this.idCompra = idCompra;
         idProv = prov.getIdProveedor();
         this.fecha = fecha;

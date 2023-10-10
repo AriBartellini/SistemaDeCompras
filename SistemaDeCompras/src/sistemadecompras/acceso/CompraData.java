@@ -11,7 +11,6 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
 import sistemadecompras.entidades.Compra;
-import sistemadecompras.entidades.Producto;
 
 public class CompraData {
 
@@ -21,7 +20,7 @@ public class CompraData {
         con = Conexion.buscarConexion();
     }
 
-    public void guardarCompra(int idProveedor, List<Producto> detalle, int cant, int total ) {
+    public void guardarCompra(int idProveedor, List<String> detalle, int cant, double total ) {
        Date fecha= Date.valueOf(LocalDate.now());
        String sql = "INSERT INTO compra ( idProveedor , detalle , cant , total , fecha ) VALUES ( ? , ? , ? , ? , ? )";
         

@@ -1,26 +1,26 @@
 package sistemadecompras.vistas;
 
+import java.util.ArrayList;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
+import sistemadecompras.acceso.CompraData;
 import sistemadecompras.acceso.ProductoData;
 import sistemadecompras.acceso.ProveedorData;
-import sistemadecompras.entidades.Producto;
-
+import sistemadecompras.entidades.Proveedor;
 
 public class Compras extends javax.swing.JInternalFrame {
 
     private final DefaultTableModel modelo = new DefaultTableModel();
-    
+
     public Compras() {
         initComponents();
-        Menu m= new Menu();
+        Menu m = new Menu();
         m.centrarInternalFrame(this);
-        
+
         cargarCombos();
         armarCabecera();
     }
 
-    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -192,7 +192,30 @@ public class Compras extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jbLimpiarActionPerformed
 
     private void jbComprarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbComprarActionPerformed
-        // TODO add your handling code here:
+
+        //PARA SACAR ID PROVEEDOR
+        Proveedor prov = (Proveedor) jcbProveedores.getSelectedItem();
+        int idProveedor = prov.getIdProveedor();
+
+        //PARA SACAR LISTA DE PRODUCTOS QUE VA A DETALLE
+        List<String> detalle = new ArrayList<>();
+        for (int i = 0; i < modelo.getRowCount(); i++) {
+            String nombreProducto = (String) modelo.getValueAt(i, 0);
+            detalle.add(nombreProducto);
+        }
+        //PARA SACAR CANTIDAD TOTAL DE PRODUCTOS
+        int cant = 0;
+        for (int i = 0; i < modelo.getRowCount(); i++) {
+            int cantidad = (int) modelo.getValueAt(i, 1);
+            cant = cant + cantidad;
+        }
+        //PARA SACAR TOTAL MONEY DEL LABEL
+        String totalS = jlTotal.getText();
+        Double total = Double.parseDouble(totalS.substring(1));
+
+        //LLAMAR A GUARDARCOMPRA
+        CompraData c= new CompraData();
+        c.guardarCompra(idProveedor, detalle, cant, total);
     }//GEN-LAST:event_jbComprarActionPerformed
 
     private void jbSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSalirActionPerformed
@@ -222,50 +245,46 @@ public class Compras extends javax.swing.JInternalFrame {
     private javax.swing.JTextField jtfCantidad;
     // End of variables declaration//GEN-END:variables
 
-    private void cargarCombos(){
-        
+    private void cargarCombos() {
+
         ProveedorData proveedor = new ProveedorData();
         ProductoData producto = new ProductoData();
-        
+
         List listaProveedor = proveedor.listarProveedores();
         List listaProducto = producto.listarProducto();
-        
+
         for (int indice = 0; indice < listaProveedor.size(); indice++) {
             jcbProveedores.addItem(String.valueOf(listaProveedor.get(indice)));
         }
-        
-     
-        
+
         for (int indice = 0; indice < listaProducto.size(); indice++) {
             jcbProductos.addItem(String.valueOf(listaProducto.get(indice)));
         }
-        
+
     }
-    
-    private void armarCabecera(){
+
+    private void armarCabecera() {
         modelo.addColumn("Producto");
         modelo.addColumn("Cantidad");
         modelo.addColumn("Precio Unitario");
         modelo.addColumn("Subtotal");
         jtLista.setModel(modelo);
     }
-    
-    private void borrarFilas(){
+
+    private void borrarFilas() {
         int filas = jtLista.getRowCount() - 1;
-        for(int f = filas; f >= 0; f--){
+        for (int f = filas; f >= 0; f--) {
             modelo.removeRow(f);
         }
     }
-    
-    private void actualizarFilas(){
+
+    private void actualizarFilas() {
         borrarFilas();
-        
+
         String producto = (String) jcbProductos.getSelectedItem();
         String cantidad = jtfCantidad.getText();
-        
-        
+
         //System.out.println(producto);
-        
     }
-    
+
 }
