@@ -99,4 +99,25 @@ public class ProductoData {
         return productos;
     }   
     
+    public double traerPrecioPorId(int id){
+        double precio = 0;
+        
+        try{
+        String sql = "SELECT precio FROM Producto WHERE idProducto = ?";
+        PreparedStatement ps = con.prepareStatement(sql);
+        ps.setInt(1, id);
+        ResultSet rs = ps.executeQuery();
+        
+            if (rs.next()) {
+                
+                precio = rs.getDouble("precio");
+                
+            }
+        } catch(SQLException e){
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla en el metodo traerPrecioPorID");
+        }
+        return precio;
+    }
+     
+     
 }

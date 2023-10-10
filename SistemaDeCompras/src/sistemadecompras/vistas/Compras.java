@@ -6,6 +6,7 @@ import javax.swing.table.DefaultTableModel;
 import sistemadecompras.acceso.CompraData;
 import sistemadecompras.acceso.ProductoData;
 import sistemadecompras.acceso.ProveedorData;
+import sistemadecompras.entidades.Producto;
 import sistemadecompras.entidades.Proveedor;
 
 public class Compras extends javax.swing.JInternalFrame {
@@ -256,6 +257,7 @@ public class Compras extends javax.swing.JInternalFrame {
 
         for (int indice = 0; indice < listaProveedor.size(); indice++) {
             jcbProveedores.addItem(String.valueOf(listaProveedor.get(indice)));
+            
         }
 
         for (int indice = 0; indice < listaProducto.size(); indice++) {
@@ -281,11 +283,21 @@ public class Compras extends javax.swing.JInternalFrame {
 
     private void actualizarFilas() {
         borrarFilas();
-
-        String producto = (String) jcbProductos.getSelectedItem();
+        
+        
         String cantidad = jtfCantidad.getText();
-
-        //System.out.println(producto);
+        ProductoData productodata = new ProductoData();
+        String producto = (String) jcbProductos.getSelectedItem();
+        String id = producto.substring(0, 1);
+        System.out.println(id);
+        int idProducto = Integer.parseInt(id);
+        
+        double precio = productodata.traerPrecioPorId(idProducto);
+        
+        double subtotal = precio * (Integer.parseInt(cantidad));
+        
+        
+        
     }
 
 }
