@@ -209,9 +209,7 @@ public class Compras extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jbLimpiarActionPerformed
 
     private void jbComprarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbComprarActionPerformed
-
         comprar();
-                
         limpiarCampos();
     }//GEN-LAST:event_jbComprarActionPerformed
 
@@ -383,8 +381,7 @@ public class Compras extends javax.swing.JInternalFrame {
         jlTotal.setText(String.valueOf(suma));
     }
 
-    
-    private void comprar(){
+    private void comprar() {
         //PARA SACAR ID PROVEEDOR
         String proveedor = (String) jcbProveedores.getSelectedItem();
         String id = proveedor.substring(0, 1);

@@ -65,7 +65,7 @@ public class ActualizarStock extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jbActivarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbActivarActionPerformed
-        // TODO add your handling code here:
+        descontarAleatorio();
     }//GEN-LAST:event_jbActivarActionPerformed
 
 
@@ -76,6 +76,7 @@ public class ActualizarStock extends javax.swing.JInternalFrame {
     // End of variables declaration//GEN-END:variables
 
 private void descontarAleatorio(){
+    
     int stockDescontar = (int) (Math.random() * 10) + 1; //descuenta de 1 a 10 productos
     
 }

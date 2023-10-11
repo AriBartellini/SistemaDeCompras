@@ -181,7 +181,7 @@ public class RegistroProducto extends javax.swing.JInternalFrame {
         String nombre = jtfNombre.getText();
         double precio = Double.parseDouble(jtfPrecioCosto.getText());
         
-        Producto producto = new Producto(nombre,precio);
+        Producto producto = new Producto(nombre,precio, 0); // aqui creamos el producto con stock 0
         productoData.agregarProducto(producto);
     }
     

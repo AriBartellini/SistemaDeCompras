@@ -21,13 +21,13 @@ public class ProductoData {
 
     public void agregarProducto(Producto producto) {
 
-        String sql = "INSERT INTO Producto (nombre, precio) VALUES (?,?)";
+        String sql = "INSERT INTO Producto (nombre, precio) VALUES (?,?,?)";
         try {
             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 
             ps.setString(1, producto.getNombreProducto());
             ps.setDouble(2, producto.getPrecio());
-
+            ps.setInt(3, producto.getStock());
             ps.executeUpdate();
 
             ResultSet rs = ps.getGeneratedKeys();
@@ -62,6 +62,23 @@ public class ProductoData {
             JOptionPane.showMessageDialog(null, "Error al acceder al Producto en metodo modificarProducto");
         }
 
+    }
+    
+    public void modificarStock(Producto producto){ //aca modificamos el stock para las compras a un producto especifico
+        
+        String sql = "UPDATE Producto Set stock = ? WHERE idProducto = ?";
+        try{
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, producto.getStock());
+            ps.setInt(2, producto.getIdProducto());
+            int exito = ps.executeUpdate();
+            if (exito == 1) {
+                JOptionPane.showMessageDialog(null, "STOCK modificado correctamente");
+            }
+        } catch(SQLException ex){
+            JOptionPane.showMessageDialog(null, "Error al acceder al Producto en metodo modificarSTOCK");
+        }
+        
     }
 
     public void eliminarProductoPorId(int id) {
@@ -119,5 +136,6 @@ public class ProductoData {
         return precio;
     }
      
+    
      
 }
