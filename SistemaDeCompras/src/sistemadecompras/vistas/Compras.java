@@ -2,6 +2,7 @@ package sistemadecompras.vistas;
 
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import sistemadecompras.acceso.CompraData;
 import sistemadecompras.acceso.ProductoData;
@@ -13,10 +14,6 @@ public class Compras extends javax.swing.JInternalFrame {
 
     private final DefaultTableModel modelo = new DefaultTableModel();
 
-    boolean flag = false;
-    boolean procesoCompra = false;
-    
-    
     public Compras() {
         initComponents();
         Menu m = new Menu();
@@ -213,35 +210,8 @@ public class Compras extends javax.swing.JInternalFrame {
 
     private void jbComprarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbComprarActionPerformed
 
-        //PARA SACAR ID PROVEEDOR
-       String proveedor =  (String) jcbProveedores.getSelectedItem();
-       String id = proveedor.substring(0, 1);
-        int idProveedor = Integer.parseInt(id);
-       
-        //PARA SACAR LISTA DE PRODUCTOS QUE VA A DETALLE
-        List<String> detalle = new ArrayList<>();
-        for (int i = 0; i < modelo.getRowCount(); i++) {
-            String nombreProducto = (String) modelo.getValueAt(i, 0);
-            detalle.add(nombreProducto);
-        }
-        //PARA SACAR CANTIDAD TOTAL DE PRODUCTOS
-        int cant = 0;
-        for (int i = 0; i < modelo.getRowCount(); i++) {
-            try{
-           int cantidad = Integer.parseInt(modelo.getValueAt(i, 1).toString());
-            cant = cant + cantidad;
-            } catch (NumberFormatException e){
-                 System.out.println("Error al convertir a entero en la fila " + i);
-            }
-        }
-        //PARA SACAR TOTAL MONEY DEL LABEL
-        String totalS = jlTotal.getText();
-        Double total = Double.parseDouble(totalS.substring(1));
-
-        //LLAMAR A GUARDARCOMPRA
-        CompraData c= new CompraData();
-        c.guardarCompra(idProveedor, detalle, cant, total);
-        
+        comprar();
+                
         limpiarCampos();
     }//GEN-LAST:event_jbComprarActionPerformed
 
@@ -252,15 +222,11 @@ public class Compras extends javax.swing.JInternalFrame {
     private void jbAgregarAListaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAgregarAListaActionPerformed
         actualizarFilas();
         actualizarPrecio();
-        flag = true;
         checkCampos();
     }//GEN-LAST:event_jbAgregarAListaActionPerformed
 
     private void jcbProveedoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbProveedoresActionPerformed
-        // proveedor seleccionado
-        flag = true;
-        //procesoCompra = true;
-        //jcbProveedores.setEnabled(false);
+
         checkCampos();
     }//GEN-LAST:event_jcbProveedoresActionPerformed
 
@@ -297,7 +263,7 @@ public class Compras extends javax.swing.JInternalFrame {
 
         for (int indice = 0; indice < listaProveedor.size(); indice++) {
             jcbProveedores.addItem(String.valueOf(listaProveedor.get(indice)));
-            
+
         }
 
         for (int indice = 0; indice < listaProducto.size(); indice++) {
@@ -320,13 +286,10 @@ public class Compras extends javax.swing.JInternalFrame {
             modelo.removeRow(f);
         }
     }
-    
-    private void limpiarCampos(){
-        flag = false;
-        procesoCompra = false;
+
+    private void limpiarCampos() {
         jcbProveedores.setEnabled(true);
         jcbProveedores.setSelectedIndex(0);
-        //jcbProveedores.setEnabledAt(0,false);
         jcbProductos.setEnabled(false);
         jcbProductos.setSelectedIndex(0);
         jtfCantidad.setEnabled(false);
@@ -336,59 +299,120 @@ public class Compras extends javax.swing.JInternalFrame {
         jlTotal.setText("-");
         borrarFilas();
     }
-    
-    private void checkCampos(){
-        
-        if(flag && !jtfCantidad.isEnabled()){
-            flag = false;
+
+//    private void checkCampos(){
+//        
+//        if(flag && !jtfCantidad.isEnabled() && jcbProveedores.getSelectedIndex() != 0){
+//            flag = false;
+//            jcbProveedores.setEnabled(false);
+//            jcbProductos.setEnabled(true);
+//            jtfCantidad.setEnabled(false);
+//            jbAgregarALista.setEnabled(false);
+//            jbComprar.setEnabled(false);
+//        }
+//        else if(jcbProductos.isEnabled()&& !flag && jcbProductos.getSelectedIndex() != 0){ //producto ya seleccionado
+//            jtfCantidad.setEnabled(true);
+//            jbAgregarALista.setEnabled(true);
+//            flag = true;
+//        }
+//        else if(jcbProductos.getSelectedIndex() == 0){
+//            jtfCantidad.setEnabled(false);
+//            jbAgregarALista.setEnabled(false);
+//            flag = false;
+//        }
+//        else if(flag && jtfCantidad.isEnabled()){
+//            jbComprar.setEnabled(true);
+//        }
+//        
+//    }
+    ////////////////////////////////////////////////////////////////////////////////////
+    private void checkCampos() {
+        boolean proveedorSeleccionado = (jcbProveedores.getSelectedIndex() != 0);
+        boolean productoSeleccionado = (jcbProductos.getSelectedIndex() != 0);
+        boolean cantidadIngresada = !jtfCantidad.getText().isEmpty();
+
+        if (proveedorSeleccionado) {
             jcbProveedores.setEnabled(false);
             jcbProductos.setEnabled(true);
             jtfCantidad.setEnabled(false);
             jbAgregarALista.setEnabled(false);
             jbComprar.setEnabled(false);
         }
-        else if(jcbProductos.isEnabled()&& !flag){ //producto ya seleccionado
+
+        if (productoSeleccionado) {
             jtfCantidad.setEnabled(true);
             jbAgregarALista.setEnabled(true);
-            flag = true;
         }
-        else if(flag && jtfCantidad.isEnabled()){
+
+        if (cantidadIngresada) {
             jbComprar.setEnabled(true);
         }
-        
     }
 
     private void actualizarFilas() {
-        //borrarFilas();
-        
+
         String cantidad = jtfCantidad.getText();
+
         ProductoData productodata = new ProductoData();
         String producto = (String) jcbProductos.getSelectedItem();
         String id = producto.substring(0, 1);
         System.out.println(id);
         int idProducto = Integer.parseInt(id);
-        
+
         double precio = productodata.traerPrecioPorId(idProducto);
-        
-        double subtotal = precio * (Integer.parseInt(cantidad));
-        
-        Object[] datos = {producto, cantidad, precio, subtotal};
-        modelo.addRow(datos);
-          
+        try {
+            double subtotal = precio * (Integer.parseInt(cantidad));
+
+            Object[] datos = {producto, cantidad, precio, subtotal};
+            modelo.addRow(datos);
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(null, "Ingrese una cantidad valida");
+            jtfCantidad.setText("");
+        }
     }
 
-    private void actualizarPrecio(){
+    private void actualizarPrecio() {
+
         double total = 0;
         double suma = 0;
-        for(int i = 0; i < modelo.getRowCount(); i++){
-            total = (Double)modelo.getValueAt(i, 3);
+        for (int i = 0; i < modelo.getRowCount(); i++) {
+            total = (Double) modelo.getValueAt(i, 3);
             suma += total;
         }
-        
-        
-        
-        
+
         jlTotal.setText(String.valueOf(suma));
     }
+
     
+    private void comprar(){
+        //PARA SACAR ID PROVEEDOR
+        String proveedor = (String) jcbProveedores.getSelectedItem();
+        String id = proveedor.substring(0, 1);
+        int idProveedor = Integer.parseInt(id);
+
+        //PARA SACAR LISTA DE PRODUCTOS QUE VA A DETALLE
+        List<String> detalle = new ArrayList<>();
+        for (int i = 0; i < modelo.getRowCount(); i++) {
+            String nombreProducto = (String) modelo.getValueAt(i, 0);
+            detalle.add(nombreProducto);
+        }
+        //PARA SACAR CANTIDAD TOTAL DE PRODUCTOS
+        int cant = 0;
+        for (int i = 0; i < modelo.getRowCount(); i++) {
+            try {
+                int cantidad = Integer.parseInt(modelo.getValueAt(i, 1).toString());
+                cant = cant + cantidad;
+            } catch (NumberFormatException e) {
+                System.out.println("Error al convertir a entero en la fila " + i);
+            }
+        }
+        //PARA SACAR TOTAL MONEY DEL LABEL
+        String totalS = jlTotal.getText();
+        Double total = Double.parseDouble(totalS.substring(1));
+
+        //LLAMAR A GUARDARCOMPRA
+        CompraData c = new CompraData();
+        c.guardarCompra(idProveedor, detalle, cant, total);
+
+    }
 }
