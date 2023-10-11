@@ -230,6 +230,7 @@ public class Compras extends javax.swing.JInternalFrame {
 
     private void jbAgregarAListaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAgregarAListaActionPerformed
         actualizarFilas();
+        actualizarPrecio();
     }//GEN-LAST:event_jbAgregarAListaActionPerformed
 
 
@@ -288,7 +289,6 @@ public class Compras extends javax.swing.JInternalFrame {
     private void actualizarFilas() {
         //borrarFilas();
         
-        
         String cantidad = jtfCantidad.getText();
         ProductoData productodata = new ProductoData();
         String producto = (String) jcbProductos.getSelectedItem();
@@ -303,9 +303,20 @@ public class Compras extends javax.swing.JInternalFrame {
         Object[] datos = {producto, cantidad, precio, subtotal};
         modelo.addRow(datos);
           
-            
-        
-        
     }
 
+    private void actualizarPrecio(){
+        double total = 0;
+        double suma = 0;
+        for(int i = 0; i < modelo.getRowCount(); i++){
+            total = (Double)modelo.getValueAt(i, 3);
+            suma += total;
+        }
+        
+        
+        
+        
+        jlTotal.setText(String.valueOf(suma));
+    }
+    
 }
