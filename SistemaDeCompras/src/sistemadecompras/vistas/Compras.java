@@ -413,6 +413,7 @@ public class Compras extends javax.swing.JInternalFrame {
         //LLAMAR A GUARDARCOMPRA
         CompraData c = new CompraData();
         c.guardarCompra(idProveedor, detalle, cant, total);
+        
 
     }
 }

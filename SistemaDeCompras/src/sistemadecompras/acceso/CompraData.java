@@ -20,13 +20,14 @@ public class CompraData {
         con = Conexion.buscarConexion();
     }
 
-    public void guardarCompra(int idProveedor, List<String> detalle, int cant, double total ) {
+    public int guardarCompra(int idProveedor, List<String> detalle, int cant, double total ) {
        Date fecha= Date.valueOf(LocalDate.now());
        String sql = "INSERT INTO compra ( idProveedor , detalle , cant , total , fecha ) VALUES ( ? , ? , ? , ? , ? )";
-        
+        int generatedId = -1;
         try {
             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-
+            
+            
             ps.setInt(1, idProveedor);
             ps.setString(2, detalle.toString());
             ps.setInt(3, cant);
@@ -36,7 +37,9 @@ public class CompraData {
             ps.executeUpdate();
             
             ResultSet rs = ps.getGeneratedKeys();
+            
             if (rs.next()) {
+                generatedId = rs.getInt(1);
                 JOptionPane.showMessageDialog(null, "Compra cargada correctamente");
             }
             ps.close();
@@ -44,6 +47,7 @@ public class CompraData {
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Compra");
         }
+        return generatedId;
     }
 
     public void modificarCompra(Compra compra, int idCompra) {
