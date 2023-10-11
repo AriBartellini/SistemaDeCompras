@@ -13,6 +13,10 @@ public class Compras extends javax.swing.JInternalFrame {
 
     private final DefaultTableModel modelo = new DefaultTableModel();
 
+    boolean flag = false;
+    boolean procesoCompra = false;
+    
+    
     public Compras() {
         initComponents();
         Menu m = new Menu();
@@ -52,6 +56,7 @@ public class Compras extends javax.swing.JInternalFrame {
 
         jbComprar.setFont(new java.awt.Font("Segoe UI Symbol", 0, 11)); // NOI18N
         jbComprar.setText("Comprar");
+        jbComprar.setEnabled(false);
         jbComprar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jbComprarActionPerformed(evt);
@@ -83,11 +88,24 @@ public class Compras extends javax.swing.JInternalFrame {
         jScrollPane1.setViewportView(jtLista);
 
         jcbProductos.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Productos" }));
+        jcbProductos.setEnabled(false);
+        jcbProductos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jcbProductosActionPerformed(evt);
+            }
+        });
+
+        jtfCantidad.setEnabled(false);
 
         jLabel1.setFont(new java.awt.Font("Segoe UI Symbol", 0, 11)); // NOI18N
         jLabel1.setText("Cantidad:");
 
         jcbProveedores.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Proveedores" }));
+        jcbProveedores.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jcbProveedoresActionPerformed(evt);
+            }
+        });
 
         jLabel3.setFont(new java.awt.Font("Segoe UI Symbol", 0, 11)); // NOI18N
         jLabel3.setText("Seleccionar ");
@@ -97,6 +115,7 @@ public class Compras extends javax.swing.JInternalFrame {
 
         jbAgregarALista.setFont(new java.awt.Font("Segoe UI Symbol", 0, 11)); // NOI18N
         jbAgregarALista.setText("Agregar a la lista");
+        jbAgregarALista.setEnabled(false);
         jbAgregarALista.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jbAgregarAListaActionPerformed(evt);
@@ -104,10 +123,10 @@ public class Compras extends javax.swing.JInternalFrame {
         });
 
         jLabel5.setFont(new java.awt.Font("Segoe UI Symbol", 0, 14)); // NOI18N
-        jLabel5.setText("TOTAL:");
+        jLabel5.setText("TOTAL: $");
 
         jlTotal.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jlTotal.setText("$");
+        jlTotal.setText("-");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -158,15 +177,15 @@ public class Compras extends javax.swing.JInternalFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(50, 50, 50)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jcbProductos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(35, 35, 35)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jcbProveedores, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4))
                 .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jcbProductos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3))
+                .addGap(27, 27, 27)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(jtfCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -189,7 +208,7 @@ public class Compras extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jbLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbLimpiarActionPerformed
-        // TODO add your handling code here:
+        limpiarCampos();
     }//GEN-LAST:event_jbLimpiarActionPerformed
 
     private void jbComprarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbComprarActionPerformed
@@ -222,6 +241,8 @@ public class Compras extends javax.swing.JInternalFrame {
         //LLAMAR A GUARDARCOMPRA
         CompraData c= new CompraData();
         c.guardarCompra(idProveedor, detalle, cant, total);
+        
+        limpiarCampos();
     }//GEN-LAST:event_jbComprarActionPerformed
 
     private void jbSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSalirActionPerformed
@@ -231,7 +252,21 @@ public class Compras extends javax.swing.JInternalFrame {
     private void jbAgregarAListaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAgregarAListaActionPerformed
         actualizarFilas();
         actualizarPrecio();
+        flag = true;
+        checkCampos();
     }//GEN-LAST:event_jbAgregarAListaActionPerformed
+
+    private void jcbProveedoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbProveedoresActionPerformed
+        // proveedor seleccionado
+        flag = true;
+        //procesoCompra = true;
+        //jcbProveedores.setEnabled(false);
+        checkCampos();
+    }//GEN-LAST:event_jcbProveedoresActionPerformed
+
+    private void jcbProductosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbProductosActionPerformed
+        checkCampos();
+    }//GEN-LAST:event_jcbProductosActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -284,6 +319,43 @@ public class Compras extends javax.swing.JInternalFrame {
         for (int f = filas; f >= 0; f--) {
             modelo.removeRow(f);
         }
+    }
+    
+    private void limpiarCampos(){
+        flag = false;
+        procesoCompra = false;
+        jcbProveedores.setEnabled(true);
+        jcbProveedores.setSelectedIndex(0);
+        //jcbProveedores.setEnabledAt(0,false);
+        jcbProductos.setEnabled(false);
+        jcbProductos.setSelectedIndex(0);
+        jtfCantidad.setEnabled(false);
+        jtfCantidad.setText("");
+        jbAgregarALista.setEnabled(false);
+        jbComprar.setEnabled(false);
+        jlTotal.setText("-");
+        borrarFilas();
+    }
+    
+    private void checkCampos(){
+        
+        if(flag && !jtfCantidad.isEnabled()){
+            flag = false;
+            jcbProveedores.setEnabled(false);
+            jcbProductos.setEnabled(true);
+            jtfCantidad.setEnabled(false);
+            jbAgregarALista.setEnabled(false);
+            jbComprar.setEnabled(false);
+        }
+        else if(jcbProductos.isEnabled()&& !flag){ //producto ya seleccionado
+            jtfCantidad.setEnabled(true);
+            jbAgregarALista.setEnabled(true);
+            flag = true;
+        }
+        else if(flag && jtfCantidad.isEnabled()){
+            jbComprar.setEnabled(true);
+        }
+        
     }
 
     private void actualizarFilas() {
