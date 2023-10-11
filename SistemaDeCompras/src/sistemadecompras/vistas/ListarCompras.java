@@ -6,6 +6,7 @@ import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
 import javax.swing.table.DefaultTableModel;
 import sistemadecompras.acceso.CompraData;
+import sistemadecompras.acceso.ProveedorData;
 import sistemadecompras.entidades.Compra;
 
 public class ListarCompras extends javax.swing.JInternalFrame {
@@ -185,9 +186,12 @@ private void llenarTabla() {
         DefaultTableModel modelo = (DefaultTableModel) jtLista.getModel();
         modelo.setRowCount(0);
         CompraData p = new CompraData();
+        ProveedorData pd = new ProveedorData();
+       
         List<Compra> lista = p.listarCompra();
         lista.forEach((elemento) -> {
-            modelo.addRow(new Object[]{elemento.getIdCompra(), elemento.getFecha(), elemento.getProv(), elemento.getCantidad(), elemento.getTotal()});
+             String proveedor = pd.buscarProveedor(elemento.getIdProv()).toString();
+            modelo.addRow(new Object[]{elemento.getIdCompra(), elemento.getFecha(), proveedor , elemento.getCantidad(), elemento.getTotal()});
         });
         checkCampos();
     }

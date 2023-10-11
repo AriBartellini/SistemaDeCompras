@@ -65,7 +65,7 @@ public class CompraData {
 
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error al acceder al Compra en metodo modificarCompra");
-        }
+         }
 
     }
 
@@ -88,23 +88,24 @@ public class CompraData {
     public List<Compra> listarCompra() {
         List<Compra> compras = new ArrayList<>();
         try {
-            String sql = "SELECT * FROM Compra";
+            String sql = "SELECT * FROM compra ";
             PreparedStatement ps = con.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 Compra compra = new Compra();
                 compra.setIdCompra(rs.getInt("idCompra"));
-                compra.setIdProv(rs.getInt("idProveedor"));
-                compra.setDetalle(rs.getString("detalle"));
-                compra.setCantidad(rs.getInt("cantidad"));
-                compra.setTotal(rs.getDouble("total"));
                 compra.setFecha(rs.getDate("fecha").toLocalDate());
+                compra.setIdProv(rs.getInt("idProveedor"));
+                compra.setCantidad(rs.getInt("cant"));
+                compra.setTotal(rs.getDouble("total"));
+                
                 compras.add(compra);
             }
             ps.close();
         } catch (SQLException e) {
             
-            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla en el metodo listarCompra");
+            JOptionPane.showMessageDialog(null, e.getMessage() + "Error al acceder a la tabla en el metodo listarCompra");
+            
         }
         return compras;
     }
