@@ -66,7 +66,7 @@ public class ProductoData {
     
     public void modificarStock(int id, int stock){ //aca modificamos el stock para las compras a un producto especifico
         
-        String sql = "UPDATE Producto Set stock = ? WHERE idProducto = ?";
+        String sql = "UPDATE Producto Set stock = (stock + ?)  WHERE idProducto = ?";
         try{
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setInt(1, stock);
@@ -107,6 +107,7 @@ public class ProductoData {
                 producto.setIdProducto(rs.getInt("idProducto"));
                 producto.setNombreProducto(rs.getString("nombre"));
                 producto.setPrecio(rs.getDouble("precio"));
+                producto.setStock(rs.getInt("stock"));
                 productos.add(producto);
             }
             ps.close();

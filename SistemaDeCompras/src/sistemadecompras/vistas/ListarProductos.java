@@ -34,7 +34,7 @@ public class ListarProductos extends javax.swing.JInternalFrame {
         ProductoData p = new ProductoData();
         List<Producto> lista = p.listarProducto();
         lista.forEach((elemento) -> {
-            modelo.addRow(new Object[]{elemento.getIdProducto(), elemento.getNombreProducto(), elemento.getPrecio()});
+            modelo.addRow(new Object[]{elemento.getIdProducto(), elemento.getNombreProducto(), elemento.getPrecio(), elemento.getStock()});
         });
         checkCampos();
     }
@@ -71,13 +71,13 @@ public class ListarProductos extends javax.swing.JInternalFrame {
         jtProductos.setFont(new java.awt.Font("Segoe UI Symbol", 0, 11)); // NOI18N
         jtProductos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
             },
             new String [] {
-                "Id", "Nombre", "PrecioCosto"
+                "Id", "Nombre", "PrecioCosto", "Stock"
             }
         ));
         jtProductos.getTableHeader().setReorderingAllowed(false);
@@ -91,6 +91,7 @@ public class ListarProductos extends javax.swing.JInternalFrame {
             jtProductos.getColumnModel().getColumn(0).setMaxWidth(40);
             jtProductos.getColumnModel().getColumn(1).setResizable(false);
             jtProductos.getColumnModel().getColumn(2).setMaxWidth(80);
+            jtProductos.getColumnModel().getColumn(3).setMaxWidth(80);
         }
 
         jbModificar.setFont(new java.awt.Font("Segoe UI Symbol", 0, 11)); // NOI18N
