@@ -21,7 +21,7 @@ public class ProductoData {
 
     public void agregarProducto(Producto producto) {
 
-        String sql = "INSERT INTO Producto (nombre, precio) VALUES (?,?,?)";
+        String sql = "INSERT INTO Producto (nombre, precio, stock) VALUES (?,?,?)";
         try {
             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 
@@ -38,7 +38,7 @@ public class ProductoData {
             ps.close();
 
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Producto Duplicado");
+            JOptionPane.showMessageDialog(null, "Error en metodo agregarProducto");
         }
 
     }

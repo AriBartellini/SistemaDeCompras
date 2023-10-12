@@ -385,9 +385,9 @@ public class Compras extends javax.swing.JInternalFrame {
         sumarStock();
     }
     
-   ////////////////////////////pain
+ 
     private void sumarStock(){
-        ProductoData productodata = new ProductoData(); //aca modifica los stock pero no los suma, solo los reemplaza
+        ProductoData productodata = new ProductoData(); 
         
         int id;
         int cant;
