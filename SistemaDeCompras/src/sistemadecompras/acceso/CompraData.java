@@ -1,11 +1,11 @@
 package sistemadecompras.acceso;
 
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -21,18 +21,17 @@ public class CompraData {
     }
 
     public int guardarCompra(int idProveedor, List<String> detalle, int cant, double total ) {
-       Date fecha= Date.valueOf(LocalDate.now());
+      Timestamp fecha = new Timestamp(System.currentTimeMillis());
        String sql = "INSERT INTO compra ( idProveedor , detalle , cant , total , fecha ) VALUES ( ? , ? , ? , ? , ? )";
         int generatedId = -1;
         try {
             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-            
-            
+                        
             ps.setInt(1, idProveedor);
             ps.setString(2, detalle.toString());
             ps.setInt(3, cant);
             ps.setDouble(4, total);
-            ps.setDate(5, fecha);
+            ps.setTimestamp(5, fecha);
         
             ps.executeUpdate();
             
@@ -98,7 +97,7 @@ public class CompraData {
             while (rs.next()) {
                 Compra compra = new Compra();
                 compra.setIdCompra(rs.getInt("idCompra"));
-                compra.setFecha(rs.getDate("fecha").toLocalDate());
+                compra.setFecha(rs.getTimestamp("fecha"));
                 compra.setIdProv(rs.getInt("idProveedor"));
                 compra.setCantidad(rs.getInt("cant"));
                 compra.setTotal(rs.getDouble("total"));

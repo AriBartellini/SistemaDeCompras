@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package sistemadecompras.vistas;
 
 /**
@@ -11,9 +7,6 @@ package sistemadecompras.vistas;
  */
 public class DetalleDeCompra extends javax.swing.JInternalFrame {
 
-    /**
-     * Creates new form DetalleDeCompra
-     */
     public DetalleDeCompra() {
         initComponents();
     }

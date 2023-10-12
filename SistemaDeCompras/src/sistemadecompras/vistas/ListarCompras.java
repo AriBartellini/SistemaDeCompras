@@ -71,7 +71,6 @@ public class ListarCompras extends javax.swing.JInternalFrame {
         jScrollPane1.setViewportView(jtLista);
         if (jtLista.getColumnModel().getColumnCount() > 0) {
             jtLista.getColumnModel().getColumn(0).setMaxWidth(40);
-            jtLista.getColumnModel().getColumn(1).setMaxWidth(80);
             jtLista.getColumnModel().getColumn(3).setMaxWidth(80);
             jtLista.getColumnModel().getColumn(4).setMaxWidth(80);
         }

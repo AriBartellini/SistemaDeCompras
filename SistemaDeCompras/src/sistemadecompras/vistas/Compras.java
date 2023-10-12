@@ -5,6 +5,7 @@ import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import sistemadecompras.acceso.CompraData;
+import sistemadecompras.acceso.DetalleCompraData;
 import sistemadecompras.acceso.ProductoData;
 import sistemadecompras.acceso.ProveedorData;
 
@@ -381,6 +382,9 @@ public class Compras extends javax.swing.JInternalFrame {
         //LLAMAR A GUARDARCOMPRA
         CompraData c = new CompraData();
         c.guardarCompra(idProveedor, detalle, cant, total);
+        DetalleCompraData dc = new DetalleCompraData();
+        
+        dc.agregarDetalleCompra(cant, total, (dc.buscarCompraPorId()), idProveedor);
 
         sumarStock();
     }

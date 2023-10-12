@@ -1,5 +1,5 @@
 package sistemadecompras.entidades;
-
+import java.sql.Timestamp;
 import java.time.LocalDate;
 
 public class Compra {
@@ -11,12 +11,12 @@ public class Compra {
     private String detalle;
     private int cantidad;
     private double total;
-    private LocalDate fecha;
+    private Timestamp fecha;
 
     public Compra() {
     }
 
-    public Compra(int idProv, LocalDate fecha, int cantidad) {
+    public Compra(int idProv, Timestamp fecha, int cantidad) {
         idProv = prov.getIdProveedor();
         this.fecha = fecha;
         this.cantidad = cantidad;
@@ -29,7 +29,7 @@ public class Compra {
         this.total = total;
     }
 
-    public Compra(int idCompra, Proveedor prov, int idProv, String detalle, int cantidad, double total, LocalDate fecha) {
+    public Compra(int idCompra, Proveedor prov, int idProv, String detalle, int cantidad, double total, Timestamp fecha) {
         this.idCompra = idCompra;
         this.prov = prov;
         this.idProv = idProv;
@@ -39,7 +39,7 @@ public class Compra {
         this.fecha = fecha;
     }
 
-    public Compra(Proveedor prov, int idProv, String detalle, int cantidad, double total, LocalDate fecha) {
+    public Compra(Proveedor prov, int idProv, String detalle, int cantidad, double total, Timestamp fecha) {
         this.prov = prov;
         this.idProv = idProv;
         this.detalle = detalle;
@@ -47,7 +47,7 @@ public class Compra {
         this.total = total;
         this.fecha = fecha;
     }
-  public Compra(int idCompra, int idProv, LocalDate fecha, int cantidad) {
+  public Compra(int idCompra, int idProv, Timestamp fecha, int cantidad) {
         this.idCompra = idCompra;
         idProv = prov.getIdProveedor();
         this.fecha = fecha;
@@ -103,11 +103,11 @@ public class Compra {
         this.prov = prov;
     }
 
-    public LocalDate getFecha() {
+    public Timestamp getFecha() {
         return fecha;
     }
 
-    public void setFecha(LocalDate fecha) {
+    public void setFecha(Timestamp fecha) {
         this.fecha = fecha;
     }
 

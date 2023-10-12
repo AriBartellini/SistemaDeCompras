@@ -16,7 +16,7 @@ import sistemadecompras.entidades.Producto;
 public class DetalleCompraData {
      private Connection con;
 
-    public DetalleCompraData(Connection con) {
+    public DetalleCompraData() {
        con = Conexion.buscarConexion();
     }
      
@@ -36,7 +36,7 @@ public class DetalleCompraData {
             ps.close();
            
         } catch (SQLException ex) {
-             Logger.getLogger(DetalleCompraData.class.getName()).log(Level.SEVERE, null, ex);
+              JOptionPane.showMessageDialog(null, "Error en agregarDetalleCompra");
          }
     }
     public void agregarDetalleCompra(int cantidad, double precioCosto, int idCompra,int idProducto){
@@ -55,7 +55,7 @@ public class DetalleCompraData {
             ps.close();
            
         } catch (SQLException ex) {
-             Logger.getLogger(DetalleCompraData.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, "Error en agregarDetalleCompra");
          }
     }
     public List<Compra> listarPorId(){
@@ -69,8 +69,24 @@ public class DetalleCompraData {
             }
             
         } catch (SQLException ex) {
-             Logger.getLogger(DetalleCompraData.class.getName()).log(Level.SEVERE, null, ex);
+           JOptionPane.showMessageDialog(null, "Error en listarPorID en DetalleCompra");
          }
          return comp;
     }
+ 
+   public int buscarCompraPorId(){
+       int id = 0;
+       try{
+           String sql = "SELECT idCompra from compra ORDER BY fecha DESC LIMIT 1 ";
+           PreparedStatement ps = con.prepareStatement(sql);
+           ResultSet rs = ps.executeQuery();
+           id = rs.getInt("idCompra");
+                   
+       } catch (SQLException ex) {
+             JOptionPane.showMessageDialog(null, "Error en buscarCompraPorID en DetalleCompra");
+         }
+       
+       return id;
+   }
+
 }
