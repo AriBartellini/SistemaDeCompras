@@ -183,6 +183,7 @@ public class RegistroProducto extends javax.swing.JInternalFrame {
         
         Producto producto = new Producto(nombre,precio, 0); // aqui creamos el producto con stock 0
         productoData.agregarProducto(producto);
+        limpiarCampos();
     }
     
 }
