@@ -325,7 +325,7 @@ public class Compras extends javax.swing.JInternalFrame {
         ProductoData productodata = new ProductoData();
         String producto = (String) jcbProductos.getSelectedItem();
         String id = producto.substring(0, 1);
-        
+
         int idProducto = Integer.parseInt(id);
 
         double precio = productodata.traerPrecioPorId(idProducto);
@@ -381,23 +381,25 @@ public class Compras extends javax.swing.JInternalFrame {
         //LLAMAR A GUARDARCOMPRA
         CompraData c = new CompraData();
         c.guardarCompra(idProveedor, detalle, cant, total);
-        
+
         sumarStock();
     }
-    
- 
-    private void sumarStock(){
-        ProductoData productodata = new ProductoData(); 
-        
+
+    private void sumarStock() {
+        ProductoData productodata = new ProductoData();
+
         int id;
         int cant;
-        for(int i = 0; i< modelo.getRowCount(); i++){
-        //id = Integer.parseInt(modelo.getValueAt(i, 0).toString().substring(0, 1));
-        id = Integer.parseInt(modelo.getValueAt(i, 0).toString().charAt(0) + "");
-        cant = Integer.parseInt(modelo.getValueAt(i, 1).toString());
-        
-        productodata.modificarStock(id, cant);
-        System.out.println(id+"-"+cant);
+        for (int i = 0; i < modelo.getRowCount(); i++) {
+            //id = Integer.parseInt(modelo.getValueAt(i, 0).toString().substring(0, 1));
+            //id = Integer.parseInt(modelo.getValueAt(i, 0).toString().charAt(0) + "");
+            String idString = modelo.getValueAt(i, 0).toString();
+            String[] parts = idString.split(" ");
+            id = Integer.parseInt(parts[0]);
+            cant = Integer.parseInt(modelo.getValueAt(i, 1).toString());
+
+            productodata.modificarStock(id, cant);
+            System.out.println(id + "-" + cant);
+        }
     }
-}
 }
