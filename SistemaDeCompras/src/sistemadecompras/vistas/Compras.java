@@ -392,7 +392,8 @@ public class Compras extends javax.swing.JInternalFrame {
         int id;
         int cant;
         for(int i = 0; i< modelo.getRowCount(); i++){
-        id = Integer.parseInt(modelo.getValueAt(i, 0).toString().substring(0, 1));
+        //id = Integer.parseInt(modelo.getValueAt(i, 0).toString().substring(0, 1));
+        id = Integer.parseInt(modelo.getValueAt(i, 0).toString().charAt(0) + "");
         cant = Integer.parseInt(modelo.getValueAt(i, 1).toString());
         
         productodata.modificarStock(id, cant);
