@@ -7,8 +7,6 @@ import javax.swing.table.DefaultTableModel;
 import sistemadecompras.acceso.CompraData;
 import sistemadecompras.acceso.ProductoData;
 import sistemadecompras.acceso.ProveedorData;
-import sistemadecompras.entidades.Producto;
-import sistemadecompras.entidades.Proveedor;
 
 public class Compras extends javax.swing.JInternalFrame {
 
@@ -224,7 +222,6 @@ public class Compras extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jbAgregarAListaActionPerformed
 
     private void jcbProveedoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbProveedoresActionPerformed
-
         checkCampos();
     }//GEN-LAST:event_jcbProveedoresActionPerformed
 
@@ -298,32 +295,6 @@ public class Compras extends javax.swing.JInternalFrame {
         borrarFilas();
     }
 
-//    private void checkCampos(){
-//        
-//        if(flag && !jtfCantidad.isEnabled() && jcbProveedores.getSelectedIndex() != 0){
-//            flag = false;
-//            jcbProveedores.setEnabled(false);
-//            jcbProductos.setEnabled(true);
-//            jtfCantidad.setEnabled(false);
-//            jbAgregarALista.setEnabled(false);
-//            jbComprar.setEnabled(false);
-//        }
-//        else if(jcbProductos.isEnabled()&& !flag && jcbProductos.getSelectedIndex() != 0){ //producto ya seleccionado
-//            jtfCantidad.setEnabled(true);
-//            jbAgregarALista.setEnabled(true);
-//            flag = true;
-//        }
-//        else if(jcbProductos.getSelectedIndex() == 0){
-//            jtfCantidad.setEnabled(false);
-//            jbAgregarALista.setEnabled(false);
-//            flag = false;
-//        }
-//        else if(flag && jtfCantidad.isEnabled()){
-//            jbComprar.setEnabled(true);
-//        }
-//        
-//    }
-    ////////////////////////////////////////////////////////////////////////////////////
     private void checkCampos() {
         boolean proveedorSeleccionado = (jcbProveedores.getSelectedIndex() != 0);
         boolean productoSeleccionado = (jcbProductos.getSelectedIndex() != 0);
@@ -354,7 +325,7 @@ public class Compras extends javax.swing.JInternalFrame {
         ProductoData productodata = new ProductoData();
         String producto = (String) jcbProductos.getSelectedItem();
         String id = producto.substring(0, 1);
-        System.out.println(id);
+        
         int idProducto = Integer.parseInt(id);
 
         double precio = productodata.traerPrecioPorId(idProducto);
@@ -411,6 +382,21 @@ public class Compras extends javax.swing.JInternalFrame {
         CompraData c = new CompraData();
         c.guardarCompra(idProveedor, detalle, cant, total);
         
-
+        sumarStock();
     }
+    
+   ////////////////////////////pain
+    private void sumarStock(){
+        ProductoData productodata = new ProductoData(); //aca modifica los stock pero no los suma, solo los reemplaza
+        
+        int id;
+        int cant;
+        for(int i = 0; i< modelo.getRowCount(); i++){
+        id = Integer.parseInt(modelo.getValueAt(i, 0).toString().substring(0, 1));
+        cant = Integer.parseInt(modelo.getValueAt(i, 1).toString());
+        
+        productodata.modificarStock(id, cant);
+        System.out.println(id+"-"+cant);
+    }
+}
 }

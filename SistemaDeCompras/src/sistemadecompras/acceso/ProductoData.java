@@ -64,13 +64,13 @@ public class ProductoData {
 
     }
     
-    public void modificarStock(Producto producto){ //aca modificamos el stock para las compras a un producto especifico
+    public void modificarStock(int id, int stock){ //aca modificamos el stock para las compras a un producto especifico
         
         String sql = "UPDATE Producto Set stock = ? WHERE idProducto = ?";
         try{
             PreparedStatement ps = con.prepareStatement(sql);
-            ps.setInt(1, producto.getStock());
-            ps.setInt(2, producto.getIdProducto());
+            ps.setInt(1, stock);
+            ps.setInt(2, id);
             int exito = ps.executeUpdate();
             if (exito == 1) {
                 JOptionPane.showMessageDialog(null, "STOCK modificado correctamente");
