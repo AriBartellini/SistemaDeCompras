@@ -117,6 +117,27 @@ public class ProductoData {
         return productos;
     }   
     
+     public List<Integer> listarIdProductos(){
+        List<Integer> idProductos = new ArrayList<>();
+        try {
+            String sql = "SELECT idProducto FROM Producto";
+            PreparedStatement ps = con.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                //Producto producto = new Producto();
+                int prodId;
+                prodId = rs.getInt("idProducto");
+                
+                idProductos.add(prodId);
+            }
+            ps.close();
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla en el metodo listarIdProductos");
+        }
+        return idProductos;
+    }   
+     
+     
     public double traerPrecioPorId(int id){
         double precio = 0;
         
@@ -137,6 +158,42 @@ public class ProductoData {
         return precio;
     }
      
+    public void descontarPorId(int id, int descuento){
+        String sql = "UPDATE Producto Set stock = (stock - ?)  WHERE idProducto = ?";
+        
+        try{
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, descuento);
+            ps.setInt(2, id);
+            int exito = ps.executeUpdate();
+//            if (exito == 1) {
+//                JOptionPane.showMessageDialog(null, "STOCK modificado correctamente");
+//            }
+        } catch(SQLException ex){
+            JOptionPane.showMessageDialog(null, "Error al acceder al Producto en metodo descontarPorId");
+        }
+        
+    } 
     
+    
+    public int traerStockPorId(int id){
+        int stock = 0;
+        String sql = "SELECT stock FROM Producto WHERE idProducto = ?";
+        try{
+        
+        PreparedStatement ps = con.prepareStatement(sql);
+        ps.setInt(1, id);
+        ResultSet rs = ps.executeQuery();
+        
+            if (rs.next()) {
+                
+                stock = rs.getInt("stock");
+                
+            }
+        } catch(SQLException e){
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla en el metodo traerStockPorId");
+        }
+        return stock;
+    }
      
 }

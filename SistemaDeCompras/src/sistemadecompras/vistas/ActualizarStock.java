@@ -1,10 +1,17 @@
 package sistemadecompras.vistas;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+import javax.swing.JOptionPane;
+import sistemadecompras.acceso.ProductoData;
+import sistemadecompras.entidades.Producto;
+
 public class ActualizarStock extends javax.swing.JInternalFrame {
 
     public ActualizarStock() {
         initComponents();
-        Menu m= new Menu();
+        Menu m = new Menu();
         m.centrarInternalFrame(this);
     }
 
@@ -75,10 +82,30 @@ public class ActualizarStock extends javax.swing.JInternalFrame {
     private javax.swing.JButton jbActivar;
     // End of variables declaration//GEN-END:variables
 
-private void descontarAleatorio(){
-    
-    int stockDescontar = (int) (Math.random() * 10) + 1; //descuenta de 1 a 10 productos
-    
-}
+    private void descontarAleatorio() {
+
+        ProductoData productodata = new ProductoData();
+
+        List<Integer> listaId = new ArrayList<>();
+        listaId = productodata.listarIdProductos();
+
+        Random rand = new Random();
+        int indiceAleatorio = rand.nextInt(listaId.size());
+        int id = listaId.get(indiceAleatorio);
+        
+        try{
+            int stock = productodata.traerStockPorId(id);
+            int descuentoMaximo = Math.min(5, stock);
+            int descuento = rand.nextInt(descuentoMaximo) + 1;
+        //int descuento = (int) (Math.random() * 5) + 1; // se descuenta de 1 a 5 productos
+        productodata.descontarPorId(id, descuento);
+        JOptionPane.showMessageDialog(null, "se desconto al id: " + id + " descuento: " + descuento + " unidades");
+        
+        } catch(IllegalArgumentException e){
+            
+        }
+        
+
+    }
 
 }
