@@ -32,8 +32,7 @@ public class ProductoData {
 
             ResultSet rs = ps.getGeneratedKeys();
             if (rs.next()) {
-                producto.setIdProducto(rs.getInt(1));
-                JOptionPane.showMessageDialog(null, "Producto Agregado correctamente");
+                  JOptionPane.showMessageDialog(null, "Producto Agregado correctamente");
             }
             ps.close();
 

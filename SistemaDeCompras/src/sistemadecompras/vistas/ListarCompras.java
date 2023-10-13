@@ -12,13 +12,16 @@ import sistemadecompras.entidades.Compra;
 public class ListarCompras extends javax.swing.JInternalFrame {
     
     private boolean cambios;
-
+     private DetalleCompra detalle;
+     
     public ListarCompras() {
         initComponents();
+       
         Menu m = new Menu();
         m.centrarInternalFrame(this);
         llenarTabla();
-        
+         this.detalle = new DetalleCompra(m, true);
+         detalle.setLocationRelativeTo(m);
 ///////////////////////////////////////////////// ESTO ES PARA ACTIVAR EL BOTON DE MODIFICAR
         DefaultTableModel modelo = (DefaultTableModel) jtLista.getModel();
         modelo.addTableModelListener(new TableModelListener() {
@@ -28,6 +31,8 @@ public class ListarCompras extends javax.swing.JInternalFrame {
                 checkCampos();
             }
         });
+        
+      
     }
 
     @SuppressWarnings("unchecked")
@@ -40,6 +45,7 @@ public class ListarCompras extends javax.swing.JInternalFrame {
         jbModificar = new javax.swing.JButton();
         jbEliminar = new javax.swing.JButton();
         jbSalir = new javax.swing.JButton();
+        jbDetalle = new javax.swing.JButton();
 
         jLabel2.setFont(new java.awt.Font("Segoe UI Symbol", 1, 36)); // NOI18N
         jLabel2.setText(" Compras");
@@ -99,6 +105,14 @@ public class ListarCompras extends javax.swing.JInternalFrame {
             }
         });
 
+        jbDetalle.setFont(new java.awt.Font("Segoe UI Symbol", 0, 11)); // NOI18N
+        jbDetalle.setText("Mostrar Detalle");
+        jbDetalle.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbDetalleActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -110,9 +124,11 @@ public class ListarCompras extends javax.swing.JInternalFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jbModificar)
-                                .addGap(160, 160, 160)
-                                .addComponent(jbEliminar)
+                                .addGap(61, 61, 61)
+                                .addComponent(jbDetalle)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jbEliminar)
+                                .addGap(81, 81, 81)
                                 .addComponent(jbSalir))
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 572, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
@@ -131,7 +147,8 @@ public class ListarCompras extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jbModificar)
                     .addComponent(jbEliminar)
-                    .addComponent(jbSalir))
+                    .addComponent(jbSalir)
+                    .addComponent(jbDetalle))
                 .addContainerGap(28, Short.MAX_VALUE))
         );
 
@@ -181,6 +198,10 @@ public class ListarCompras extends javax.swing.JInternalFrame {
            jbEliminar.setEnabled(true);
     }//GEN-LAST:event_jtListaMouseReleased
 
+    private void jbDetalleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbDetalleActionPerformed
+      detalle.setVisible(true);
+    }//GEN-LAST:event_jbDetalleActionPerformed
+
 private void llenarTabla() {
         DefaultTableModel modelo = (DefaultTableModel) jtLista.getModel();
         modelo.setRowCount(0);
@@ -213,6 +234,7 @@ private void checkCampos() {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JButton jbDetalle;
     private javax.swing.JButton jbEliminar;
     private javax.swing.JButton jbModificar;
     private javax.swing.JButton jbSalir;

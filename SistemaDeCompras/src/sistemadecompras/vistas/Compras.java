@@ -12,7 +12,8 @@ import sistemadecompras.acceso.ProveedorData;
 public class Compras extends javax.swing.JInternalFrame {
 
     private final DefaultTableModel modelo = new DefaultTableModel();
-
+   
+    
     public Compras() {
         initComponents();
         Menu m = new Menu();
@@ -335,6 +336,7 @@ public class Compras extends javax.swing.JInternalFrame {
 
             Object[] datos = {producto, cantidad, precio, subtotal};
             modelo.addRow(datos);
+         
         } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(null, "Ingrese una cantidad valida");
             jtfCantidad.setText("");
@@ -354,6 +356,7 @@ public class Compras extends javax.swing.JInternalFrame {
     }
 
     private void comprar() {
+        
         //PARA SACAR ID PROVEEDOR
         String proveedor = (String) jcbProveedores.getSelectedItem();
         String id = proveedor.substring(0, 1);
@@ -382,11 +385,14 @@ public class Compras extends javax.swing.JInternalFrame {
         //LLAMAR A GUARDARCOMPRA
         CompraData c = new CompraData();
         c.guardarCompra(idProveedor, detalle, cant, total);
+      
+        //LLAMAR DETALLE COMPRA- ACA NO FUNCIONA
         DetalleCompraData dc = new DetalleCompraData();
-        
         dc.agregarDetalleCompra(cant, total, (dc.buscarCompraPorId()), idProveedor);
-
+       
+        
         sumarStock();
+      
     }
 
     private void sumarStock() {
@@ -395,8 +401,7 @@ public class Compras extends javax.swing.JInternalFrame {
         int id;
         int cant;
         for (int i = 0; i < modelo.getRowCount(); i++) {
-            //id = Integer.parseInt(modelo.getValueAt(i, 0).toString().substring(0, 1));
-            //id = Integer.parseInt(modelo.getValueAt(i, 0).toString().charAt(0) + "");
+          
             String idString = modelo.getValueAt(i, 0).toString();
             String[] parts = idString.split(" ");
             id = Integer.parseInt(parts[0]);
@@ -406,4 +411,6 @@ public class Compras extends javax.swing.JInternalFrame {
             System.out.println(id + "-" + cant);
         }
     }
+    
+    
 }
