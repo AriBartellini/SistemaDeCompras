@@ -18,15 +18,15 @@ public class DetalleCompraData {
  
     public void agregarDetalleCompra(int cantidad, double precioCosto, int idCompra, int idProducto) {
         
-        String sql = "INSERT INTO detallecompra (cantidad,	precioCosto,idCompra,idProducto	) VALUES (?,?,?,?)";
+        String sql = "INSERT INTO detallecompra ( cantidad , precioCosto , idCompra , idProducto ) VALUES (?,?,?,?)";
         try {
             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             ps.setInt(1, cantidad);
             ps.setDouble(2, precioCosto);
             ps.setInt(3, idCompra);
             ps.setInt(4, idProducto);
-
-            ResultSet rs = ps.getGeneratedKeys();
+            ps.executeUpdate();
+            ResultSet rs = ps.getGeneratedKeys();            
             if (rs.next()) {
                 JOptionPane.showMessageDialog(null, "Detalle cargado correctamente");
             }

@@ -8,6 +8,7 @@ import sistemadecompras.acceso.CompraData;
 import sistemadecompras.acceso.DetalleCompraData;
 import sistemadecompras.acceso.ProductoData;
 import sistemadecompras.acceso.ProveedorData;
+import sistemadecompras.entidades.DetalleCompra;
 
 public class Compras extends javax.swing.JInternalFrame {
 
@@ -384,11 +385,10 @@ public class Compras extends javax.swing.JInternalFrame {
 
         //LLAMAR A GUARDARCOMPRA
         CompraData c = new CompraData();
-        c.guardarCompra(idProveedor, detalle, cant, total);
-      
+        int idCompra=c.guardarCompra(idProveedor, detalle, cant, total);
+        System.out.println(idCompra);
         //LLAMAR DETALLE COMPRA- ACA NO FUNCIONA
-        DetalleCompraData dc = new DetalleCompraData();
-        dc.agregarDetalleCompra(cant, total, (dc.buscarCompraPorId()), idProveedor);
+        guardarDetalleCompra(idCompra);
        
         
         sumarStock();
@@ -410,6 +410,26 @@ public class Compras extends javax.swing.JInternalFrame {
             productodata.modificarStock(id, cant);
             System.out.println(id + "-" + cant);
         }
+    }
+    private void guardarDetalleCompra(int idCompra) {
+        DetalleCompraData detalleCompra= new DetalleCompraData();
+
+        int idProducto;
+        int cant;
+        double precioCosto;
+        System.out.println(idCompra);
+        for (int i = 0; i < modelo.getRowCount(); i++) {
+          
+            String idString = modelo.getValueAt(i, 0).toString();
+            String[] parts = idString.split(" ");
+            idProducto = Integer.parseInt(parts[0]);
+            cant = Integer.parseInt(modelo.getValueAt(i, 1).toString());
+            precioCosto =Double.parseDouble(modelo.getValueAt(i, 3).toString());
+
+            detalleCompra.agregarDetalleCompra(cant,precioCosto,idCompra,idProducto);
+            
+        }
+        
     }
     
     
