@@ -33,13 +33,13 @@ public class ProveedorData {
 
             ResultSet rs = ps.getGeneratedKeys();
             if (rs.next()) {
-                proveedor.setIdProveedor(rs.getInt(1));
+                
                 JOptionPane.showMessageDialog(null, "Proveedor guardado correctamente");
             }
             ps.close();
 
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Proveedor duplicado, inserte otro ID");
+            JOptionPane.showMessageDialog(null, "Error en guardarProveedor");
         }
 
     }

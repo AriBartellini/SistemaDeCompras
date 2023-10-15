@@ -82,8 +82,21 @@ public class Compras extends javax.swing.JInternalFrame {
             new String [] {
                 "Producto", "Cantidad", "Precio Unitario", "SubTotal"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jScrollPane1.setViewportView(jtLista);
+        if (jtLista.getColumnModel().getColumnCount() > 0) {
+            jtLista.getColumnModel().getColumn(1).setMaxWidth(80);
+            jtLista.getColumnModel().getColumn(2).setMaxWidth(80);
+            jtLista.getColumnModel().getColumn(3).setMaxWidth(80);
+        }
 
         jcbProductos.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Productos" }));
         jcbProductos.setEnabled(false);
@@ -387,10 +400,10 @@ public class Compras extends javax.swing.JInternalFrame {
         CompraData c = new CompraData();
         int idCompra=c.guardarCompra(idProveedor, detalle, cant, total);
         System.out.println(idCompra);
-        //LLAMAR DETALLE COMPRA- ACA NO FUNCIONA
+      
+        //LLAMAR DETALLE COMPRA
         guardarDetalleCompra(idCompra);
-       
-        
+         
         sumarStock();
       
     }
