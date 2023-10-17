@@ -10,10 +10,11 @@ public class Producto {
     }
 
     
-    public Producto(int idProducto, String nombreProducto, double precio) {
+    public Producto(int idProducto, String nombreProducto, double precio, int stock) {
         this.idProducto = idProducto;
         this.nombreProducto = nombreProducto;
         this.precio = precio;
+        this.stock= stock;
     }
 
    

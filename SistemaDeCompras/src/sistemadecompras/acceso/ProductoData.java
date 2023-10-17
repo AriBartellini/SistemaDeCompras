@@ -44,13 +44,14 @@ public class ProductoData {
 
     public void modificarProducto(Producto producto) {
 
-        String sql = "UPDATE Producto SET nombre = ?, precio = ? WHERE idProducto = ?";
+        String sql = "UPDATE Producto SET nombre = ?, precio = ?, stock = ? WHERE idProducto = ?";
 
         try {
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setString(1, producto.getNombreProducto());
             ps.setDouble(2, producto.getPrecio());
-            ps.setInt(3, producto.getIdProducto());
+            ps.setInt(3, producto.getStock());
+            ps.setInt(4, producto.getIdProducto());
             int exito = ps.executeUpdate();
 
             if (exito == 1) {

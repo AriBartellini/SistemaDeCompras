@@ -8,7 +8,6 @@ import sistemadecompras.acceso.CompraData;
 import sistemadecompras.acceso.DetalleCompraData;
 import sistemadecompras.acceso.ProductoData;
 import sistemadecompras.acceso.ProveedorData;
-import sistemadecompras.entidades.DetalleCompra;
 
 public class Compras extends javax.swing.JInternalFrame {
 
