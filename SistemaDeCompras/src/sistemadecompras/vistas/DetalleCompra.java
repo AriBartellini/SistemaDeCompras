@@ -27,9 +27,7 @@ public class DetalleCompra extends javax.swing.JDialog {
         jtDetalle = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        jlProveedor1 = new javax.swing.JLabel();
         jlFecha1 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -82,12 +80,7 @@ public class DetalleCompra extends javax.swing.JDialog {
         jLabel4.setFont(new java.awt.Font("Segoe UI Symbol", 0, 11)); // NOI18N
         jLabel4.setText("Id Compra");
 
-        jlProveedor1.setText("xxxxxx");
-
         jlFecha1.setText("xxxxxx");
-
-        jLabel6.setFont(new java.awt.Font("Segoe UI Symbol", 0, 11)); // NOI18N
-        jLabel6.setText("Id Detalle");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -103,10 +96,7 @@ public class DetalleCompra extends javax.swing.JDialog {
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(jlProveedor1, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
+                                .addGap(206, 206, 206)
                                 .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jlFecha1, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -136,8 +126,6 @@ public class DetalleCompra extends javax.swing.JDialog {
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(2, 2, 2)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel6)
-                    .addComponent(jlProveedor1)
                     .addComponent(jLabel4)
                     .addComponent(jlFecha1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -203,12 +191,10 @@ public class DetalleCompra extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel jlFecha;
     private javax.swing.JLabel jlFecha1;
     private javax.swing.JLabel jlProveedor;
-    private javax.swing.JLabel jlProveedor1;
     private javax.swing.JLabel jlTotal;
     private javax.swing.JTable jtDetalle;
     // End of variables declaration//GEN-END:variables

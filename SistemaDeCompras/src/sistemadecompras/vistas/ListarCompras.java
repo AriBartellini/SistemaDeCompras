@@ -10,18 +10,18 @@ import sistemadecompras.acceso.ProveedorData;
 import sistemadecompras.entidades.Compra;
 
 public class ListarCompras extends javax.swing.JInternalFrame {
-    
+
     private boolean cambios;
-     private DetalleCompra detalle;
-     
+    private DetalleCompra detalle;
+
     public ListarCompras() {
         initComponents();
-       
+
         Menu m = new Menu();
         m.centrarInternalFrame(this);
         llenarTabla();
-         this.detalle = new DetalleCompra(m, true);
-         detalle.setLocationRelativeTo(m);
+        this.detalle = new DetalleCompra(m, true);
+        detalle.setLocationRelativeTo(m);
 ///////////////////////////////////////////////// ESTO ES PARA ACTIVAR EL BOTON DE MODIFICAR
         DefaultTableModel modelo = (DefaultTableModel) jtLista.getModel();
         modelo.addTableModelListener(new TableModelListener() {
@@ -31,8 +31,7 @@ public class ListarCompras extends javax.swing.JInternalFrame {
                 checkCampos();
             }
         });
-        
-      
+
     }
 
     @SuppressWarnings("unchecked")
@@ -156,38 +155,11 @@ public class ListarCompras extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jbModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbModificarActionPerformed
-      int filaSeleccionada = jtLista.getSelectedRow();
-
-        if (filaSeleccionada != -1) {
-            int idCompra = (int) jtLista.getValueAt(filaSeleccionada, 0);
-            String nombreProveedor = (String) jtLista.getValueAt(filaSeleccionada, 1);
-            Double total = (Double) jtLista.getValueAt(filaSeleccionada, 2);
-            int cantidad= (int) jtLista.getValueAt(filaSeleccionada, 3);
-           Compra compra = new Compra(idCompra, nombreProveedor, cantidad, total );
-            CompraData c = new CompraData();
-            c.modificarCompra(compra, idCompra);
-
-            llenarTabla();
-            cambios = false; //////////// cambio
-            checkCampos();
-        }else {
-            JOptionPane.showMessageDialog(this, "Por favor, seleccione una compra para eliminar.", "Sin selección", JOptionPane.WARNING_MESSAGE);
-        }
+        modificar();
     }//GEN-LAST:event_jbModificarActionPerformed
 
     private void jbEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbEliminarActionPerformed
-       int filaSeleccionada = jtLista.getSelectedRow();
-
-        if (filaSeleccionada != -1) {
-            int idCompra = (int) jtLista.getValueAt(filaSeleccionada, 0);
-            CompraData p = new CompraData();
-            p.eliminarCompraPorId(idCompra);
-            llenarTabla();
-            checkCampos();
-        } else {
-            JOptionPane.showMessageDialog(this, "Por favor, seleccione un producto para eliminar.", "Sin selección", JOptionPane.WARNING_MESSAGE);
-
-        }
+        eliminar();
     }//GEN-LAST:event_jbEliminarActionPerformed
 
     private void jbSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSalirActionPerformed
@@ -195,28 +167,25 @@ public class ListarCompras extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jbSalirActionPerformed
 
     private void jtListaMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtListaMouseReleased
-           jbEliminar.setEnabled(true);
+        jbEliminar.setEnabled(true);
     }//GEN-LAST:event_jtListaMouseReleased
 
     private void jbDetalleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbDetalleActionPerformed
-      detalle.setVisible(true);
+        detalle.setVisible(true);
     }//GEN-LAST:event_jbDetalleActionPerformed
 
-private void llenarTabla() {
-        DefaultTableModel modelo = (DefaultTableModel) jtLista.getModel();
-        modelo.setRowCount(0);
-        CompraData p = new CompraData();
-        ProveedorData pd = new ProveedorData();
-       
-        List<Compra> lista = p.listarCompra();
-        lista.forEach((elemento) -> {
-             String proveedor = pd.buscarProveedor(elemento.getIdProv()).toString();
-            modelo.addRow(new Object[]{elemento.getIdCompra(), elemento.getFecha(), proveedor , elemento.getCantidad(), elemento.getTotal()});
-        });
-        checkCampos();
-    }
 
-private void checkCampos() {
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JButton jbDetalle;
+    private javax.swing.JButton jbEliminar;
+    private javax.swing.JButton jbModificar;
+    private javax.swing.JButton jbSalir;
+    private javax.swing.JTable jtLista;
+    // End of variables declaration//GEN-END:variables
+
+    private void checkCampos() {
         if (cambios) {
             jbModificar.setEnabled(true);
         } else {
@@ -230,14 +199,54 @@ private void checkCampos() {
             jbEliminar.setEnabled(false);
         }
     }
-    
-    // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JButton jbDetalle;
-    private javax.swing.JButton jbEliminar;
-    private javax.swing.JButton jbModificar;
-    private javax.swing.JButton jbSalir;
-    private javax.swing.JTable jtLista;
-    // End of variables declaration//GEN-END:variables
+
+    private void llenarTabla() {
+        DefaultTableModel modelo = (DefaultTableModel) jtLista.getModel();
+        modelo.setRowCount(0);
+        CompraData p = new CompraData();
+        ProveedorData pd = new ProveedorData();
+
+        List<Compra> lista = p.listarCompra();
+        lista.forEach((elemento) -> {
+            String proveedor = pd.buscarProveedor(elemento.getIdProv()).toString();
+            modelo.addRow(new Object[]{elemento.getIdCompra(), elemento.getFecha(), proveedor, elemento.getCantidad(), elemento.getTotal()});
+        });
+        checkCampos();
+    }
+
+    private void modificar() {
+        int filaSeleccionada = jtLista.getSelectedRow();
+
+        if (filaSeleccionada != -1) {
+            int idCompra = (int) jtLista.getValueAt(filaSeleccionada, 0);
+            String nombreProveedor = (String) jtLista.getValueAt(filaSeleccionada, 1);
+            Double total = (Double) jtLista.getValueAt(filaSeleccionada, 2);
+            int cantidad = (int) jtLista.getValueAt(filaSeleccionada, 3);
+            Compra compra = new Compra(idCompra, nombreProveedor, cantidad, total);
+            CompraData c = new CompraData();
+            c.modificarCompra(compra, idCompra);
+
+            llenarTabla();
+            cambios = false; //////////// cambio
+            checkCampos();
+        } else {
+            JOptionPane.showMessageDialog(this, "Por favor, seleccione una compra para eliminar.", "Sin selección", JOptionPane.WARNING_MESSAGE);
+        }
+    }
+
+    private void eliminar() {
+        int filaSeleccionada = jtLista.getSelectedRow();
+
+        if (filaSeleccionada != -1) {
+            int idCompra = (int) jtLista.getValueAt(filaSeleccionada, 0);
+            CompraData p = new CompraData();
+            p.eliminarCompraPorId(idCompra);
+            llenarTabla();
+            checkCampos();
+        } else {
+            JOptionPane.showMessageDialog(this, "Por favor, seleccione un producto para eliminar.", "Sin selección", JOptionPane.WARNING_MESSAGE);
+
+        }
+    }
+
 }
