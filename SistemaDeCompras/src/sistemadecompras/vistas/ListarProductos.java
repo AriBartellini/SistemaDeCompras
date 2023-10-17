@@ -79,7 +79,15 @@ public class ListarProductos extends javax.swing.JInternalFrame {
             new String [] {
                 "Id", "Nombre", "PrecioCosto", "Stock"
             }
-        ));
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Integer.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
         jtProductos.getTableHeader().setReorderingAllowed(false);
         jtProductos.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseReleased(java.awt.event.MouseEvent evt) {
@@ -164,7 +172,8 @@ public class ListarProductos extends javax.swing.JInternalFrame {
             int idProducto = (int) jtProductos.getValueAt(filaSeleccionada, 0);
             String nombreProducto = (String) jtProductos.getValueAt(filaSeleccionada, 1);
             Double precioCosto = (Double) jtProductos.getValueAt(filaSeleccionada, 2);
-            Producto producto = new Producto(idProducto, nombreProducto, precioCosto);
+            int stock = (int)jtProductos.getValueAt(filaSeleccionada, 3);
+            Producto producto = new Producto(idProducto, nombreProducto, precioCosto, stock);
             ProductoData p = new ProductoData();
             p.modificarProducto(producto);
 
