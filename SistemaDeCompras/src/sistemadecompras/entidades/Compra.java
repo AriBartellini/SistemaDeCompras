@@ -1,6 +1,5 @@
 package sistemadecompras.entidades;
 import java.sql.Timestamp;
-import java.time.LocalDate;
 
 public class Compra {
 

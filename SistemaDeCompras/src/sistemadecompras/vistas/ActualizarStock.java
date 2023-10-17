@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.Random;
 import javax.swing.JOptionPane;
 import sistemadecompras.acceso.ProductoData;
-import sistemadecompras.entidades.Producto;
 
 public class ActualizarStock extends javax.swing.JInternalFrame {
 
