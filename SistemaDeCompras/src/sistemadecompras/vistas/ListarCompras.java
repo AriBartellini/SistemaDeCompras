@@ -20,9 +20,10 @@ public class ListarCompras extends javax.swing.JInternalFrame {
         Menu m = new Menu();
         m.centrarInternalFrame(this);
         llenarTabla();
+        llenarProveedores();
         this.detalle = new DetalleCompra(m, true);
         detalle.setLocationRelativeTo(m);
-///////////////////////////////////////////////// ESTO ES PARA ACTIVAR EL BOTON DE MODIFICAR
+        //////////////////////////////////////// ESTO ES PARA ACTIVAR EL BOTON DE MODIFICAR
         DefaultTableModel modelo = (DefaultTableModel) jtLista.getModel();
         modelo.addTableModelListener(new TableModelListener() {
             @Override
@@ -45,6 +46,11 @@ public class ListarCompras extends javax.swing.JInternalFrame {
         jbEliminar = new javax.swing.JButton();
         jbSalir = new javax.swing.JButton();
         jbDetalle = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        jDateChooser1 = new com.toedter.calendar.JDateChooser();
+        jLabel3 = new javax.swing.JLabel();
+        jcbProveedores = new javax.swing.JComboBox<>();
+        jbBorrarFiltros = new javax.swing.JButton();
 
         jLabel2.setFont(new java.awt.Font("Segoe UI Symbol", 1, 36)); // NOI18N
         jLabel2.setText(" Compras");
@@ -112,43 +118,80 @@ public class ListarCompras extends javax.swing.JInternalFrame {
             }
         });
 
+        jLabel1.setText("Buscar por fecha");
+
+        jLabel3.setText("Buscar por proveedor");
+
+        jcbProveedores.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccionar" }));
+        jcbProveedores.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jcbProveedoresItemStateChanged(evt);
+            }
+        });
+
+        jbBorrarFiltros.setFont(new java.awt.Font("Segoe UI Historic", 0, 12)); // NOI18N
+        jbBorrarFiltros.setText("Borrar Filtros");
+        jbBorrarFiltros.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbBorrarFiltrosActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(29, 29, 29)
+                .addGap(38, 38, 38)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createSequentialGroup()
+                            .addGap(189, 189, 189)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(26, 26, 26)
+                                .addComponent(jLabel3)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jcbProveedores, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(layout.createSequentialGroup()
                                 .addComponent(jbModificar)
-                                .addGap(61, 61, 61)
-                                .addComponent(jbDetalle)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 49, Short.MAX_VALUE)
                                 .addComponent(jbEliminar)
-                                .addGap(81, 81, 81)
-                                .addComponent(jbSalir))
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 572, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(213, 213, 213)
-                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(37, Short.MAX_VALUE))
+                                .addGap(40, 40, 40)
+                                .addComponent(jbDetalle)
+                                .addGap(28, 28, 28)
+                                .addComponent(jbBorrarFiltros)
+                                .addGap(26, 26, 26)
+                                .addComponent(jbSalir))))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 594, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(68, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(18, 18, 18)
+                .addGap(27, 27, 27)
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(13, 13, 13)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel1)
+                    .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jcbProveedores, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel3)))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(38, 38, 38)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 73, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jbModificar)
                     .addComponent(jbEliminar)
                     .addComponent(jbSalir)
-                    .addComponent(jbDetalle))
-                .addContainerGap(28, Short.MAX_VALUE))
+                    .addComponent(jbDetalle)
+                    .addComponent(jbBorrarFiltros, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(31, 31, 31))
         );
 
         pack();
@@ -174,14 +217,43 @@ public class ListarCompras extends javax.swing.JInternalFrame {
         detalle.setVisible(true);
     }//GEN-LAST:event_jbDetalleActionPerformed
 
+    private void jcbProveedoresItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jcbProveedoresItemStateChanged
+     if("Seleccionar".equals((String)jcbProveedores.getSelectedItem())){
+         llenarTabla();
+     } else{
+        String proveedor = (String)jcbProveedores.getSelectedItem();
+     int idProveedor = Integer.valueOf(proveedor.substring(0, 1));
+                
+        //LLENARTABLA por proveedor
+        DefaultTableModel modelo = (DefaultTableModel) jtLista.getModel();
+        modelo.setRowCount(0);
+        CompraData p = new CompraData();
+        List<Compra> lista = p.listarCompraPorProveedor(idProveedor);
+        lista.forEach((elemento) -> {
+            modelo.addRow(new Object[]{elemento.getIdCompra(), elemento.getFecha(), idProveedor, elemento.getCantidad(), elemento.getTotal()});
+        });
+        checkCampos();
+     }
+    }//GEN-LAST:event_jcbProveedoresItemStateChanged
+
+    private void jbBorrarFiltrosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBorrarFiltrosActionPerformed
+      jcbProveedores.setSelectedItem("Seleccionar");
+      llenarTabla();
+    }//GEN-LAST:event_jbBorrarFiltrosActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private com.toedter.calendar.JDateChooser jDateChooser1;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JButton jbBorrarFiltros;
     private javax.swing.JButton jbDetalle;
     private javax.swing.JButton jbEliminar;
     private javax.swing.JButton jbModificar;
     private javax.swing.JButton jbSalir;
+    private javax.swing.JComboBox<String> jcbProveedores;
     private javax.swing.JTable jtLista;
     // End of variables declaration//GEN-END:variables
 
@@ -227,7 +299,7 @@ public class ListarCompras extends javax.swing.JInternalFrame {
             c.modificarCompra(compra, idCompra);
 
             llenarTabla();
-            cambios = false; //////////// cambio
+            cambios = false; 
             checkCampos();
         } else {
             JOptionPane.showMessageDialog(this, "Por favor, seleccione una compra para eliminar.", "Sin selección", JOptionPane.WARNING_MESSAGE);
@@ -247,6 +319,16 @@ public class ListarCompras extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(this, "Por favor, seleccione un producto para eliminar.", "Sin selección", JOptionPane.WARNING_MESSAGE);
 
         }
+    }
+    
+    private void llenarProveedores(){
+        ProveedorData proveedor = new ProveedorData();
+        List listaProveedor = proveedor.listarProveedores();
+          for (int indice = 0; indice < listaProveedor.size(); indice++) {
+            jcbProveedores.addItem(String.valueOf(listaProveedor.get(indice)));
+
+        }
+
     }
 
 }

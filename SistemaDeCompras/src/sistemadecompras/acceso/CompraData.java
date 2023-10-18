@@ -112,4 +112,57 @@ public class CompraData {
         return compras;
     }
 
+      public List<Compra> listarCompraPorProveedor(int idProveedor) {
+        List<Compra> compras = new ArrayList<>();
+        try {
+            String sql = "SELECT * FROM compra WHERE idProveedor = ? ";
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, idProveedor);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                Compra compra = new Compra();
+                compra.setIdCompra(rs.getInt("idCompra"));
+                compra.setFecha(rs.getTimestamp("fecha"));
+                compra.setIdProv(rs.getInt("idProveedor"));
+                compra.setCantidad(rs.getInt("cant"));
+                compra.setTotal(rs.getDouble("total"));
+                
+                compras.add(compra);
+            }
+            ps.close();
+        } catch (SQLException e) {
+            
+            JOptionPane.showMessageDialog(null, e.getMessage() + "Error al acceder a la tabla en el metodo listarCompra");
+            
+        }
+        return compras;
+    }
+      
+     
+      public List<Compra> listarCompraPorFecha(Timestamp fecha) {
+        List<Compra> compras = new ArrayList<>();
+        try {
+            String sql = " SELECT * FROM compra WHERE  fecha = ? ";
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setTimestamp(1, fecha);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                Compra compra = new Compra();
+                compra.setIdCompra(rs.getInt("idCompra"));
+                compra.setFecha(rs.getTimestamp("fecha"));
+                compra.setIdProv(rs.getInt("idProveedor"));
+                compra.setCantidad(rs.getInt("cant"));
+                compra.setTotal(rs.getDouble("total"));
+                
+                compras.add(compra);
+            }
+            ps.close();
+        } catch (SQLException e) {
+            
+            JOptionPane.showMessageDialog(null, e.getMessage() + "Error al acceder a la tabla en el metodo listarCompra");
+            
+        }
+        return compras;
+    }
+      
 }
