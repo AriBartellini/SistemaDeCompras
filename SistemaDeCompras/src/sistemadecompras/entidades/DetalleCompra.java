@@ -6,6 +6,24 @@ public class DetalleCompra {
     private double precioCosto;
     private Compra compra;
     private Producto producto;
+    private int idCompra;
+    private int idProducto;
+
+    public int getIdCompra() {
+        return idCompra;
+    }
+
+    public void setIdCompra(int idCompra) {
+        this.idCompra = idCompra;
+    }
+
+    public int getIdProducto() {
+        return idProducto;
+    }
+
+    public void setIdProducto(int idProducto) {
+        this.idProducto = idProducto;
+    }
 
     public DetalleCompra() {
     }

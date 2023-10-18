@@ -4,8 +4,12 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JOptionPane;
 import org.mariadb.jdbc.Statement;
+import sistemadecompras.entidades.DetalleCompra;
+import sistemadecompras.entidades.Proveedor;
 
 public class DetalleCompraData {
 
@@ -53,6 +57,57 @@ public class DetalleCompraData {
 
         return id;
     }
-    
+    public DetalleCompra buscarDetalleCompra(int id) { //busqueda si o si por ID // en proceso...
+
+        String sql = "SELECT idDetalle, cantidad, precioCosto, idProducto FROM detallecompra WHERE idCompra = ?";
+        DetalleCompra detalleCompra = null;
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, id);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                detalleCompra = new DetalleCompra();
+                detalleCompra.setIdCompra (id);
+                detalleCompra.setIdDetalle(rs.getInt("idDetalle"));
+                detalleCompra.setCantidad(rs.getInt("cantidad"));
+                detalleCompra.setPrecioCosto(rs.getDouble("precioCosto"));
+                detalleCompra.setIdProducto(rs.getInt("idProducto"));
+
+            } else {
+                JOptionPane.showMessageDialog(null, "No existe una compra con ese id");
+            }
+
+            ps.close();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla en el metodo buscarDetalleCompra");
+        }
+        return detalleCompra;
+
+    }
+    public List<DetalleCompra> listarDetalleCompra(int id) {
+        List<DetalleCompra> detallesCompra = new ArrayList<>();
+        try {
+            String sql = "SELECT * FROM detallecompra WHERE idCompra = ?";
+            DetalleCompra detalleCompra = null;
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, id);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                detalleCompra = new DetalleCompra();
+                detalleCompra.setIdCompra (id);
+                detalleCompra.setIdDetalle(rs.getInt("idDetalle"));
+                detalleCompra.setCantidad(rs.getInt("cantidad"));
+                detalleCompra.setPrecioCosto(rs.getDouble("precioCosto"));
+                detalleCompra.setIdProducto(rs.getInt("idProducto"));
+
+                detallesCompra.add(detalleCompra);
+            }
+            ps.close();
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla en el metodo listarDetalleCompra");
+        }
+        return detallesCompra;
+    }
+
    
 }

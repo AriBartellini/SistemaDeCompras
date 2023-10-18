@@ -1,6 +1,11 @@
 package sistemadecompras.vistas;
 
+
 import javax.swing.table.DefaultTableModel;
+
+import sistemadecompras.acceso.DetalleCompraData;
+
+
 
 public class DetalleCompra extends javax.swing.JDialog {
    Menu m = new Menu();
@@ -13,8 +18,10 @@ public class DetalleCompra extends javax.swing.JDialog {
         
     }
     public DetalleCompra(int idCompra) {
-           
+        
         System.out.println(idCompra);
+//        System.out.println( buscarDetalleCompra(idCompra));
+        listarDetalleCompra(idCompra);
         
     }
 
