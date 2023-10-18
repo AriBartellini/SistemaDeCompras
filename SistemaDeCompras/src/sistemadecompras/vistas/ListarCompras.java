@@ -8,6 +8,7 @@ import javax.swing.table.DefaultTableModel;
 import sistemadecompras.acceso.CompraData;
 import sistemadecompras.acceso.ProveedorData;
 import sistemadecompras.entidades.Compra;
+import sistemadecompras.vistas.DetalleCompra;
 
 public class ListarCompras extends javax.swing.JInternalFrame {
 
@@ -214,7 +215,22 @@ public class ListarCompras extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jtListaMouseReleased
 
     private void jbDetalleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbDetalleActionPerformed
-        detalle.setVisible(true);
+        int filaSeleccionada = jtLista.getSelectedRow();
+
+        if (filaSeleccionada != -1) {
+            int idCompra = (int) jtLista.getValueAt(filaSeleccionada, 0);
+            
+            DetalleCompra detallecompra=new DetalleCompra(idCompra);
+            detalle.setVisible(true);
+        } else {
+            JOptionPane.showMessageDialog(this, "", "", JOptionPane.WARNING_MESSAGE);
+
+        }
+        
+        
+        
+        
+
     }//GEN-LAST:event_jbDetalleActionPerformed
 
     private void jcbProveedoresItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jcbProveedoresItemStateChanged

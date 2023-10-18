@@ -12,6 +12,11 @@ public class DetalleCompra extends javax.swing.JDialog {
         initComponents();
         
     }
+    public DetalleCompra(int idCompra) {
+           
+        System.out.println(idCompra);
+        
+    }
 
      @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
