@@ -2,7 +2,6 @@ package sistemadecompras.vistas;
 
 import java.util.ArrayList;
 import java.util.List;
-import javax.swing.JDesktopPane;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import sistemadecompras.acceso.CompraData;
@@ -261,11 +260,8 @@ public class Compras extends javax.swing.JInternalFrame {
 
     private void jbStockMinActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbStockMinActionPerformed
 
-        ListarStockMinimo listFrame = new ListarStockMinimo(this);
-                JDesktopPane desktopPane = getDesktopPane();
-                desktopPane.add(listFrame);
-                listFrame.setVisible(true);
-        
+        ListarStockMinimo listar = new ListarStockMinimo(null,true);
+        listar.setVisible(true);
         
     }//GEN-LAST:event_jbStockMinActionPerformed
 

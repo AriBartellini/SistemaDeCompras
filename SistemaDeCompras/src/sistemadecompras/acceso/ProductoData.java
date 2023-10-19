@@ -195,5 +195,26 @@ public class ProductoData {
         }
         return stock;
     }
+    
+    public List<Producto> listarProductosBajoStock(){
+        List<Producto> productos = new ArrayList<>();
+        try {
+            String sql = "SELECT * FROM Producto WHERE stock < 10"; //definimos 10 como el minimo del stock
+            PreparedStatement ps = con.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                Producto producto = new Producto();
+                //producto.setIdProducto(rs.getInt("idProducto"));
+                producto.setNombreProducto(rs.getString("nombre"));
+                //producto.setPrecio(rs.getDouble("precio"));
+                producto.setStock(rs.getInt("stock"));
+                productos.add(producto);
+            }
+            ps.close();
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla en el metodo listarProductosBajoStock");
+        }
+        return productos;
+    }   
      
 }
