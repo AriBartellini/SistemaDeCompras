@@ -21,7 +21,7 @@ public class DetalleCompra extends javax.swing.JDialog {
         
         System.out.println(idCompra);
 //        System.out.println( buscarDetalleCompra(idCompra));
-        listarDetalleCompra(idCompra);
+       // listarDetalleCompra(idCompra);
         
     }
 
