@@ -8,7 +8,6 @@ import javax.swing.table.DefaultTableModel;
 import sistemadecompras.acceso.CompraData;
 import sistemadecompras.acceso.ProveedorData;
 import sistemadecompras.entidades.Compra;
-import sistemadecompras.vistas.DetalleCompra;
 
 public class ListarCompras extends javax.swing.JInternalFrame {
 
@@ -48,7 +47,7 @@ public class ListarCompras extends javax.swing.JInternalFrame {
         jbSalir = new javax.swing.JButton();
         jbDetalle = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
-        jDateChooser1 = new com.toedter.calendar.JDateChooser();
+        jdc = new com.toedter.calendar.JDateChooser();
         jLabel3 = new javax.swing.JLabel();
         jcbProveedores = new javax.swing.JComboBox<>();
         jbBorrarFiltros = new javax.swing.JButton();
@@ -121,6 +120,19 @@ public class ListarCompras extends javax.swing.JInternalFrame {
 
         jLabel1.setText("Buscar por fecha");
 
+        jdc.addInputMethodListener(new java.awt.event.InputMethodListener() {
+            public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
+            }
+            public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
+                jdcInputMethodTextChanged(evt);
+            }
+        });
+        jdc.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                jdcPropertyChange(evt);
+            }
+        });
+
         jLabel3.setText("Buscar por proveedor");
 
         jcbProveedores.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccionar" }));
@@ -153,7 +165,7 @@ public class ListarCompras extends javax.swing.JInternalFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel1)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jdc, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(26, 26, 26)
                                 .addComponent(jLabel3)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -179,7 +191,7 @@ public class ListarCompras extends javax.swing.JInternalFrame {
                 .addGap(13, 13, 13)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel1)
-                    .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jdc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jcbProveedores, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel3)))
@@ -219,47 +231,79 @@ public class ListarCompras extends javax.swing.JInternalFrame {
 
         if (filaSeleccionada != -1) {
             int idCompra = (int) jtLista.getValueAt(filaSeleccionada, 0);
-            
-            DetalleCompra detallecompra=new DetalleCompra(idCompra);
+
+            DetalleCompra detallecompra = new DetalleCompra(idCompra);
             detalle.setVisible(true);
         } else {
             JOptionPane.showMessageDialog(this, "", "", JOptionPane.WARNING_MESSAGE);
 
         }
-        
-        
-        
-        
 
     }//GEN-LAST:event_jbDetalleActionPerformed
 
     private void jcbProveedoresItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jcbProveedoresItemStateChanged
-     if("Seleccionar".equals((String)jcbProveedores.getSelectedItem())){
-         llenarTabla();
-     } else{
-        String proveedor = (String)jcbProveedores.getSelectedItem();
-     int idProveedor = Integer.valueOf(proveedor.substring(0, 1));
-                
-        //LLENARTABLA por proveedor
-        DefaultTableModel modelo = (DefaultTableModel) jtLista.getModel();
-        modelo.setRowCount(0);
-        CompraData p = new CompraData();
-        List<Compra> lista = p.listarCompraPorProveedor(idProveedor);
-        lista.forEach((elemento) -> {
-            modelo.addRow(new Object[]{elemento.getIdCompra(), elemento.getFecha(), idProveedor, elemento.getCantidad(), elemento.getTotal()});
-        });
-        checkCampos();
-     }
+        if ("Seleccionar".equals((String) jcbProveedores.getSelectedItem())) {
+            llenarTabla();
+        } else {
+            String proveedor = (String) jcbProveedores.getSelectedItem();
+            int idProveedor = Integer.valueOf(proveedor.substring(0, 1));
+
+            //LLENARTABLA por proveedor
+            DefaultTableModel modelo = (DefaultTableModel) jtLista.getModel();
+            modelo.setRowCount(0);
+            CompraData p = new CompraData();
+            List<Compra> lista = p.listarCompraPorProveedor(idProveedor);
+            lista.forEach((elemento) -> {
+                modelo.addRow(new Object[]{elemento.getIdCompra(), elemento.getFecha(), idProveedor, elemento.getCantidad(), elemento.getTotal()});
+            });
+            checkCampos();
+        }
     }//GEN-LAST:event_jcbProveedoresItemStateChanged
 
     private void jbBorrarFiltrosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBorrarFiltrosActionPerformed
-      jcbProveedores.setSelectedItem("Seleccionar");
-      llenarTabla();
+        jcbProveedores.setSelectedItem("Seleccionar");
+        jdc.cleanup();
+        llenarTabla();
     }//GEN-LAST:event_jbBorrarFiltrosActionPerformed
 
+    private void jdcInputMethodTextChanged(java.awt.event.InputMethodEvent evt) {//GEN-FIRST:event_jdcInputMethodTextChanged
+    /*    java.util.Date fechaS = jdc.getDate();
+        Timestamp fechaTimestamp =*/
+    }//GEN-LAST:event_jdcInputMethodTextChanged
+
+    private void jdcPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jdcPropertyChange
+     /*   String fechaString = jdc.getDateFormatString();
+
+        if (fechaString != null && !fechaString.isEmpty()) {
+             System.out.println("fuck");
+            try {
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy/mm/dd");
+                java.util.Date fechaUtil = sdf.parse(fechaString);
+                java.sql.Timestamp fechaTimestamp = new java.sql.Timestamp(fechaUtil.getTime());
+
+                DefaultTableModel modelo = (DefaultTableModel) jtLista.getModel();
+                modelo.setRowCount(0);
+                CompraData p = new CompraData();
+
+                List<Compra> lista = p.listarCompraPorFecha(fechaTimestamp);
+                System.out.println(lista);
+
+                lista.forEach((elemento) -> {
+                    System.out.println("fuck");
+                    modelo.addRow(new Object[]{elemento.getIdCompra(), elemento.getFecha(), elemento.getProv(), elemento.getCantidad(), elemento.getTotal()});
+                });
+
+                checkCampos();
+            } catch (ParseException ex) {
+                llenarTabla();
+            }
+        } else {
+            llenarTabla();
+        }*/
+    }//GEN-LAST:event_jdcPropertyChange
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private com.toedter.calendar.JDateChooser jDateChooser1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -270,6 +314,7 @@ public class ListarCompras extends javax.swing.JInternalFrame {
     private javax.swing.JButton jbModificar;
     private javax.swing.JButton jbSalir;
     private javax.swing.JComboBox<String> jcbProveedores;
+    private com.toedter.calendar.JDateChooser jdc;
     private javax.swing.JTable jtLista;
     // End of variables declaration//GEN-END:variables
 
@@ -315,7 +360,7 @@ public class ListarCompras extends javax.swing.JInternalFrame {
             c.modificarCompra(compra, idCompra);
 
             llenarTabla();
-            cambios = false; 
+            cambios = false;
             checkCampos();
         } else {
             JOptionPane.showMessageDialog(this, "Por favor, seleccione una compra para eliminar.", "Sin selección", JOptionPane.WARNING_MESSAGE);
@@ -336,11 +381,11 @@ public class ListarCompras extends javax.swing.JInternalFrame {
 
         }
     }
-    
-    private void llenarProveedores(){
+
+    private void llenarProveedores() {
         ProveedorData proveedor = new ProveedorData();
         List listaProveedor = proveedor.listarProveedores();
-          for (int indice = 0; indice < listaProveedor.size(); indice++) {
+        for (int indice = 0; indice < listaProveedor.size(); indice++) {
             jcbProveedores.addItem(String.valueOf(listaProveedor.get(indice)));
 
         }
