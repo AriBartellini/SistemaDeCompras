@@ -1,6 +1,10 @@
 package sistemadecompras.vistas;
 
+import com.formdev.flatlaf.json.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import javax.swing.JOptionPane;
 import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
@@ -11,7 +15,7 @@ import sistemadecompras.entidades.Compra;
 
 public class ListarCompras extends javax.swing.JInternalFrame {
 
-        private DetalleCompra detalle;
+    private DetalleCompra detalle;
 
     public ListarCompras() {
         initComponents();
@@ -109,6 +113,8 @@ public class ListarCompras extends javax.swing.JInternalFrame {
 
         jLabel1.setText("Buscar por fecha");
 
+        jdc.setMaxSelectableDate(new java.util.Date(1735704099000L));
+        jdc.setMinSelectableDate(new java.util.Date(1641009699000L));
         jdc.addInputMethodListener(new java.awt.event.InputMethodListener() {
             public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
                 jdcInputMethodTextChanged(evt);
@@ -212,7 +218,6 @@ public class ListarCompras extends javax.swing.JInternalFrame {
 
         if (filaSeleccionada != -1) {
             int idCompra = (int) jtLista.getValueAt(filaSeleccionada, 0);
-
             DetalleCompra detallecompra = new DetalleCompra(idCompra);
             detalle.setVisible(true);
         } else {
@@ -223,6 +228,7 @@ public class ListarCompras extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jbDetalleActionPerformed
 
     private void jcbProveedoresItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jcbProveedoresItemStateChanged
+
         if ("Seleccionar".equals((String) jcbProveedores.getSelectedItem())) {
             llenarTabla();
         } else {
@@ -243,46 +249,74 @@ public class ListarCompras extends javax.swing.JInternalFrame {
 
     private void jbBorrarFiltrosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBorrarFiltrosActionPerformed
         jcbProveedores.setSelectedItem("Seleccionar");
-        jdc.cleanup();
         llenarTabla();
     }//GEN-LAST:event_jbBorrarFiltrosActionPerformed
 
     private void jdcInputMethodTextChanged(java.awt.event.InputMethodEvent evt) {//GEN-FIRST:event_jdcInputMethodTextChanged
-    /*    java.util.Date fechaS = jdc.getDate();
-        Timestamp fechaTimestamp =*/
+       /* try {
+            String fechaString = jdc.getDate() != null ? jdc.getDate().toString() : null;
+
+            if (fechaString != null && !fechaString.isEmpty()) {
+                try {
+                    SimpleDateFormat inputFormat = new SimpleDateFormat("EEE MMM dd HH:mm:ss zzz yyyy", Locale.ENGLISH);
+                    java.util.Date fechaUtil = inputFormat.parse(fechaString);
+                    java.sql.Date fechaDate = new java.sql.Date(fechaUtil.getTime());
+
+                    DefaultTableModel modelo = (DefaultTableModel) jtLista.getModel();
+                    modelo.setRowCount(0);
+                    CompraData p = new CompraData();
+
+                    ArrayList<Compra> lista = (ArrayList<Compra>) p.listarCompraPorFecha(fechaDate);
+
+                    lista.forEach((elemento) -> {
+                        modelo.addRow(new Object[]{elemento.getIdCompra(), elemento.getFecha(), elemento.getProv(), elemento.getCantidad(), elemento.getTotal()});
+                    });
+
+                    checkCampos();
+                } catch (ParseException | java.text.ParseException ex) {
+                    llenarTabla();
+                }
+            } else {
+                llenarTabla();
+            }
+        } catch (NullPointerException n) {
+            JOptionPane.showMessageDialog(this, "Problemas en jdcPropertyChange.", "Sin selección", JOptionPane.WARNING_MESSAGE);
+        }*/
     }//GEN-LAST:event_jdcInputMethodTextChanged
 
     private void jdcPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jdcPropertyChange
-     /*   String fechaString = jdc.getDateFormatString();
+        try {
+            String fechaString = jdc.getDate() != null ? jdc.getDate().toString() : null;
 
-        if (fechaString != null && !fechaString.isEmpty()) {
-             System.out.println("fuck");
-            try {
-                SimpleDateFormat sdf = new SimpleDateFormat("yyyy/mm/dd");
-                java.util.Date fechaUtil = sdf.parse(fechaString);
-                java.sql.Timestamp fechaTimestamp = new java.sql.Timestamp(fechaUtil.getTime());
+            if (fechaString != null && !fechaString.isEmpty()) {
+                try {
+                    SimpleDateFormat inputFormat = new SimpleDateFormat("EEE MMM dd HH:mm:ss zzz yyyy", Locale.ENGLISH);
+                    java.util.Date fechaUtil = inputFormat.parse(fechaString);
+                    java.sql.Date fechaDate = new java.sql.Date(fechaUtil.getTime());
 
-                DefaultTableModel modelo = (DefaultTableModel) jtLista.getModel();
-                modelo.setRowCount(0);
-                CompraData p = new CompraData();
+                    DefaultTableModel modelo = (DefaultTableModel) jtLista.getModel();
+                    modelo.setRowCount(0);
+                    CompraData p = new CompraData();
 
-                List<Compra> lista = p.listarCompraPorFecha(fechaTimestamp);
-                System.out.println(lista);
+                    ArrayList<Compra> lista = (ArrayList<Compra>) p.listarCompraPorFecha(fechaDate);
 
-                lista.forEach((elemento) -> {
-                    System.out.println("fuck");
-                    modelo.addRow(new Object[]{elemento.getIdCompra(), elemento.getFecha(), elemento.getProv(), elemento.getCantidad(), elemento.getTotal()});
-                });
+                    lista.forEach((elemento) -> {
+                        modelo.addRow(new Object[]{elemento.getIdCompra(), elemento.getFecha(), elemento.getProv(), elemento.getCantidad(), elemento.getTotal()});
+                    });
 
-                checkCampos();
-            } catch (ParseException ex) {
+                    checkCampos();
+                } catch (ParseException | java.text.ParseException ex) {
+                    llenarTabla();
+                }
+            } else {
                 llenarTabla();
             }
-        } else {
-            llenarTabla();
-        }*/
+        } catch (NullPointerException n) {
+            JOptionPane.showMessageDialog(this, "Problemas en jdcPropertyChange.", "Sin selección", JOptionPane.WARNING_MESSAGE);
+        }
+
     }//GEN-LAST:event_jdcPropertyChange
-    
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
@@ -299,7 +333,7 @@ public class ListarCompras extends javax.swing.JInternalFrame {
     // End of variables declaration//GEN-END:variables
 
     private void checkCampos() {
-        
+
         int filaSeleccionada = jtLista.getSelectedRow();
         if (filaSeleccionada != -1) {
             jbEliminar.setEnabled(true);

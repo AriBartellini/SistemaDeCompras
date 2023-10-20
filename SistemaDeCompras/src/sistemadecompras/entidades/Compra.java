@@ -110,9 +110,17 @@ public class Compra {
         this.fecha = fecha;
     }
 
+    public String getNombreProv() {
+        return nombreProv;
+    }
+
+    public void setNombreProv(String nombreProv) {
+        this.nombreProv = nombreProv;
+    }
+
     @Override
     public String toString() {
-        return "Compra{" + "idCompra=" + idCompra + ", prov=" + prov + ", fecha=" + fecha + '}';
+        return "Compra{" + "idCompra=" + idCompra + ", prov=" + nombreProv + ", fecha=" + fecha + '}';
     }
 
 }

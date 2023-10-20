@@ -1,6 +1,7 @@
 package sistemadecompras.acceso;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -139,12 +140,12 @@ public class CompraData {
     }
       
      
-      public List<Compra> listarCompraPorFecha(Timestamp fecha) {
+      public List<Compra> listarCompraPorFecha(Date fecha) {
         List<Compra> compras = new ArrayList<>();
         try {
-            String sql = " SELECT * FROM compra WHERE  fecha = ? ";
+            String sql = " SELECT * FROM compra WHERE  DATE(fecha) = ? ";
             PreparedStatement ps = con.prepareStatement(sql);
-            ps.setTimestamp(1, fecha);
+            ps.setDate(1, fecha);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 Compra compra = new Compra();

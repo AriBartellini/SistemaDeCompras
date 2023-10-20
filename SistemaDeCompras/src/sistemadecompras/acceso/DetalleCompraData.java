@@ -9,7 +9,6 @@ import java.util.List;
 import javax.swing.JOptionPane;
 import org.mariadb.jdbc.Statement;
 import sistemadecompras.entidades.DetalleCompra;
-import sistemadecompras.entidades.Proveedor;
 
 public class DetalleCompraData {
 
