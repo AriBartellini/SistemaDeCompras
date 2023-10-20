@@ -19,11 +19,11 @@ public class DetalleCompra extends javax.swing.JDialog {
     }
     public DetalleCompra(int idCompra) {
         DetalleCompraData detalleCompra=new DetalleCompraData();
-        System.out.println(idCompra);
+        /*System.out.println(idCompra);
         
         System.out.println( (detalleCompra.buscarDetalleCompra(idCompra)).toString());
         System.out.println( detalleCompra.listarDetalleCompra(idCompra).toString());
-       // listarDetalleCompra(idCompra);
+       // listarDetalleCompra(idCompra);*/
         
     }
 

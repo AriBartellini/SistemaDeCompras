@@ -78,7 +78,7 @@ public class CompraData {
             ps.setInt(1, id);
             int fila = ps.executeUpdate();
             if (fila == 1) {
-                JOptionPane.showMessageDialog(null, "Se eliminó el Compra");
+                JOptionPane.showMessageDialog(null, "Se eliminó la Compra");
             }
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error al acceder al Compra");
