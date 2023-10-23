@@ -1,30 +1,40 @@
 package sistemadecompras.vistas;
 
+import java.util.List;
+
 import javax.swing.table.DefaultTableModel;
+import sistemadecompras.acceso.ProductoData;
+import sistemadecompras.entidades.Producto;
 
 public class ListarStockMinimo extends javax.swing.JDialog {
+
+    Menu m = new Menu();
+    private final DefaultTableModel modelo = new DefaultTableModel();
     
-Menu m = new Menu();
-private final DefaultTableModel modelo = new DefaultTableModel();
-
-
     public ListarStockMinimo(Menu m, boolean modal) {
         super(m, modal);
+        Menu a = new Menu();
         initComponents();
+        
+        
+        armarCabecera();
+        llenarTabla();
+        setLocationRelativeTo(null);
+       
+        
     }
-
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        jtProductos = new javax.swing.JTable();
+        jtLista = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        jtProductos.setModel(new javax.swing.table.DefaultTableModel(
+        jtLista.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null},
                 {null, null},
@@ -43,7 +53,7 @@ private final DefaultTableModel modelo = new DefaultTableModel();
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(jtProductos);
+        jScrollPane1.setViewportView(jtLista);
 
         jLabel1.setFont(new java.awt.Font("Dialog", 1, 36)); // NOI18N
         jLabel1.setText("Productos bajos de stock");
@@ -73,7 +83,6 @@ private final DefaultTableModel modelo = new DefaultTableModel();
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -117,6 +126,32 @@ private final DefaultTableModel modelo = new DefaultTableModel();
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jtProductos;
+    private javax.swing.JTable jtLista;
     // End of variables declaration//GEN-END:variables
+
+    private void armarCabecera() {
+        modelo.addColumn("Producto");
+        modelo.addColumn("Stock");
+        jtLista.setModel(modelo);
+    }
+
+    public void llenarTabla() {
+        
+        ProductoData productodata = new ProductoData();
+        DefaultTableModel modelo = (DefaultTableModel) jtLista.getModel();
+        modelo.setRowCount(0);
+        
+        List<Producto> productosBajosStock = productodata.listarProductosBajoStock();
+        
+        
+         
+             for (Producto producto : productosBajosStock) {
+            Object[] fila = {producto.getNombreProducto(), producto.getStock()};
+            modelo.addRow(fila);
+             
+             
+         }
+        
+        
+    }
 }
