@@ -56,33 +56,35 @@ public class DetalleCompraData {
 
         return id;
     }
-    public DetalleCompra buscarDetalleCompra(int id) { //busqueda si o si por ID // en proceso...
-
-        String sql = "SELECT idDetalle, cantidad, precioCosto, idProducto FROM detallecompra WHERE idCompra = ?";
-        DetalleCompra detalleCompra = null;
-        try {
-            PreparedStatement ps = con.prepareStatement(sql);
-            ps.setInt(1, id);
-            ResultSet rs = ps.executeQuery();
-            if (rs.next()) {
-                detalleCompra = new DetalleCompra();
-                detalleCompra.setIdCompra (id);
-                detalleCompra.setIdDetalle(rs.getInt("idDetalle"));
-                detalleCompra.setCantidad(rs.getInt("cantidad"));
-                detalleCompra.setPrecioCosto(rs.getDouble("precioCosto"));
-                detalleCompra.setIdProducto(rs.getInt("idProducto"));
-
-            } else {
-                JOptionPane.showMessageDialog(null, "No existe una compra con ese id");
-            }
-
-            ps.close();
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla en el metodo buscarDetalleCompra");
-        }
-        return detalleCompra;
-
-    }
+//    public DetalleCompra buscarDetalleCompra(int id) { //busqueda si o si por ID // en proceso...
+//
+//        String sql = "SELECT idDetalle, cantidad, precioCosto, idProducto FROM detallecompra WHERE idCompra = ?";
+//        DetalleCompra detalleCompra = null;
+//        
+//        
+//        try {
+//            PreparedStatement ps = con.prepareStatement(sql);
+//            ps.setInt(1, id);
+//            ResultSet rs = ps.executeQuery();
+//            if (rs.next()) {
+//                detalleCompra = new DetalleCompra();
+//                detalleCompra.setIdCompra (id);
+//                detalleCompra.setIdDetalle(rs.getInt("idDetalle"));
+//                detalleCompra.setCantidad(rs.getInt("cantidad"));
+//                detalleCompra.setPrecioCosto(rs.getDouble("precioCosto"));
+//                detalleCompra.setIdProducto(rs.getInt("idProducto"));
+//
+//            } else {
+//                JOptionPane.showMessageDialog(null, "No existe una compra con ese id");
+//            }
+//
+//            ps.close();
+//        } catch (SQLException ex) {
+//            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla en el metodo buscarDetalleCompra");
+//        }
+//        return detalleCompra;
+//
+//    }
     public List<DetalleCompra> listarDetalleCompra(int id) {
         List<DetalleCompra> detallesCompra = new ArrayList<>();
         try {

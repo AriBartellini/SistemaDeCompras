@@ -1,33 +1,50 @@
 package sistemadecompras.vistas;
 
-
+import java.util.List;
 import javax.swing.table.DefaultTableModel;
 
 import sistemadecompras.acceso.DetalleCompraData;
 
-
-
 public class DetalleCompra extends javax.swing.JDialog {
-   Menu m = new Menu();
+
+    Menu m = new Menu();
     private final DefaultTableModel modelo = new DefaultTableModel();
-    
+
     public DetalleCompra(Menu m, boolean modal) {
-           
+
         super(m, modal);
         initComponents();
         
-    }
-    public DetalleCompra(int idCompra) {
-        DetalleCompraData detalleCompra=new DetalleCompraData();
-        /*System.out.println(idCompra);
-        
-        System.out.println( (detalleCompra.buscarDetalleCompra(idCompra)).toString());
-        System.out.println( detalleCompra.listarDetalleCompra(idCompra).toString());
-       // listarDetalleCompra(idCompra);*/
-        
+
     }
 
-     @SuppressWarnings("unchecked")
+    public DetalleCompra(int idCompra) {
+        initComponents();
+//        armarCabecera();
+        
+        borrarFilas();
+        DetalleCompraData detalleCompra = new DetalleCompraData();
+        System.out.println(idCompra);
+//      jlFecha.setText(String.valueOf(idCompra));
+//        jlFecha.setText(String.valueOf(idCompra));
+        
+        System.out.println(detalleCompra.listarDetalleCompra(idCompra).toString());
+
+        List lista = detalleCompra.listarDetalleCompra(idCompra);        
+        for (int i = 0; i < lista.size(); i++) {
+            String fila = lista.get(i).toString();
+            String[] data = fila.split(" ");            
+            modelo.addRow(new Object[]{"Hola", data[1], data[2], data[3]});
+        }
+
+    }
+    private void borrarFilas() {
+        int filas = modelo.getRowCount();
+        while (filas > 0) {
+            modelo.removeRow(--filas);
+        }
+    }
+    @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
@@ -212,4 +229,12 @@ public class DetalleCompra extends javax.swing.JDialog {
     private javax.swing.JLabel jlTotal;
     private javax.swing.JTable jtDetalle;
     // End of variables declaration//GEN-END:variables
+private void armarCabecera() {
+
+        modelo.addColumn("ID Compra");
+        modelo.addColumn("");
+        modelo.addColumn("");
+        modelo.addColumn("");
+        jtDetalle.setModel(modelo);
+}
 }

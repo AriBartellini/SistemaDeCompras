@@ -43,6 +43,7 @@ public class DetalleCompra {
         this.compra = compra;
         this.producto = producto;
     }
+    
 
     public int getIdDetalle() {
         return idDetalle;
@@ -84,10 +85,13 @@ public class DetalleCompra {
         this.producto = producto;
     }
 
-    @Override
+//    @Override
+//    public String toString() {
+//        return (compra.getFecha().toString() + producto.getIdProducto() + producto.getNombreProducto() + producto.getPrecio() + compra.getIdCompra());
+//    }
+            @Override
     public String toString() {
-        return (compra.getFecha().toString() + producto.getIdProducto() + producto.getNombreProducto() + producto.getPrecio() + compra.getIdCompra());
+        return (  String.valueOf(getIdCompra())+" "+ String.valueOf(getIdProducto())+" "+ String.valueOf(getCantidad())+" "+ String.valueOf(getPrecioCosto()));
     }
-    
     
 }
