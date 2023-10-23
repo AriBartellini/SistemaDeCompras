@@ -10,24 +10,21 @@ public class DetalleCompra extends javax.swing.JDialog {
     Menu m = new Menu();
     private final DefaultTableModel modelo = new DefaultTableModel();
 
-    public DetalleCompra(Menu m, boolean modal) {
-
+   public DetalleCompra(Menu m, boolean modal) {
         super(m, modal);
         initComponents();
-        
-
     }
 
-    public DetalleCompra(int idCompra) {
+    public DetalleCompra(int idCompra) {        
         initComponents();
-//        armarCabecera();
-        
+        armarCabecera();        
         borrarFilas();
         DetalleCompraData detalleCompra = new DetalleCompraData();
         System.out.println(idCompra);
-//      jlFecha.setText(String.valueOf(idCompra));
-//        jlFecha.setText(String.valueOf(idCompra));
-        
+     
+        jlFecha.setText(String.valueOf(idCompra));
+
+
         System.out.println(detalleCompra.listarDetalleCompra(idCompra).toString());
 
         List lista = detalleCompra.listarDetalleCompra(idCompra);        
@@ -178,7 +175,6 @@ public class DetalleCompra extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
@@ -214,6 +210,8 @@ public class DetalleCompra extends javax.swing.JDialog {
                 dialog.setVisible(true);
             }
         });
+        
+        
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -230,7 +228,7 @@ public class DetalleCompra extends javax.swing.JDialog {
     private javax.swing.JTable jtDetalle;
     // End of variables declaration//GEN-END:variables
 private void armarCabecera() {
-
+ 
         modelo.addColumn("ID Compra");
         modelo.addColumn("");
         modelo.addColumn("");

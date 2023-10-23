@@ -21,8 +21,6 @@ public class Compras extends javax.swing.JInternalFrame {
         cargarCombos();
         armarCabecera();
 
-        
-        
     }
 
     @SuppressWarnings("unchecked")
@@ -452,7 +450,7 @@ public class Compras extends javax.swing.JInternalFrame {
         int idProducto;
         int cant;
         double precioCosto;
-        System.out.println(idCompra);
+    
         for (int i = 0; i < modelo.getRowCount(); i++) {
 
             String idString = modelo.getValueAt(i, 0).toString();

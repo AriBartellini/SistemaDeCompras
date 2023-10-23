@@ -9,7 +9,26 @@ public class DetalleCompra {
     private int idCompra;
     private int idProducto;
 
-    public int getIdCompra() {
+   
+    public DetalleCompra() {
+    }
+
+    public DetalleCompra(int cantidad, double precioCosto, Compra compra, Producto producto) {
+        this.cantidad = cantidad;
+        this.precioCosto = precioCosto;
+        this.compra = compra;
+        this.producto = producto;
+    }
+
+    
+    public DetalleCompra(int idDetalle, int cantidad, double precioCosto, int idProducto) {
+        this.idDetalle = idDetalle;
+        this.cantidad = cantidad;
+        this.precioCosto = precioCosto;
+        this.idProducto= idProducto;
+    }
+    
+ public int getIdCompra() {
         return idCompra;
     }
 
@@ -24,26 +43,6 @@ public class DetalleCompra {
     public void setIdProducto(int idProducto) {
         this.idProducto = idProducto;
     }
-
-    public DetalleCompra() {
-    }
-
-    public DetalleCompra(int cantidad, double precioCosto, Compra compra, Producto producto) {
-        this.cantidad = cantidad;
-        this.precioCosto = precioCosto;
-        this.compra = compra;
-        this.producto = producto;
-    }
-
-    
-    public DetalleCompra(int idDetalle, int cantidad, double precioCosto, Compra compra, Producto producto) {
-        this.idDetalle = idDetalle;
-        this.cantidad = cantidad;
-        this.precioCosto = precioCosto;
-        this.compra = compra;
-        this.producto = producto;
-    }
-    
 
     public int getIdDetalle() {
         return idDetalle;
@@ -91,7 +90,7 @@ public class DetalleCompra {
 //    }
             @Override
     public String toString() {
-        return (  String.valueOf(getIdCompra())+" "+ String.valueOf(getIdProducto())+" "+ String.valueOf(getCantidad())+" "+ String.valueOf(getPrecioCosto()));
+        return ( getIdCompra()+" "+ getIdProducto() +" "+ getCantidad()+" "+ getPrecioCosto());
     }
     
 }

@@ -12,7 +12,7 @@ import sistemadecompras.entidades.DetalleCompra;
 
 public class DetalleCompraData {
 
-    private Connection con;
+    private final Connection con;
 
     public DetalleCompraData() {
         con = Conexion.buscarConexion();
@@ -23,17 +23,17 @@ public class DetalleCompraData {
         
         String sql = "INSERT INTO detallecompra ( cantidad , precioCosto , idCompra , idProducto ) VALUES (?,?,?,?)";
         try {
-            PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-            ps.setInt(1, cantidad);
-            ps.setDouble(2, precioCosto);
-            ps.setInt(3, idCompra);
-            ps.setInt(4, idProducto);
-            ps.executeUpdate();
-            ResultSet rs = ps.getGeneratedKeys();            
-            if (rs.next()) {
-                JOptionPane.showMessageDialog(null, "Detalle cargado correctamente");
+            try (PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
+                ps.setInt(1, cantidad);
+                ps.setDouble(2, precioCosto);
+                ps.setInt(3, idCompra);
+                ps.setInt(4, idProducto);
+                ps.executeUpdate();
+                ResultSet rs = ps.getGeneratedKeys();
+                if (rs.next()) {
+                    JOptionPane.showMessageDialog(null, "Detalle cargado correctamente");
+                }
             }
-            ps.close();
 
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error en agregarDetalleCompra");
@@ -89,21 +89,21 @@ public class DetalleCompraData {
         List<DetalleCompra> detallesCompra = new ArrayList<>();
         try {
             String sql = "SELECT * FROM detallecompra WHERE idCompra = ?";
-            DetalleCompra detalleCompra = null;
-            PreparedStatement ps = con.prepareStatement(sql);
-            ps.setInt(1, id);
-            ResultSet rs = ps.executeQuery();
-            while (rs.next()) {
-                detalleCompra = new DetalleCompra();
-                detalleCompra.setIdCompra (id);
-                detalleCompra.setIdDetalle(rs.getInt("idDetalle"));
-                detalleCompra.setCantidad(rs.getInt("cantidad"));
-                detalleCompra.setPrecioCosto(rs.getDouble("precioCosto"));
-                detalleCompra.setIdProducto(rs.getInt("idProducto"));
-
-                detallesCompra.add(detalleCompra);
+          
+            try (PreparedStatement ps = con.prepareStatement(sql)) {
+                ps.setInt(1, id);
+                ResultSet rs = ps.executeQuery();
+                while (rs.next()) {
+                    DetalleCompra detalleCompra = new DetalleCompra();
+                    detalleCompra.setIdCompra (id);
+                    detalleCompra.setIdDetalle(rs.getInt("idDetalle"));
+                    detalleCompra.setCantidad(rs.getInt("cantidad"));
+                    detalleCompra.setPrecioCosto(rs.getDouble("precioCosto"));
+                    detalleCompra.setIdProducto(rs.getInt("idProducto"));
+                    
+                    detallesCompra.add(detalleCompra);
+                }
             }
-            ps.close();
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "Error al acceder a la tabla en el metodo listarDetalleCompra");
         }
