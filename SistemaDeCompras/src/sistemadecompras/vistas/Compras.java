@@ -8,6 +8,7 @@ import sistemadecompras.acceso.CompraData;
 import sistemadecompras.acceso.DetalleCompraData;
 import sistemadecompras.acceso.ProductoData;
 import sistemadecompras.acceso.ProveedorData;
+import sistemadecompras.entidades.Producto;
 
 public class Compras extends javax.swing.JInternalFrame {
 
@@ -258,9 +259,7 @@ public class Compras extends javax.swing.JInternalFrame {
 
     private void jbStockMinActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbStockMinActionPerformed
 
-        ListarStockMinimo listar = new ListarStockMinimo(null,true);
-        listar.setVisible(true);
-        
+        mostrarStockMin();
     }//GEN-LAST:event_jbStockMinActionPerformed
 
 
@@ -282,6 +281,19 @@ public class Compras extends javax.swing.JInternalFrame {
     private javax.swing.JTable jtLista;
     private javax.swing.JTextField jtfCantidad;
     // End of variables declaration//GEN-END:variables
+
+    private void mostrarStockMin() {
+        ProductoData productodata = new ProductoData();
+        List<Producto> productosBajosStock = productodata.listarProductosBajoStock();
+
+        if (productosBajosStock.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "no hay productos bajos de stock");
+        } else {
+            ListarStockMinimo listar = new ListarStockMinimo(null, true);
+            listar.setVisible(true);
+        }
+
+    }
 
     private void cargarCombos() {
 
