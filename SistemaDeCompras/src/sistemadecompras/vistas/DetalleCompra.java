@@ -4,6 +4,7 @@ import java.util.List;
 import javax.swing.table.DefaultTableModel;
 
 import sistemadecompras.acceso.DetalleCompraData;
+import sistemadecompras.acceso.CompraData;
 
 public class DetalleCompra extends javax.swing.JDialog {
     public int valorID=-1;
@@ -221,19 +222,33 @@ public class DetalleCompra extends javax.swing.JDialog {
     private javax.swing.JTable jtDetalle;
     // End of variables declaration//GEN-END:variables
 private void armarTabla(int idCompra){
-     armarCabecera();        
+        int total=0;
+        armarCabecera();        
         borrarFilas();
         DetalleCompraData detalleCompra = new DetalleCompraData();
-        System.out.println(idCompra);
+        
+        CompraData Compra = new CompraData();
+        List listaCompra = Compra.listarCompraIdCompra(idCompra);
+        String filaCompra = listaCompra.toString();
+        String[] datosCompra = filaCompra.split(" ");
+        String idProveedor=datosCompra[1];
+        String fechaCompra=datosCompra[3];
+        
      
         jlFecha1.setText(String.valueOf(idCompra));        
-
-        List lista = detalleCompra.listarDetalleCompra(idCompra);        
+        jlFecha.setText(fechaCompra);
+        
+        List lista = detalleCompra.listarDetalleCompra(idCompra);
+        
         for (int i = 0; i < lista.size(); i++) {
             String fila = lista.get(i).toString();
             String[] data = fila.split(" ");            
             modelo.addRow(new Object[]{data[0], data[1], data[2], data[3]});
+//            total=total+Integer.parseInt(data[3]);
+           
         }
+        
+        jlTotal.setText("$ "+Integer.toString(total));
 }
     
     
