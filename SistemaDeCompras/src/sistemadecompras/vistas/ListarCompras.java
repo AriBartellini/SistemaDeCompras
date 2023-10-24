@@ -16,6 +16,7 @@ import sistemadecompras.entidades.Compra;
 public class ListarCompras extends javax.swing.JInternalFrame {
 
     private DetalleCompra detalle;
+    private int idComp = 18;
 
     public ListarCompras() {
         initComponents();
@@ -24,7 +25,7 @@ public class ListarCompras extends javax.swing.JInternalFrame {
         m.centrarInternalFrame(this);
         llenarTabla();
         llenarProveedores();
-        this.detalle = new DetalleCompra(m, true);
+        this.detalle = new DetalleCompra(m, true, idComp);
         detalle.setLocationRelativeTo(m);
         //////////////////////////////////////// ESTO ES PARA ACTIVAR EL BOTON DE MODIFICAR
         DefaultTableModel modelo = (DefaultTableModel) jtLista.getModel();
@@ -218,7 +219,11 @@ public class ListarCompras extends javax.swing.JInternalFrame {
 
         if (filaSeleccionada != -1) {
             int idCompra = (int) jtLista.getValueAt(filaSeleccionada, 0);
-            DetalleCompra detallecompra = new DetalleCompra(idCompra);
+            Menu m = new Menu();
+            m.centrarInternalFrame(this);
+            this.idComp = idCompra;
+            this.detalle = new DetalleCompra(m, true, idComp);
+            detalle.setLocationRelativeTo(m);
             detalle.setVisible(true);
         } else {
             JOptionPane.showMessageDialog(this, "", "", JOptionPane.WARNING_MESSAGE);

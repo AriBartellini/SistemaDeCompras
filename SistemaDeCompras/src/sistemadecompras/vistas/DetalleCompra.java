@@ -6,34 +6,27 @@ import javax.swing.table.DefaultTableModel;
 import sistemadecompras.acceso.DetalleCompraData;
 
 public class DetalleCompra extends javax.swing.JDialog {
+    public int valorID=-1;
 
+    public int getValorID() {
+        return valorID;
+    }
+
+    public void setValorID(int valorID) {
+        this.valorID = valorID;
+    }
     Menu m = new Menu();
     private final DefaultTableModel modelo = new DefaultTableModel();
 
-   public DetalleCompra(Menu m, boolean modal) {
+    
+
+   public DetalleCompra(Menu m, boolean modal,int id) {
         super(m, modal);
+        this.valorID=id;
+        setValorID(id);
         initComponents();
-    }
-
-    public DetalleCompra(int idCompra) {        
-        initComponents();
-        armarCabecera();        
-        borrarFilas();
-        DetalleCompraData detalleCompra = new DetalleCompraData();
-        System.out.println(idCompra);
-     
-        jlFecha.setText(String.valueOf(idCompra));
-
-
-        System.out.println(detalleCompra.listarDetalleCompra(idCompra).toString());
-
-        List lista = detalleCompra.listarDetalleCompra(idCompra);        
-        for (int i = 0; i < lista.size(); i++) {
-            String fila = lista.get(i).toString();
-            String[] data = fila.split(" ");            
-            modelo.addRow(new Object[]{"Hola", data[1], data[2], data[3]});
-        }
-
+        armarTabla(getValorID());
+        
     }
     private void borrarFilas() {
         int filas = modelo.getRowCount();
@@ -174,7 +167,7 @@ public class DetalleCompra extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    public static void main(String args[]) {
+    public void main(String args[]) {
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
@@ -200,7 +193,7 @@ public class DetalleCompra extends javax.swing.JDialog {
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                DetalleCompra dialog = new DetalleCompra((Menu) new javax.swing.JFrame(), true);
+                DetalleCompra dialog = new DetalleCompra((Menu) new javax.swing.JFrame(), true, getValorID());
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
@@ -227,12 +220,29 @@ public class DetalleCompra extends javax.swing.JDialog {
     private javax.swing.JLabel jlTotal;
     private javax.swing.JTable jtDetalle;
     // End of variables declaration//GEN-END:variables
-private void armarCabecera() {
+private void armarTabla(int idCompra){
+     armarCabecera();        
+        borrarFilas();
+        DetalleCompraData detalleCompra = new DetalleCompraData();
+        System.out.println(idCompra);
+     
+        jlFecha1.setText(String.valueOf(idCompra));        
+
+        List lista = detalleCompra.listarDetalleCompra(idCompra);        
+        for (int i = 0; i < lista.size(); i++) {
+            String fila = lista.get(i).toString();
+            String[] data = fila.split(" ");            
+            modelo.addRow(new Object[]{data[0], data[1], data[2], data[3]});
+        }
+}
+    
+    
+    private void armarCabecera() {
  
         modelo.addColumn("ID Compra");
-        modelo.addColumn("");
-        modelo.addColumn("");
-        modelo.addColumn("");
+        modelo.addColumn("ID Producto");
+        modelo.addColumn("Cantidad");
+        modelo.addColumn("SubTotal");
         jtDetalle.setModel(modelo);
 }
 }
