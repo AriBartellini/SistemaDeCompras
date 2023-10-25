@@ -235,7 +235,7 @@ private void armarTabla(int idCompra) {
         jlFecha.setText(fechaCompra);
         } catch(ArrayIndexOutOfBoundsException e){
             JOptionPane.showMessageDialog(null, "no hay compras realizadas");
-            this.dispose();
+            
         }
         
 

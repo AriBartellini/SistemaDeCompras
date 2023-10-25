@@ -32,7 +32,7 @@ public class ListarCompras extends javax.swing.JInternalFrame {
         modelo.addTableModelListener(new TableModelListener() {
             @Override
             public void tableChanged(TableModelEvent e) {
-                checkCampos();
+                
             }
         });
 
@@ -45,7 +45,6 @@ public class ListarCompras extends javax.swing.JInternalFrame {
         jLabel2 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jtLista = new javax.swing.JTable();
-        jbEliminar = new javax.swing.JButton();
         jbSalir = new javax.swing.JButton();
         jbDetalle = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
@@ -87,14 +86,6 @@ public class ListarCompras extends javax.swing.JInternalFrame {
             jtLista.getColumnModel().getColumn(3).setMaxWidth(80);
             jtLista.getColumnModel().getColumn(4).setMaxWidth(80);
         }
-
-        jbEliminar.setFont(new java.awt.Font("Segoe UI Symbol", 0, 11)); // NOI18N
-        jbEliminar.setText("Eliminar");
-        jbEliminar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbEliminarActionPerformed(evt);
-            }
-        });
 
         jbSalir.setFont(new java.awt.Font("Segoe UI Symbol", 0, 11)); // NOI18N
         jbSalir.setText("Salir");
@@ -153,27 +144,26 @@ public class ListarCompras extends javax.swing.JInternalFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(49, 49, 49)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(189, 189, 189)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(jLabel1)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addComponent(jdc, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(26, 26, 26)
-                            .addComponent(jLabel3)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addComponent(jcbProveedores, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 594, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jbEliminar)
-                        .addGap(87, 87, 87)
-                        .addComponent(jbDetalle)
-                        .addGap(77, 77, 77)
-                        .addComponent(jbBorrarFiltros)
-                        .addGap(75, 75, 75)
-                        .addComponent(jbSalir)))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                            .addComponent(jbDetalle)
+                            .addGap(43, 43, 43)
+                            .addComponent(jbBorrarFiltros)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jbSalir))
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(189, 189, 189)
+                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jdc, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(26, 26, 26)
+                                .addComponent(jLabel3)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jcbProveedores, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addContainerGap(57, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -192,7 +182,6 @@ public class ListarCompras extends javax.swing.JInternalFrame {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 73, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jbEliminar)
                     .addComponent(jbSalir)
                     .addComponent(jbDetalle)
                     .addComponent(jbBorrarFiltros, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -202,16 +191,12 @@ public class ListarCompras extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jbEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbEliminarActionPerformed
-        eliminar();
-    }//GEN-LAST:event_jbEliminarActionPerformed
-
     private void jbSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSalirActionPerformed
         this.dispose();
     }//GEN-LAST:event_jbSalirActionPerformed
 
     private void jtListaMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtListaMouseReleased
-        jbEliminar.setEnabled(true);
+        
     }//GEN-LAST:event_jtListaMouseReleased
 
     private void jbDetalleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbDetalleActionPerformed
@@ -248,7 +233,7 @@ public class ListarCompras extends javax.swing.JInternalFrame {
             lista.forEach((elemento) -> {
                 modelo.addRow(new Object[]{elemento.getIdCompra(), elemento.getFecha(), idProveedor, elemento.getCantidad(), elemento.getTotal()});
             });
-            checkCampos();
+            
         }
     }//GEN-LAST:event_jcbProveedoresItemStateChanged
 
@@ -309,7 +294,7 @@ public class ListarCompras extends javax.swing.JInternalFrame {
                         modelo.addRow(new Object[]{elemento.getIdCompra(), elemento.getFecha(), elemento.getProv(), elemento.getCantidad(), elemento.getTotal()});
                     });
 
-                    checkCampos();
+                    
                 } catch (ParseException | java.text.ParseException ex) {
                     llenarTabla();
                 }
@@ -330,22 +315,13 @@ public class ListarCompras extends javax.swing.JInternalFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton jbBorrarFiltros;
     private javax.swing.JButton jbDetalle;
-    private javax.swing.JButton jbEliminar;
     private javax.swing.JButton jbSalir;
     private javax.swing.JComboBox<String> jcbProveedores;
     private com.toedter.calendar.JDateChooser jdc;
     private javax.swing.JTable jtLista;
     // End of variables declaration//GEN-END:variables
 
-    private void checkCampos() {
-
-        int filaSeleccionada = jtLista.getSelectedRow();
-        if (filaSeleccionada != -1) {
-            jbEliminar.setEnabled(true);
-        } else {
-            jbEliminar.setEnabled(false);
-        }
-    }
+    
 
     private void llenarTabla() {
         DefaultTableModel modelo = (DefaultTableModel) jtLista.getModel();
@@ -358,7 +334,7 @@ public class ListarCompras extends javax.swing.JInternalFrame {
             String proveedor = pd.buscarProveedor(elemento.getIdProv()).toString();
             modelo.addRow(new Object[]{elemento.getIdCompra(), elemento.getFecha(), proveedor, elemento.getCantidad(), elemento.getTotal()});
         });
-        checkCampos();
+       
     }
 
     private void eliminar() {
@@ -369,7 +345,7 @@ public class ListarCompras extends javax.swing.JInternalFrame {
             CompraData p = new CompraData();
             p.eliminarCompraPorId(idCompra);
             llenarTabla();
-            checkCampos();
+            
         } else {
             JOptionPane.showMessageDialog(this, "Por favor, seleccione un producto para eliminar.", "Sin selección", JOptionPane.WARNING_MESSAGE);
 

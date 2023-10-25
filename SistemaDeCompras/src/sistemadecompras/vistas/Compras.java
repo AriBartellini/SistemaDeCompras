@@ -230,10 +230,6 @@ public class Compras extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jbLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbLimpiarActionPerformed
-        limpiarCampos();
-    }//GEN-LAST:event_jbLimpiarActionPerformed
-
     private void jbComprarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbComprarActionPerformed
         comprar();
         limpiarCampos();
@@ -261,6 +257,10 @@ public class Compras extends javax.swing.JInternalFrame {
 
         mostrarStockMin();
     }//GEN-LAST:event_jbStockMinActionPerformed
+
+    private void jbLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbLimpiarActionPerformed
+        limpiarCampos();
+    }//GEN-LAST:event_jbLimpiarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
