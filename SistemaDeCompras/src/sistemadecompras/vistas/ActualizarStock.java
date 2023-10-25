@@ -83,27 +83,25 @@ public class ActualizarStock extends javax.swing.JInternalFrame {
 
     private void descontarAleatorio() {
 
-        ProductoData productodata = new ProductoData();
+        try {
+            ProductoData productodata = new ProductoData();
 
-        List<Integer> listaId = new ArrayList<>();
-        listaId = productodata.listarIdProductos();
+            List<Integer> listaId = new ArrayList<>();
+            listaId = productodata.listarIdProductos();
 
-        Random rand = new Random();
-        int indiceAleatorio = rand.nextInt(listaId.size());
-        int id = listaId.get(indiceAleatorio);
-        
-        try{
+            Random rand = new Random();
+            int indiceAleatorio = rand.nextInt(listaId.size());
+            int id = listaId.get(indiceAleatorio);
             int stock = productodata.traerStockPorId(id);
             int descuentoMaximo = Math.min(20, stock);
             int descuento = rand.nextInt(descuentoMaximo) + 1;
-        //int descuento = (int) (Math.random() * 5) + 1; // se descuenta de 1 a 5 productos
-        productodata.descontarPorId(id, descuento);
-        JOptionPane.showMessageDialog(null, "se desconto al id: " + id + " descuento: " + descuento + " unidades");
-        
-        } catch(IllegalArgumentException e){
-            
+            //int descuento = (int) (Math.random() * 5) + 1; // se descuenta de 1 a 5 productos
+            productodata.descontarPorId(id, descuento);
+            JOptionPane.showMessageDialog(null, "se desconto al id: " + id + " descuento: " + descuento + " unidades");
+
+        } catch (IllegalArgumentException e) {
+            JOptionPane.showMessageDialog(null, "no hay productos para descontar");
         }
-        
 
     }
 

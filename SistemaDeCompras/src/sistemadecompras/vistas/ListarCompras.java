@@ -226,7 +226,7 @@ public class ListarCompras extends javax.swing.JInternalFrame {
             detalle.setLocationRelativeTo(m);
             detalle.setVisible(true);
         } else {
-            JOptionPane.showMessageDialog(this, "", "", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Elija un Producto", "Mensaje", JOptionPane.WARNING_MESSAGE);
 
         }
 
