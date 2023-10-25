@@ -93,6 +93,8 @@ public class ActualizarStock extends javax.swing.JInternalFrame {
             int indiceAleatorio = rand.nextInt(listaId.size());
             int id = listaId.get(indiceAleatorio);
             int stock = productodata.traerStockPorId(id);
+            
+            
             int descuentoMaximo = Math.min(20, stock);
             int descuento = rand.nextInt(descuentoMaximo) + 1;
             //int descuento = (int) (Math.random() * 5) + 1; // se descuenta de 1 a 5 productos
