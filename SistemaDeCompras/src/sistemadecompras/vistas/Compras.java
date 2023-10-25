@@ -376,6 +376,8 @@ public class Compras extends javax.swing.JInternalFrame {
         int idProducto = Integer.parseInt(id);
 
         double precio = productodata.traerPrecioPorId(idProducto);
+        System.out.println(precio);
+        System.out.println(idProducto);
         try {
             double subtotal = precio * (Integer.parseInt(cantidad));
 
