@@ -1,6 +1,7 @@
 package sistemadecompras.vistas;
 
 import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 import sistemadecompras.acceso.DetalleCompraData;
@@ -225,13 +226,18 @@ private void armarTabla(int idCompra) {
         CompraData Compra = new CompraData();
         List listaCompra = Compra.listarCompraIdCompra(idCompra);
         String filaCompra = listaCompra.toString();
+        try{
         String[] datosCompra = filaCompra.split(" ");
         String idProveedor = datosCompra[1];
         String fechaCompra = datosCompra[2] + "  [" + datosCompra[3];
-
         jlProveedor.setText(String.valueOf(idProveedor));
         jlFecha1.setText(String.valueOf(idCompra));
         jlFecha.setText(fechaCompra);
+        } catch(ArrayIndexOutOfBoundsException e){
+            JOptionPane.showMessageDialog(null, "no hay compras realizadas");
+            this.dispose();
+        }
+        
 
         List lista = detalleCompra.listarDetalleCompra(idCompra);
 
