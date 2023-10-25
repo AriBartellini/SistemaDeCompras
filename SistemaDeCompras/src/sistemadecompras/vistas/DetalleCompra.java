@@ -7,7 +7,8 @@ import sistemadecompras.acceso.DetalleCompraData;
 import sistemadecompras.acceso.CompraData;
 
 public class DetalleCompra extends javax.swing.JDialog {
-    public int valorID=-1;
+
+    public int valorID = -1;
 
     public int getValorID() {
         return valorID;
@@ -19,22 +20,22 @@ public class DetalleCompra extends javax.swing.JDialog {
     Menu m = new Menu();
     private final DefaultTableModel modelo = new DefaultTableModel();
 
-    
-
-   public DetalleCompra(Menu m, boolean modal,int id) {
+    public DetalleCompra(Menu m, boolean modal, int id) {
         super(m, modal);
-        this.valorID=id;
+        this.valorID = id;
         setValorID(id);
         initComponents();
         armarTabla(getValorID());
-        
+
     }
+
     private void borrarFilas() {
         int filas = modelo.getRowCount();
         while (filas > 0) {
             modelo.removeRow(--filas);
         }
     }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -54,7 +55,7 @@ public class DetalleCompra extends javax.swing.JDialog {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jLabel3.setFont(new java.awt.Font("Segoe UI Symbol", 0, 11)); // NOI18N
-        jLabel3.setText("Fecha De Compra");
+        jLabel3.setText("Fecha");
 
         jLabel5.setFont(new java.awt.Font("Segoe UI Symbol", 0, 11)); // NOI18N
         jLabel5.setText("TOTAL:");
@@ -86,7 +87,7 @@ public class DetalleCompra extends javax.swing.JDialog {
                 {null, null, null, null}
             },
             new String [] {
-                "Producto", "Cantidad", "Precio Unitario", "Precio Total"
+                "Producto", "Cantidad", "Precio Unitario", "Subtotal"
             }
         ));
         jScrollPane1.setViewportView(jtDetalle);
@@ -116,12 +117,12 @@ public class DetalleCompra extends javax.swing.JDialog {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jlFecha1, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
                         .addComponent(jlFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jlProveedor, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                         .addGroup(layout.createSequentialGroup()
@@ -199,8 +200,7 @@ public class DetalleCompra extends javax.swing.JDialog {
                 dialog.setVisible(true);
             }
         });
-        
-        
+
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -216,43 +216,48 @@ public class DetalleCompra extends javax.swing.JDialog {
     private javax.swing.JLabel jlTotal;
     private javax.swing.JTable jtDetalle;
     // End of variables declaration//GEN-END:variables
-private void armarTabla(int idCompra){
-        int total=0;
-        armarCabecera();        
+private void armarTabla(int idCompra) {
+        int total = 0;
+        armarCabecera();
         borrarFilas();
         DetalleCompraData detalleCompra = new DetalleCompraData();
-        
+
         CompraData Compra = new CompraData();
         List listaCompra = Compra.listarCompraIdCompra(idCompra);
         String filaCompra = listaCompra.toString();
         String[] datosCompra = filaCompra.split(" ");
-        String idProveedor=datosCompra[1];
-        String fechaCompra= datosCompra[2]+ "  [" + datosCompra[3];
-        
-     
-        jlFecha1.setText(String.valueOf(idCompra));        
+        String idProveedor = datosCompra[1];
+        String fechaCompra = datosCompra[2] + "  [" + datosCompra[3];
+
+        jlProveedor.setText(String.valueOf(idProveedor));
+        jlFecha1.setText(String.valueOf(idCompra));
         jlFecha.setText(fechaCompra);
-        
+
         List lista = detalleCompra.listarDetalleCompra(idCompra);
-        
+
         for (int i = 0; i < lista.size(); i++) {
             String fila = lista.get(i).toString();
-            String[] data = fila.split(" ");            
+            String[] data = fila.split(" ");
             modelo.addRow(new Object[]{data[0], data[1], data[2], data[3]});
-//            total=total+Integer.parseInt(data[3]);
-           
+
+            double totalx = 0;
+            double suma = 0;
+            for (int k = 0; k < modelo.getRowCount(); k++) {
+                String valorCelda = (String) modelo.getValueAt(k, 3);
+                totalx = Double.parseDouble(valorCelda);
+                suma += totalx;
+            }
+            jlTotal.setText(String.valueOf(suma));
         }
-        
-        jlTotal.setText("$ "+Integer.toString(total));
-}
-    
-    
+
+    }
+
     private void armarCabecera() {
- 
+
         modelo.addColumn("ID Compra");
         modelo.addColumn("ID Producto");
         modelo.addColumn("Cantidad");
         modelo.addColumn("SubTotal");
         jtDetalle.setModel(modelo);
-}
+    }
 }
