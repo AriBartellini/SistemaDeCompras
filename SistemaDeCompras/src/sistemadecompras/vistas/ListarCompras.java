@@ -6,8 +6,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 import javax.swing.JOptionPane;
-import javax.swing.event.TableModelEvent;
-import javax.swing.event.TableModelListener;
 import javax.swing.table.DefaultTableModel;
 import sistemadecompras.acceso.CompraData;
 import sistemadecompras.acceso.ProveedorData;
@@ -27,14 +25,7 @@ public class ListarCompras extends javax.swing.JInternalFrame {
         llenarProveedores();
         this.detalle = new DetalleCompra(m, true, idComp);
         detalle.setLocationRelativeTo(m);
-        //////////////////////////////////////// ESTO ES PARA ACTIVAR EL BOTON DE MODIFICAR
-        DefaultTableModel modelo = (DefaultTableModel) jtLista.getModel();
-        modelo.addTableModelListener(new TableModelListener() {
-            @Override
-            public void tableChanged(TableModelEvent e) {
-                
-            }
-        });
+        
 
     }
 
