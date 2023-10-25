@@ -59,7 +59,7 @@ public class ListarCompras extends javax.swing.JInternalFrame {
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                true, false, true, true, true
+                false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -234,35 +234,7 @@ public class ListarCompras extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jbBorrarFiltrosActionPerformed
 
     private void jdcInputMethodTextChanged(java.awt.event.InputMethodEvent evt) {//GEN-FIRST:event_jdcInputMethodTextChanged
-       /* try {
-            String fechaString = jdc.getDate() != null ? jdc.getDate().toString() : null;
-
-            if (fechaString != null && !fechaString.isEmpty()) {
-                try {
-                    SimpleDateFormat inputFormat = new SimpleDateFormat("EEE MMM dd HH:mm:ss zzz yyyy", Locale.ENGLISH);
-                    java.util.Date fechaUtil = inputFormat.parse(fechaString);
-                    java.sql.Date fechaDate = new java.sql.Date(fechaUtil.getTime());
-
-                    DefaultTableModel modelo = (DefaultTableModel) jtLista.getModel();
-                    modelo.setRowCount(0);
-                    CompraData p = new CompraData();
-
-                    ArrayList<Compra> lista = (ArrayList<Compra>) p.listarCompraPorFecha(fechaDate);
-
-                    lista.forEach((elemento) -> {
-                        modelo.addRow(new Object[]{elemento.getIdCompra(), elemento.getFecha(), elemento.getProv(), elemento.getCantidad(), elemento.getTotal()});
-                    });
-
-                    checkCampos();
-                } catch (ParseException | java.text.ParseException ex) {
-                    llenarTabla();
-                }
-            } else {
-                llenarTabla();
-            }
-        } catch (NullPointerException n) {
-            JOptionPane.showMessageDialog(this, "Problemas en jdcPropertyChange.", "Sin selección", JOptionPane.WARNING_MESSAGE);
-        }*/
+  
     }//GEN-LAST:event_jdcInputMethodTextChanged
 
     private void jdcPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jdcPropertyChange
