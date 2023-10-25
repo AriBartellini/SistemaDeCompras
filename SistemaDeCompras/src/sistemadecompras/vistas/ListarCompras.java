@@ -117,10 +117,10 @@ public class ListarCompras extends javax.swing.JInternalFrame {
         jdc.setMaxSelectableDate(new java.util.Date(1735704099000L));
         jdc.setMinSelectableDate(new java.util.Date(1641009699000L));
         jdc.addInputMethodListener(new java.awt.event.InputMethodListener() {
+            public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
+            }
             public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
                 jdcInputMethodTextChanged(evt);
-            }
-            public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
             }
         });
         jdc.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
@@ -168,11 +168,11 @@ public class ListarCompras extends javax.swing.JInternalFrame {
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 594, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jbEliminar)
-                        .addGap(38, 38, 38)
+                        .addGap(87, 87, 87)
                         .addComponent(jbDetalle)
-                        .addGap(50, 50, 50)
+                        .addGap(77, 77, 77)
                         .addComponent(jbBorrarFiltros)
-                        .addGap(151, 151, 151)
+                        .addGap(75, 75, 75)
                         .addComponent(jbSalir)))
                 .addContainerGap(57, Short.MAX_VALUE))
         );

@@ -120,7 +120,7 @@ public class Compra {
 
     @Override
     public String toString() {
-        return "Compra{" + "idCompra=" + idCompra + ", prov=" + nombreProv + ", fecha=" + fecha + '}';
+        return  "idCompra=" + idCompra + ", prov=" + nombreProv + " " + fecha ;
     }
 
 }
