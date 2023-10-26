@@ -192,7 +192,7 @@ public class ListarProveedores extends javax.swing.JInternalFrame {
         ProveedorData p = new ProveedorData();
         List<Proveedor> lista = p.listarProveedores();
         lista.forEach((elemento) -> {
-            modelo.addRow(new Object[]{elemento.getIdProveedor(), elemento.getNombreProveedor(), elemento.getDomicilio(), elemento.getTelefono()});
+            modelo.addRow(new Object[]{elemento.getIdProveedor(), elemento.getNombreProveedor(), elemento.getTelefono(), elemento.getDomicilio()});
         });
         checkCampos();
     }
