@@ -73,7 +73,7 @@ public class ProductoData {
             ps.setInt(2, id);
             int exito = ps.executeUpdate();
             if (exito == 1) {
-                JOptionPane.showMessageDialog(null, "STOCK modificado correctamente");
+                //JOptionPane.showMessageDialog(null, "STOCK modificado correctamente");
             }
         } catch(SQLException ex){
             JOptionPane.showMessageDialog(null, "Error al acceder al Producto en metodo modificarSTOCK");

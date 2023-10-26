@@ -31,7 +31,7 @@ public class DetalleCompraData {
                 ps.executeUpdate();
                 ResultSet rs = ps.getGeneratedKeys();
                 if (rs.next()) {
-                    JOptionPane.showMessageDialog(null, "Detalle cargado correctamente");
+                    //JOptionPane.showMessageDialog(null, "Detalle cargado correctamente");
                 }
             }
 

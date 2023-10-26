@@ -376,8 +376,7 @@ public class Compras extends javax.swing.JInternalFrame {
         int idProducto = Integer.parseInt(id);
 
         double precio = productodata.traerPrecioPorId(idProducto);
-        System.out.println(precio);
-        System.out.println(idProducto);
+        
         try {
             double subtotal = precio * (Integer.parseInt(cantidad));
 
@@ -432,7 +431,7 @@ public class Compras extends javax.swing.JInternalFrame {
         //LLAMAR A GUARDARCOMPRA
         CompraData c = new CompraData();
         int idCompra = c.guardarCompra(idProveedor, detalle, cant, total);
-        System.out.println(idCompra);
+        //System.out.println(idCompra);
 
         //LLAMAR DETALLE COMPRA
         guardarDetalleCompra(idCompra);
@@ -454,7 +453,7 @@ public class Compras extends javax.swing.JInternalFrame {
             cant = Integer.parseInt(modelo.getValueAt(i, 1).toString());
 
             productodata.modificarStock(id, cant);
-            System.out.println(id + "-" + cant);
+            //System.out.println(id + "-" + cant);
         }
     }
 
