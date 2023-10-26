@@ -83,7 +83,7 @@ public class ProductoData {
 
     public void eliminarProductoPorId(int id) {
         try {
-            String sql = "DELETE  FROM producto  WHERE  idProducto  =  ?  ";
+            String sql = "UPDATE  producto  SET estado = 0 WHERE  idProducto  =  ?  ";
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setInt(1, id);
             int fila = ps.executeUpdate();
@@ -99,7 +99,7 @@ public class ProductoData {
      public List<Producto> listarProducto(){
         List<Producto> productos = new ArrayList<>();
         try {
-            String sql = "SELECT * FROM Producto";
+            String sql = "SELECT * FROM Producto WHERE estado = 1 ";
             PreparedStatement ps = con.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {

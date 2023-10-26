@@ -5,6 +5,7 @@ public class Producto {
     private String nombreProducto;
     private double precio;
     private int stock;
+    private boolean estado;
 
     public Producto() {
     }
@@ -27,6 +28,14 @@ public class Producto {
     public Producto(String nombreProducto, int stock) {
         this.nombreProducto = nombreProducto;
         this.stock = stock;
+    }
+
+    public boolean isEstado() {
+        return estado;
+    }
+
+    public void setEstado(boolean estado) {
+        this.estado = estado;
     }
     
 

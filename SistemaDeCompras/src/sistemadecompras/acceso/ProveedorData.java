@@ -73,7 +73,7 @@ public class ProveedorData {
       
         
         try{
-              String sql= "DELETE  FROM proveedor WHERE idProveedor = ?";
+              String sql= "UPDATE proveedor SET estado = 0  WHERE idProveedor = ?";
             PreparedStatement ps= con.prepareStatement(sql);
             ps.setInt(1, id);
             
@@ -118,7 +118,7 @@ public class ProveedorData {
     public List<Proveedor> listarProveedores() {
         List<Proveedor> proveedores = new ArrayList<>();
         try {
-            String sql = "SELECT * FROM proveedor";
+            String sql = "SELECT * FROM proveedor WHERE estado = 1";
             PreparedStatement ps = con.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
