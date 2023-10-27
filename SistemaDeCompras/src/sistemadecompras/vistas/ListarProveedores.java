@@ -148,8 +148,8 @@ public class ListarProveedores extends javax.swing.JInternalFrame {
         if (filaSeleccionada != -1) {
             int idProveedor = (int) jtProveedores.getValueAt(filaSeleccionada, 0);
             String nombreProveedor = (String) jtProveedores.getValueAt(filaSeleccionada, 1);
-            String direccion = (String) jtProveedores.getValueAt(filaSeleccionada, 2);
-            String telefono = (String) jtProveedores.getValueAt(filaSeleccionada, 3);
+            String direccion = (String) jtProveedores.getValueAt(filaSeleccionada, 3);
+            String telefono = (String) jtProveedores.getValueAt(filaSeleccionada, 2);
 
             Proveedor proveedor = new Proveedor(idProveedor, nombreProveedor, direccion, telefono);
             ProveedorData p = new ProveedorData();
