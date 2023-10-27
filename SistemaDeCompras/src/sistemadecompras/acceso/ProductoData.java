@@ -120,7 +120,7 @@ public class ProductoData {
      public List<Integer> listarIdProductos(){
         List<Integer> idProductos = new ArrayList<>();
         try {
-            String sql = "SELECT idProducto FROM Producto";
+            String sql = "SELECT idProducto FROM Producto WHERE estado = 1 ";
             PreparedStatement ps = con.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
@@ -159,7 +159,7 @@ public class ProductoData {
     }
      
     public void descontarPorId(int id, int descuento){
-        String sql = "UPDATE Producto Set stock = (stock - ?)  WHERE idProducto = ?";
+        String sql = "UPDATE Producto SET stock = (stock - ?)  WHERE idProducto = ? ";
         
         try{
             PreparedStatement ps = con.prepareStatement(sql);

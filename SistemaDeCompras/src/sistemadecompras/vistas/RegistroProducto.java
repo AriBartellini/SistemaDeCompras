@@ -1,5 +1,6 @@
 package sistemadecompras.vistas;
 
+import javax.swing.JOptionPane;
 import sistemadecompras.acceso.ProductoData;
 import sistemadecompras.entidades.Producto;
 
@@ -7,11 +8,10 @@ public class RegistroProducto extends javax.swing.JInternalFrame {
 
     public RegistroProducto() {
         initComponents();
-        Menu m= new Menu();
+        Menu m = new Menu();
         m.centrarInternalFrame(this);
     }
 
-   
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -141,11 +141,11 @@ public class RegistroProducto extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jbLimpiarActionPerformed
 
     private void jbSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSalirActionPerformed
-         this.dispose();
+        this.dispose();
     }//GEN-LAST:event_jbSalirActionPerformed
 
     private void jtfNombreKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtfNombreKeyReleased
-         checkCampos();
+        checkCampos();
     }//GEN-LAST:event_jtfNombreKeyReleased
 
     private void jtfPrecioCostoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtfPrecioCostoKeyReleased
@@ -165,25 +165,33 @@ public class RegistroProducto extends javax.swing.JInternalFrame {
     private javax.swing.JTextField jtfPrecioCosto;
     // End of variables declaration//GEN-END:variables
 
-    private void checkCampos(){
-        if(jtfPrecioCosto.getText().equals("")||jtfNombre.getText().equals("")){
+    private void checkCampos() {
+        if (jtfPrecioCosto.getText().equals("") || jtfNombre.getText().equals("")) {
             jbGuardar.setEnabled(false);
-        } else jbGuardar.setEnabled(true);
+        } else {
+            jbGuardar.setEnabled(true);
+        }
     }
-    private void limpiarCampos(){
+
+    private void limpiarCampos() {
         jtfNombre.setText("");
         jtfPrecioCosto.setText("");
         checkCampos();
     }
-    
-    private void guardarProducto(){
-        ProductoData productoData = new ProductoData();
-        String nombre = jtfNombre.getText();
-        double precio = Double.parseDouble(jtfPrecioCosto.getText());
-        
-        Producto producto = new Producto(nombre,precio, 0); // aqui creamos el producto con stock 0
-        productoData.agregarProducto(producto);
-        limpiarCampos();
+
+    private void guardarProducto() {
+        try {
+            ProductoData productoData = new ProductoData();
+            String nombre = jtfNombre.getText();
+            double precio = Double.parseDouble(jtfPrecioCosto.getText());
+            Producto producto = new Producto(nombre, precio, 0); // aqui creamos el producto con stock 0
+            limpiarCampos();
+
+            productoData.agregarProducto(producto);
+        } catch (NullPointerException | NumberFormatException e) {
+            JOptionPane.showMessageDialog(null, "ingrese un valor valido");
+        }
+
     }
-    
+
 }
